@@ -1,0 +1,67 @@
+\todo[inline]{
+- show that the problem is NP-hard even for DAG 							\\
+- fix the approximation algorithm for directed graph with $\infty$ capacity	\\
+- fix the approximation algorithm for graph with capacities					\\
+- give approximation algorithm when $\frac{w(uv)}{w(vu)}$ is bounded
+}
+\section{Introduction}
+Carpooling, is the sharing of car journeys so that more than one person travels
+in a car.
+Knapen et al. describe~\cite{knapen2013estimating} an automatic service
+to match commuting trips.
+Users of the services register their personal profile and a set of periodically
+recurring trips, 
+and the service advises registered candidates on how to combine their commuting
+trips by carpooling.
+The services acts in two phases. 
+
+On the first phase, the service estimate the probability that a person $a$
+traveling in person's $b$ car will be satisfied from the trip.
+This is done based on personal information ((e.g. \todo[inline]{add some
+examples})) and feedback from the user on past rides.
+On the second phase, the service is searching for a carpool assignment that
+maximize the global (total expected) satisfaction.
+\todo[inline]{if we choose to maximize the minimum satisfaction, is that a dual
+of the k-centers problem ?}
+
+The second phase can be modeled in terms of graph theory.
+Given a directed graph $G = (V, E)$.
+Each vertex $v \in V$ is corresponded to a user of the service and a directed
+edge $(u, v)$ exists if the user corresponded to vertex $u$ is willing to
+commute with the user corresponded to vertex $v$.
+A capacity function $ c : V \rightarrow \mathbb{N} $ on the vertices is defined
+according to the number of passengers each user is willing to take if she was
+selected as a driver.
+A weight function $w : E \rightarrow [0, 1] $ define the probability that user
+$u$ will be satisfied when riding with user $v$ for each edge $(u, v) \in E$.
+
+A feasible \emph{carpool assignment} is a subset $S \subseteq E$ such
+that, for every $v \in V$:
+\begin{inparaenum}
+\item $ d^S_in(v) \leq c(v) $
+\item $ d^S_out(v) \leq 1 $, and
+\item $ \min(d^S_in(v), d^S_out(v)) = 0 $.
+\end{inparaenum}
+Where $d^S(v)$ denote the degree of vertex $v$ with respect to $S$.
+
+In the \emph{Carpool Assignment} problem we seek for a feasible assignment
+$S$ that maximize the total weight on the edges, 
+i.e. $max_{S : \text{S is feasible}} \sum_{e \in S}{w(e)}$.
+The \uca{} problem is the special case,
+when $c(v) = \infty$ for every vertex $v \in V$.
+
+Hartman et al.~\cite{hartman2013optimal} proved that the \emph{Uncapacitate
+Carpool Assignment} is NP-hard.
+Later, they compared different heuristics algorithms on real data~\cite{hartman2014theory}.
+Other heuristics algorithms were developed as well~\cite{knapen2014exploiting}.
+
+The problem remains NP-hard even for a binary weight function, and even when
+the capacity function $c(v) \leq 2$ for every vertex in $V$.
+When the set of drivers is known in advanced, the problem become tractable and
+can be solved using a maximal perfect matching in a bipartite graph.
+
+In this paper we present an efficient, optimal, algorithm for the
+\uca{} problem on trees.
+We then present a 2-approximation algorithm for general graphs.
+To the best of our knowledge, this is the first known approximation algorithm
+for the problem.

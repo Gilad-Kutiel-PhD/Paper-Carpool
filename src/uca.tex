@@ -1,0 +1,98 @@
+\section{\uca{}}
+\label{sec:uca}
+In this section we consider a variant of the \ca{} called \uca{}.
+In this variant, there is no capacity constraint on the vertices.
+We present an efficient optimal solution for trees,
+and a 2-approximation algorithm for general graphs.
+We show that our analysis for the approximation algorithm is tight.
+
+\subsection{Optimal Solution for Trees}
+Let $T = (V, E)$ be a directed tree.
+Let $D \subseteq V$ be the set of drivers, let $P$ be the
+set of passengers ($D \ca{}p P = \emptyset$), 
+and let $A \subset (E \ca{}p (P \times D))$.
+We would like to find $D$, $P$, and $A$ that maximize $w(A)$ such that
+$p^A_{out} = 1$ for every $p \in P$.
+
+We define the following functions:
+\begin{itemize}
+  \item $D(u)$ to be the optimal solution for the sub-tree of $T$ rooted at $u$,
+  when $u \in D$.
+  \item $P(u)$ to be the optimal solution for the sub-tree of $T$ rooted at
+  $u$, when $u \in P$. 
+  \item $F(u)$ to be the optimal solution for the sub-tree of $T$ rooted at
+  $u$, when $u \notin (D \cup P)$.
+\end{itemize}
+
+Then the optimal solution can be calculated using the following
+recursion:
+\begin{align*}
+%
+D(u) = \sum_{v : uv \in E}{
+\max \begin{cases}
+D(v)		\\
+P(v)		\\
+F(v) + w(vu)
+\end{cases}
+}
+\\
+P(u) = \max_{v : uv \in E}{
+D(v) + \sum_{w \neq v : uw \in E}{
+\max  \begin{cases}
+D(w)		\\
+P(w)
+\end{cases}
+}
+}
+\\
+F(u) =  \sum_{v : uv \in E}{
+\max \begin{cases}
+D(v)		\\
+P(v)		
+\end{cases}
+}
+%
+\end{align*}
+
+\todo[inline]{proof with induction ?}
+
+\subsection{Approximation Algorithm for General Graphs}
+\todo[inline]{currently this section is true for undirected graphs, can we fix
+this ?} Our approximation algorithm can be described in two lines:
+
+\begin{algorithm}
+\ca{}ption{UCA-APX}
+Find a maximal spanning tree of $G$			\;
+Return the optimal solution on this tree	\;
+\end{algorithm}
+
+\begin{lemma}
+The weight of a maximum spanning tree of $G$ is an upper bound on the weight of
+an optimal \uca{} in $G$.
+\end{lemma}
+
+\begin{proof}
+Consider an optimal \uca{}, and complete it to a spanning tree, obviously, the
+weight of the resulted tree is no more than the weight of a maximum spanning
+tree.
+\end{proof}
+
+\begin{theorem}
+The UCA-APX algorithm is 2-approximation.
+\end{theorem}
+
+\begin{proof}
+It is enough to show that for undirected tree, there is always a solution that
+weights at least half the weight of the tree.
+Let $V_{odd}$, $V_{even}$, $E_{odd}$ and  $E_{even}$
+be the set of vertices and edges of the odd and even levels of the tree
+respectively.
+Then $E_{odd} \cup E_{even} = E$ and $w(E_{odd}) + w(E_{even}) = w(E)$.
+\todo[inline]{define a solution to be a triplet (D, P, A)}
+Two feasible solutions are $(V_{odd}, V_{even}, E_{odd})$ and 
+$(V_{even}, V_{odd}, E_{even})$ with weights $w(E_{odd})$ and $w(E_{even})$,
+respectively.
+And the proof follow.
+\end{proof}
+ 
+ \todo[inline]{give an example for the tight analysis}

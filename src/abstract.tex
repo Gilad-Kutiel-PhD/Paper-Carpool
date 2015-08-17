@@ -1,0 +1,24 @@
+\begin{abstract}
+Given a directed graph $G = (V, E)$,
+a weight function on the edges $w: E \rightarrow \mathbb{R^+}$,
+a capacity function on the vertices $c: V \rightarrow \mathbb{N}$, 
+a feasible \emph{carpool assignment} is a subset of $E$ such that:
+\begin{inparaenum}
+\item the in-degree of every vertex does not exceed its capacity
+\item the out degree of every vertex is at most $1$, and
+\item for every vertex $v \in V$ either the out-degree or the in-degree is $0$.
+\end{inparaenum}
+ 
+In the \emph{Carpool Assignment} problem we seek for a feasible assignment
+$S$ that maximize the total weight on the edges, 
+i.e. $max_{S : \text{S is feasible}} \sum_{e \in S}{w(e)}$.
+The \uca{} problem is the special case,
+when $c(v) = \infty$ for every vertex $v \in V$.
+The \uca{} is known to be NP-hard even for a
+binary weight function.
+
+In this paper we present an efficient, optimal solution for the problem when the
+given graph is a tree. 
+We then present a 2-approximation algorithm for general graphs.
+
+\end{abstract}
