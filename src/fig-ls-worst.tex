@@ -1,0 +1,11 @@
+\centering
+\begin{tikzpicture}[every node/.style={draw, circle}]
+
+\node[default node](a) at (0,0) {$1$};
+\node[default node](b) at (2,0) {$2$};
+\node[default node](c) at (4,0) {$3$};
+
+\draw[->, dashed] (a) -- (b);
+\draw[<->](b) -- (c);
+
+\end{tikzpicture}

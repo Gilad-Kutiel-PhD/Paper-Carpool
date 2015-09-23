@@ -1,0 +1,78 @@
+We now present a 3-approximation algorithm for the \textsc{\CARPOOL{}} problem.
+This algorithm acts in two phases.
+In the first phase it computes a subgraph of $G$ 
+where $d_{in}(v) \leq c(v)$, and $d_{out}(v) \leq 1$ for every $v \in V$, 
+then, in the second phase it turns this subgraph to a feasible matching
+by removing some of the edges.
+
+To begin, assume for a moment, 
+that every vertex in the input can acts both as a driver and as passenger.
+We refer to a matching, under this assumption, as a \emph{super matching}
+We now show how an optimal super matching can be found efficiently.
+Given a directed graph $G = (V, E)$,
+a weight function $w : E \rightarrow \mathbb{R^+}$,
+and a capacity function $c : V \rightarrow \mathbb{N}$, 
+when every vertex can acts both as a driver and as a passenger, 
+a \emph{super matching} is a subgraph of $G$, 
+where $d_{in}(v) \leq c(v)$, and $d_{out}(v) \leq 1$ for every $v \in V$. 
+A maximum super matching can be found by the following reduction 
+to a maximum weight flow problem: 
+Let $N = (G', s, t, c', w')$ be a flow network, where 
+\begin{align*}
+G' = (V_p \cup V_d \cup \{s, t\}, E_{sp} \cup E_{pd} \cup E_{dt})	\\
+V_p = \{v_p : v \in V\} \\
+V_d = \{v_d : v \in V\} \\
+E_{sp} = \{ (s, u_p) : u_p \in V_p \} \\
+E_{pd} = \{ ((u_p, v_d)) : (u, v) \in E \} \\
+E_{dt} = \{ (v_d, t) : v_d \in V_d \} \\
+c'(u, v) 
+\begin{cases}
+c(u) & \text{if } (u, v) \in E_{dt} \\
+1 & \text{otherwise}	
+\end{cases}
+\\
+w'(u_d, v_p) = 
+\begin{cases}
+w(u, v) & \text{if } (u_d, v_p) \in E_{pd} \\
+0 & \text{otherwise}	
+\end{cases}
+\end{align*}
+
+That is, 
+we construct a bipartite graph where the left side represent each vertex 
+in $V$ being a passenger,
+and the right side each vertex in $V$ being a driver.
+One can verify that this is indeed a flow network and that there is a straight forward 
+translation between a flow and a super matching with the same weight.
+
+We now consider the underlying graph of an optimal super matching.
+Recall that in a super matching the out degree of every vertex is at most 1,
+that is, the underlying graph of a super matching is a set of connected components,
+where, the number of edges, 
+in every connected component is at most the number of vertices in that component.
+
+We now show how to transform a super matching into a feasible matching.
+We can, without loss of generality, 
+consider a single connected component in the underline graph of a maximum super matching.
+Given a connected component $C = (V, E)$ we construct a feasible matching by
+computing a maximum spanning layered graph $L = (V, E'_{even}, E'_{odd})$ of $C$,
+and returning $\argmax_{E'' \in \{ E'_{even}, E'_{odd} \}}{w(E'')} $. 
+
+We summarize the algorithm in Algorithm~\ref{alg:cm3}
+
+\begin{algorithm}
+\label{alg:cm3}
+\KwIn{$G = (V, E), c : V \rightarrow \mathbb{N}, w : E \rightarrow \mathbb{R^+}$}											 
+\KwOut{$(M \subseteq E)$}
+
+$E'' \leftarrow \emptyset$								\\
+$G' \leftarrow \text{superMatching($G$)}$				\\
+
+\For{every connected component $C_i \in G'$}{	
+	$(V^i, E'^i_{even}, E'^i_{odd}) \leftarrow \text{maximum layered spanning graph of } C_i$
+	$M \leftarrow E'' \cup \argmax_{E'' \in \{ E'^i_{even}, E'^i_{odd} \}}{w(E'')}$	
+}
+
+\Return $E''$
+\caption{Super Matching Algorithm}
+\end{algorithm}

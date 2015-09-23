@@ -1,0 +1,81 @@
+\section{Trees}
+\label{sec:carpool:trees}
+
+\def\Md{\Pi_D}
+\def\Mp{\Pi_P}
+\def\M0{\Pi_0}
+
+In this section we discuss the problem when the given graph is a tree.
+We first show an optimal solution when there is no capacity constraints, 
+then, we extend the solution for a general capacity function as well.
+
+We define the following functions:
+\begin{itemize}
+\item 
+$\Md(u)$ - the weight of a maximum matching for the subtree of $T$ rooted at $u$,
+when $u \in D$, i.e. $\dout(u) = 0$.
+
+\item
+$\Mp(u)$ - the weight of a maximum matching for the subtree of $T$ rooted at
+$u$, when $u \in P$, i.e. $\din(u) = 0$ 
+
+\item
+$\M0(u)$ - the value of the maximum matching for the subtree of $T$ rooted at
+$u$, when $\din(u) = \dout(u) = 0$.
+\end{itemize}
+%
+For a vertex $u \in V$, let $C(u)$ be the set of children of $u$,
+Then the maximum matching for the tree, rooted at $r$,
+is given by $\max{(D(r), P(r)))}$, 
+and can be calculated using the following recursion:
+
+\begin{align*}
+\Md(u)		& = \smashoperator{\sum_{v \in C(u)}}
+				{\max(\Md(v), \Mp(v), \M0(v) + w(vu))}
+\\
+\Mp(u) 		& = \max_{v \in C(u)}{\left(
+				w(uv) +
+				\Md(v) +
+				\smashoperator{\sum_{w \in (C(u) \setminus \{v\})}}{\max (\Md(w), \Mp(w))}
+				\right)}
+\\
+\M0(u) 		& =  \smashoperator{\sum_{v \in C(u)}}{\max (\Md(v), \Mp(v))}
+\end{align*}
+
+and for a leaf $u$:
+$$ \Md(u) = \Mp(u) = \M0(u) = 0 $$
+%
+That is, each vertex can be a driver ($\Md$) serving its children, 
+a passenger ($\Mp$) served by on of its children, 
+or a passenger ($\M0$) (possibly) served by its father.
+  
+We now generalize the solution when a capacity function 
+$c : V \rightarrow \N$ is defined.
+We define $\Md(u, c)$ to be the
+optimal matching of the subtree rooted at $u$, when $u$ is a driver and has
+capacity of $c$.
+For a given edge $(u, v)$, 
+define $\delta(u, v) = w(u, v) + \M0(u) - \max (\Md(u), \Mp(u))$.
+For a given vertex $u$, and a capacity $c$ 
+consider all the children with positive $\delta$ value among the $c$
+children with the highest value and refer to this set as $C_\delta(u, c)$. 
+The maximum matching for a tree can, then, be calculated using the
+following recursion:
+
+\begin{align*}
+\Md(u, c)	& = \smashoperator{\sum_{v \in C_\delta(u, c)}}{\M0(v) + w(uv)} +
+				\smashoperator
+				{\sum_{v \in (C(u) \setminus C_\delta(u, c))}}{\max(\Md(v, c(v)),\Mp(v))}
+\\
+\Mp(u) 		& = \max_{v \in C(u)}{\left(
+	w(uv) + \Md(v, c(v) - 1) +
+	\smashoperator{\sum_{w \in (C(u) \setminus \{v\})}}{\max(\Md(w, c(w)), \Mp(w))}
+\right)}
+\\
+\M0(u) 		& =  \smashoperator{\sum_{v \in C(u)}}{\max(\Md(v), \Mp(v))}
+\end{align*}
+
+That is, when a vertex is a driver it serves its (at most) $c$ children that contribute
+the most weight to the solution comparing to a solution in which 
+these children are not served by their father.
+ 

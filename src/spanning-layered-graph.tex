@@ -1,0 +1,25 @@
+Given a directed graph $G = (V, E)$,
+a weight function $w : E \rightarrow \mathbb{R^+}$, 
+and a spanning tree $T = (V, E')$ of the underlying graph, 
+we refer to the directed acyclic graph resulting from directing the edges 
+of $T$ according to their original direction as the \emph{spanning layered graph}
+of $G$.
+For a given spanning layered graph $L = (V, E')$, denote by $L_i$ the $i$th
+layer, where $L_0$ is the set of vertices in $L$ with in degree equal to zero,
+and $L_i$, for $i > 0$, is the set of vertices with a minimum distance of $i$ from $L_0$.
+Denote by $l(v)$ the layer of vertex $v$ and let 
+$$ E'_{even} = \{ (u, v) : l(u) \equiv 0 \mod 2 \} $$
+and    
+$$ E'_{odd} = \{ (u, v) : l(u) \equiv 1 \mod 2 \} $$
+
+For a set of edges $E$ let $w(E) = \sum_{e \in E}{w(e)}$, 
+then, it is easy to verify that the following properties hold:
+
+\begin{observation}
+The sets $E'_{even}$, and $E'_{odd}$ form a partition of $E$. 
+\end{observation}
+
+\begin{observation}
+\label{ob:geq_half}
+$ \max(w(E'_{even}), w(E'_{odd}))  \geq \frac{w(E)}{2} $
+\end{observation}

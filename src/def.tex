@@ -1,6 +1,60 @@
+\DeclareMathOperator*{\argmin}{arg\,min}
+\DeclareMathOperator*{\argmax}{arg\,max}
 
-\def\ca{Carpool Assignment}
-\def\uca{Uncapacitate Carpool Assignment}
+\def\UCCARPOOL{Uncapcitate Carpool Matching}
+\def\UWCARPOOL{Unweighted Carpool Matching}
+\def\CARPOOL{Maximum Carpool Matching}
+\def\FIXEDCARPOOL{Fixed Maximum Carpool Matching}
 
-\newtheorem{lemma}{Lemma}
-\newtheorem{theorem}{Theorem}
+% \newtheorem{lemma}{Lemma}
+% \newtheorem{theorem}{Theorem}
+\newtheorem{observation}{Observation}
+% \newtheorem{corollary}{Corollary}
+
+\tikzset{
+label/.style={
+	draw=none,
+	sloped,
+},
+label above/.style={
+	label,
+	midway,
+	above=-1mm,
+},
+label below/.style={
+	label,
+	midway,
+	below=-1mm,
+},
+default node/.style={
+	draw,
+	circle,
+	minimum size=9mm,
+	inner sep=0pt,
+	scale=0.7,
+},
+colored node/.style 2 args={
+	default node,
+	draw=#1,
+	star, 
+	star points=#2,
+	line width=2pt, 
+},
+red node/.style={colored node={red}{2}},
+blue node/.style={colored node={blue}{3}},
+green node/.style={colored node={green}{4}},
+black node/.style={colored node={black}{5}},
+orange node/.style={colored node={orange}{6}},
+violet node/.style={colored node={violet}{7}},
+%
+%
+/tikz/graphs/default graph/.style={
+	random seed=1,
+	spring layout,
+	spring constant=1,
+	node distance=12mm,	
+	nodes={default node},
+},
+%
+%
+}

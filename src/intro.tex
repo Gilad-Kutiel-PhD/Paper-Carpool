@@ -1,13 +1,7 @@
-\todo[inline]{
-- show that the problem is NP-hard even for DAG 							\\
-- fix the approximation algorithm for directed graph with $\infty$ capacity	\\
-- fix the approximation algorithm for graph with capacities					\\
-- give approximation algorithm when $\frac{w(uv)}{w(vu)}$ is bounded
-}
 \section{Introduction}
 Carpooling, is the sharing of car journeys so that more than one person travels
 in a car.
-Knapen et al. describe~\cite{knapen2013estimating} an automatic service
+Knapen et al.~\cite{knapen2013estimating} describe an automatic service
 to match commuting trips.
 Users of the services register their personal profile and a set of periodically
 recurring trips, 
@@ -17,51 +11,57 @@ The services acts in two phases.
 
 On the first phase, the service estimate the probability that a person $a$
 traveling in person's $b$ car will be satisfied from the trip.
-This is done based on personal information ((e.g. \todo[inline]{add some
-examples})) and feedback from the user on past rides.
-On the second phase, the service is searching for a carpool assignment that
-maximize the global (total expected) satisfaction.
-\todo[inline]{if we choose to maximize the minimum satisfaction, is that a dual
-of the k-centers problem ?}
+This is done based on personal information and feedback from users on past
+rides.
+The second phase is about finding a carpool matching
+that maximizes the global (total expected) satisfaction.
 
 The second phase can be modeled in terms of graph theory.
 Given a directed graph $G = (V, E)$.
-Each vertex $v \in V$ is corresponded to a user of the service and a directed
+Each vertex $v \in V$ corresponds to a user of the service and a directed
 edge $(u, v)$ exists if the user corresponded to vertex $u$ is willing to
 commute with the user corresponded to vertex $v$.
-A capacity function $ c : V \rightarrow \mathbb{N} $ on the vertices is defined
-according to the number of passengers each user is willing to take if she was
+A capacity function $ c: V \rightarrow \mathbb{N} $ is defined
+according to the number of passengers each user can drive if she was
 selected as a driver.
-A weight function $w : E \rightarrow [0, 1] $ define the probability that user
-$u$ will be satisfied when riding with user $v$ for each edge $(u, v) \in E$.
+A weight function $w : E \rightarrow \R $ defines the amount of
+satisfaction $w(u, v)$,
+that user $u$ gains when riding with user $v$ for every edge $(u, v) \in E$.
 
-A feasible \emph{carpool assignment} is a subset $S \subseteq E$ such
-that, for every $v \in V$:
-\begin{inparaenum}
-\item $ d^S_in(v) \leq c(v) $
-\item $ d^S_out(v) \leq 1 $, and
-\item $ \min(d^S_in(v), d^S_out(v)) = 0 $.
-\end{inparaenum}
-Where $d^S(v)$ denote the degree of vertex $v$ with respect to $S$.
+A feasible \emph{carpool matching} (matching in short) is a triple 
+$(P, D, M)$, where $P$ and $D$ form a partition of $V$, and 
+$M \subseteq E \cap (P \times D)$,
+under the constraints (w.r.t $M$) that for every driver $d \in D$, 
+$\din(d) \leq c(d)$, 
+and for every passenger $p \in P$, $\dout(p) \leq 1$.
+In the \textsc{\CARPOOL{}} problem we seek for a matching $(P, D, M)$ that maximizes the
+total weight on the edges.
 
-In the \emph{Carpool Assignment} problem we seek for a feasible assignment
-$S$ that maximize the total weight on the edges, 
-i.e. $max_{S : \text{S is feasible}} \sum_{e \in S}{w(e)}$.
-The \uca{} problem is the special case,
-when $c(v) = \infty$ for every vertex $v \in V$.
-
-Hartman et al.~\cite{hartman2013optimal} proved that the \emph{Uncapacitate
-Carpool Assignment} is NP-hard.
+Here we consider two more variants of the problem, namely, 
+the unweighted and the uncapacitate variants.
+All these variants are NP-hard, this is because, 
+even in the unweighted, uncapacitate, undirected variant of the problem, 
+the set of vertices with out degree of zero, in an optimal solution, 
+form a minimum dominating set.  
+  
+Hartman et al.~\cite{hartman2013optimal} proved that the \emph{\CARPOOL{}} problem is
+NP-hard, and that it remains NP-hard even for a binary weight function, and even when
+the capacity function $c(v) \leq 2$ for every vertex in $V$.
 Later, they compared different heuristics algorithms on real data~\cite{hartman2014theory}.
 Other heuristics algorithms were developed as well~\cite{knapen2014exploiting}.
+When the (potential) set of drivers is known in advanced, however, the problem becomes
+tractable and can be solved using a reduction to a flow network.
 
-The problem remains NP-hard even for a binary weight function, and even when
-the capacity function $c(v) \leq 2$ for every vertex in $V$.
-When the set of drivers is known in advanced, the problem become tractable and
-can be solved using a maximal perfect matching in a bipartite graph.
+In Section~\ref{sec:carpool:trees} we present an efficient,
+algorithm for the problem on trees, 
+in Section~\ref{sub:fixed} we discuss how the problem can be solved,
+when $P$ and $D$ are fixed,
+in Section~\ref{sub:uwcm} we give a 2-approximation algorithm for the
+unweighted variant of the problem,
+in Section~\ref{sub:ucudcm} we give a 2-approximation algorithm
+for the uncapacitate variants of the problem, 
+finally, we present a 3-approximation
+algorithm for the general problem.
 
-In this paper we present an efficient, optimal, algorithm for the
-\uca{} problem on trees.
-We then present a 2-approximation algorithm for general graphs.
-To the best of our knowledge, this is the first known approximation algorithm
-for the problem.
+To the best of our knowledge, 
+these are the first known approximation algorithms for any variant of the problem.

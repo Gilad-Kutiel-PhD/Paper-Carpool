@@ -1,0 +1,163 @@
+\section{\UWCARPOOL{}}
+\label{sub:uwcm}
+In this section we present a local search algorithm for the unweighted
+variant of the problem.
+We show that the approximation ratio of this algorithm is $2$ and give an example
+to show that our analysis is tight.
+
+Given a directed graph $G = (V, E)$, 
+and a capacity function ${c : V \rightarrow N}$, 
+In the \textsc{\UWCARPOOL{}} problem, 
+we seek for a maximum unweighted matching, 
+i.e. $\argmax_{(P, D, M)}{|M|}$.
+
+We can now present a simple local search algorithm for the problem, 
+the algorithm maintains a feasible matching through its running.
+In every iteration of the algorithm, the size of the matching increases.
+The algorithm terminates, when no further improvement can be done. 
+
+Recall that the \FIXEDCARPOOL{} can be solved efficiently.
+Let $M = \text{opt}_{fixed}(P, D)$ be an optimal solution of the
+\FIXEDCARPOOL{} problem.
+%
+
+For a given matching $M$, denote by $D^M_u \subseteq D$, 
+the set of utilized drivers, 
+i.e. vertices with an in degree grater than zero.
+The local search algorithm, then, tries to improve a given matching, 
+by adding another vertex to the set of drivers.
+the local search algorithm is described in
+Algorithm~\ref{alg:local}.
+
+\begin{algorithm}
+\label{alg:local}
+\KwIn{$G = (V, E)$, $c : V \rightarrow \mathbb{N}$}
+\KwOut{$M$}
+$M \leftarrow \emptyset$	\\
+\Repeat{there is no improvement}{
+\label{line:outerloop}
+	\For{$v \in (V \setminus D^M_u)$}{
+		$D \leftarrow D^M_u \cup \{v\}$ \\
+		$P \leftarrow V \setminus D$ \\
+		$M' = \text{opt}_{fixed}(P, D)$ \\
+		\If{$|M'| > |M|$}{
+			$M \leftarrow M'$
+		}
+	}
+}
+\caption{Local Search}
+\Return{$M$}
+\end{algorithm}
+
+First, observe that the outer loop on line~\ref{line:outerloop} of the local search algorithm
+can be executed at most $n$ times, 
+where $n$ is the total number of vertices, 
+this is because the loop is executed only when there was an improvement, 
+and this can happen at most $n$ times.
+Also, observe that the body of this loop can be computed in polynomial time, 
+and we can conclude that Algorithm~\ref{alg:local} runs in polynomial time.
+    
+We now prove that the local search algorithm achieves an approximation ratio of
+$2$.
+Consider a matching as a tuple $(P, D, V_0, M)$, 
+where $d_{out}(p) = 1, \, \forall p \in P$,
+$d_{in}(d) > 0, \, \forall d \in D$,
+and $d_{in} = d_{out} = 0, \, \forall v \in V_0$.
+It is easy to see that $P$, $D$, and $V_0$ form a partition of $V$.
+
+Let $(P, D, V_0, M)$ be a matching found by the local search algorithm, and let
+$(P^*, D^*, V^*_0, M^*)$ be an arbitrary but fixed optimal matching.
+We refer to a driver $v$ with degree $d(v) = c(v)$ as a \emph{fully utilized}
+driver, and denote by $D_f$ the set of fully utilized drivers.
+
+For the purpose of the analysis, assume, without loss of generality, that
+if $v \in D_f \cap D^*$, and $(u, v) \in M^*$, then $u \notin V_0$.
+If this is not the case, that is $u \in V_0$, then based on the pigeonhole principle,
+there must be a vertex $u' \in P \setminus P^*$, such that $(u', v) \in M \setminus M^*$.
+So we can remove $(u', v)$ from $M$ and add $(u, v)$ instead.
+Clearly the resulting matching has the same size of the original one,
+further, the new matching could actually be found by the $opt_{fixed}$ procedure.
+
+
+\begin{lemma}
+\label{lm:dleqp}
+$|D \cap P^*| \leq |P|$
+\end{lemma}
+
+\begin{proof}
+The lemma follows directly from the observation that 
+${|D| \leq |P|}$.
+\end{proof}
+
+\begin{lemma}
+\label{lm:v_in_p}
+If $u \in V_0 \cap P^*$, and $(u, v) \in M^*$, then $v \in P \setminus P^*$.
+\end{lemma}
+
+\begin{proof}
+Recall, that we assume that $v \notin D_f$.
+Clearly, if $v$ was in $V_0$ or in $D \setminus D_f$, 
+then the solution can be improved by the local search algorithm.
+Thus it must be the case that $v \in P$, furthermore, 
+if $(u, v) \in M^*$ then $v \notin P^*$. 
+\end{proof}
+
+\begin{lemma}
+\label{lm:u1nequ2thenv1neqv2}
+If $u_1, u_2 \in V_0 \cap P^*$, 
+$(u_1, v_1), (u_2, v_2) \in M^*$, 
+and $u_1 \neq u_2$,
+then $v_1 \neq v_2$.
+\end{lemma}
+
+\begin{proof}
+From Lemma~\ref{lm:v_in_p} we know that $v_1, v_2 \in P$,
+Assume for contradiction that $v_1 = v_2 = v$,
+and let $w$ be the vertex such that $(v, w) \in M$,
+then the local search can improve the solution, 
+by replacing $(v, w)$ with $(u_1, v)$ and $(u_2, v)$ - a contradiction.
+\end{proof}
+
+\begin{lemma}
+\label{lm:unleqp}
+$|(V_0 \cup P) \cap P^*| \leq |P|$
+\end{lemma}
+
+\begin{proof}
+It is enough to show that for every vertex $u \in V_0 \cap P^*$
+there is a distinct vertex $v \in P \setminus P^*$.
+To see that, for every vertex $u \in V_0 \cap P^*$, 
+consider the vertex $v$, such that $(u, v) \in M^*$, 
+the proof follows, then, directly
+from Lemma~\ref{lm:v_in_p} and Lemma~\ref{lm:u1nequ2thenv1neqv2}.  
+\end{proof}
+
+
+\begin{theorem}
+The local search algorithm achieves a 2-approximation ratio.
+\end{theorem}
+
+\begin{proof}
+By Lemma~\ref{lm:dleqp} and Lemma~\ref{lm:unleqp} we get that 
+$$
+|P^*| = 
+|(P^* \cap D) \cup ((V_0 \cup P) \cap P^*)| \leq 2 \cdot |P|
+$$.
+\end{proof}
+
+To conclude this section, we show that our analysis is tight.
+Consider the example given in Figure~\ref{fig:localtight}.
+Assume, in this example, that there are no capacity constraints,
+if the local search algorithm start by choosing vertex $3$ to be a driver, 
+then the returned matching is the single edge $(2,3)$.
+At this point, no further improvement can be done.
+The optimal matching, on the other hand, is $\{(1, 2), (2, 3)\}$. 
+The path in the example can be duplicated to form an arbitrary large graph (forest).
+
+\begin{figure} 
+\input{fig-ls-worst}
+\caption{
+\label{fig:localtight}
+Local Search - Worst Case Example
+}
+\end{figure}

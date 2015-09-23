@@ -1,0 +1,85 @@
+\section{\FIXEDCARPOOL{}}
+\label{sub:fixed}
+In the \textsc{\FIXEDCARPOOL{}} problem, $P$ and $D$ are fixed, 
+and the goal is to find $M$ that maximizes the total weight. 
+This variant of the problem can be solved efficiently,
+by reducing it to a maximum weight flow (flow in short) problem as
+follow:
+Let $(G = (V, E), c, w)$ be a \CARPOOL{} instance,
+let $(P, D)$ be a partition of $E$,
+let  $N = (G' = (V', E'), s, t, c')$ be a flow network, 
+and let $w' : E \rightarrow \N^+$ be a weight function, where 
+
+\begin{align*}
+V'			& = P \cup D \cup \{s, t\}										\\
+E'			& = E_{sp} \cup E_{pd} \cup E_{dt}								\\
+E_{sp}		& =	\{(s, p) : p \in P \}										\\
+E_{pd}		& =	E \cap (P \times D)											\\
+E_{dt}		& =	\{(d, t) : d \in D \}										\\
+c'(u, v)	& = 
+				\begin{cases}
+				c(u) & \text{if } (u, v) \in E_{dt} 						\\
+				1 & \text{otherwise}
+				\end{cases}
+																			\\
+w'			& = 
+				\begin{cases}
+				w(e) & \text{if } e \in E_{pd} 								\\
+				0 & \text{otherwise}	
+				\end{cases}
+\end{align*}
+The flow network is described in Figure~\ref{fig:flow}
+\begin{figure}
+\centering
+\input{fig-flow}
+\caption{
+\label{fig:flow}
+Illustration of a flow network corresponded to a \FIXEDCARPOOL{} instance.}
+\end{figure}
+
+\begin{lemma}
+There exists a maximum weight integral flow.
+\end{lemma}
+
+\begin{proof}
+The lemma follows directly from the fact that $c'$ is integral capacity function.
+\end{proof}
+
+\begin{lemma}
+For every integral flow $f$ in $N$, there is a matching $M$ on $G$ with the same weight. 
+\end{lemma}
+
+\begin{proof}
+Consider the matching $(P, D, M^f)$, where 
+$$ M^f = \{(p, d) \in E_{pd} : f(p, d) = 1\} $$
+one can verify that this is indeed a matching with the same weight as $f$.
+\end{proof}
+
+\begin{lemma}
+For every matching $(P, D, M)$ on $G$, there exists a flow $f$ on $N$ with the same weight. 
+\end{lemma}
+
+\begin{proof}
+consider the flow function
+\begin{align*}
+f(s, p)		& = d_{out}(u)		 				\\
+f(p, d)		& = 
+				\begin{cases}
+				1 & \text{if } (u, v) \in M		\\
+				0 & \text{otherwise}
+				\end{cases}						\\
+f(d, t) 	& = d_{in}(v) 
+\end{align*}
+
+It is easy to verify, that $f$ is indeed a flow function.
+Also, observe, that by construction,
+the weight of $f$ equals to the weight of the matching.
+\end{proof}
+
+As we mentioned in the preliminary, 
+the maximum weight flow problem can be solved efficiently, 
+and so is the \FIXEDCARPOOL{} problem.
+It is worth mentioning, that it possible that in a maximum weight flow, 
+some of the edges will have no flow at all, 
+that is, it is possible that in a \FIXEDCARPOOL{}
+some of the passengers and drivers will be unmatched.  
