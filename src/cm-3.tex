@@ -19,19 +19,19 @@ A maximum super matching can be found by the following reduction
 to a maximum weight flow problem: 
 Let $N = (G', s, t, c', w')$ be a flow network, where 
 \begin{align*}
-G' = (V_p \cup V_d \cup \{s, t\}, E_{sp} \cup E_{pd} \cup E_{dt})	\\
-V_p = \{v_p : v \in V\} \\
-V_d = \{v_d : v \in V\} \\
-E_{sp} = \{ (s, u_p) : u_p \in V_p \} \\
-E_{pd} = \{ ((u_p, v_d)) : (u, v) \in E \} \\
-E_{dt} = \{ (v_d, t) : v_d \in V_d \} \\
-c'(u, v) 
+G'				& = (V_p \cup V_d \cup \{s, t\}, E_{sp} \cup E_{pd} \cup E_{dt})	\\
+V_p				& = \{v_p : v \in V\} \\
+V_d				& = \{v_d : v \in V\} \\
+E_{sp}			& = \{ (s, u_p) : u_p \in V_p \} \\
+E_{pd}			& = \{ ((u_p, v_d)) : (u, v) \in E \} \\
+E_{dt}			& = \{ (v_d, t) : v_d \in V_d \} \\
+c'(u, v)		& =
 \begin{cases}
 c(u) & \text{if } (u, v) \in E_{dt} \\
 1 & \text{otherwise}	
 \end{cases}
 \\
-w'(u_d, v_p) = 
+w'(u_d, v_p)	& = 
 \begin{cases}
 w(u, v) & \text{if } (u_d, v_p) \in E_{pd} \\
 0 & \text{otherwise}	
