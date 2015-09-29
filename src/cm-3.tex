@@ -1,4 +1,4 @@
-We now present a 3-approximation algorithm for the \textsc{\CARPOOL{}} problem.
+We now present a 3-app\-roximation algorithm for the \textsc{\CARPOOL{}} problem.
 This algorithm acts in two phases.
 In the first phase it computes a subgraph of $G$ 
 where $d_{in}(v) \leq c(v)$, and $d_{out}(v) \leq 1$ for every $v \in V$, 
@@ -56,7 +56,7 @@ We can, without loss of generality,
 consider a single connected component in the underline graph of a maximum super matching.
 Given a connected component $C = (V, E)$ we construct a feasible matching by
 computing a maximum spanning layered graph $L = (V, E'_{even}, E'_{odd})$ of $C$,
-and returning $\argmax_{E'' \in \{ E'_{even}, E'_{odd} \}}{w(E'')} $. 
+and returning the edges in the odd layers or the even layers according to their weights. 
 
 We summarize the algorithm in Algorithm~\ref{alg:cm3}
 
