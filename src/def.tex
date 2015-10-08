@@ -6,10 +6,7 @@
 \def\CARPOOL{Maximum Carpool Ma\-tching}
 \def\FIXEDCARPOOL{Fixed Maximum Carpool Matching}
 
-% \newtheorem{lemma}{Lemma}
-% \newtheorem{theorem}{Theorem}
 \newtheorem{observation}{Observation}
-% \newtheorem{corollary}{Corollary}
 
 \tikzset{
 label/.style={
@@ -26,6 +23,8 @@ label below/.style={
 	midway,
 	below=-1mm,
 },
+%
+%
 default node/.style={
 	draw,
 	circle,
@@ -33,19 +32,6 @@ default node/.style={
 	inner sep=0pt,
 	scale=0.7,
 },
-colored node/.style 2 args={
-	default node,
-	draw=#1,
-	star, 
-	star points=#2,
-	line width=2pt, 
-},
-red node/.style={colored node={red}{2}},
-blue node/.style={colored node={blue}{3}},
-green node/.style={colored node={green}{4}},
-black node/.style={colored node={black}{5}},
-orange node/.style={colored node={orange}{6}},
-violet node/.style={colored node={violet}{7}},
 %
 %
 /tikz/graphs/default graph/.style={

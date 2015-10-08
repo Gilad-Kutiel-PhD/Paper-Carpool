@@ -1,4 +1,3 @@
-\section{\UWCARPOOL{}}
 \label{sub:uwcm}
 In this section we present a local search algorithm for the unweighted
 variant of the problem.
@@ -8,12 +7,11 @@ to show that our analysis is tight.
 Given a directed graph $G = (V, E)$, 
 and a capacity function ${c : V \rightarrow N}$, 
 In the \textsc{\UWCARPOOL{}} problem, 
-we seek for a maximum unweighted matching, 
-i.e. $\argmax_{(P, D, M)}{|M|}$.
+we seek for a matching that maximize the size of $M$.
 
-We can now present a simple local search algorithm for the problem, 
+We now present a simple local search algorithm for the problem, 
 the algorithm maintains a feasible matching through its running.
-In every iteration of the algorithm, the size of the matching increases.
+In every iteration of the algorithm, the size of $M$ increases.
 The algorithm terminates, when no further improvement can be done. 
 
 Recall that the \FIXEDCARPOOL{} can be solved efficiently.
@@ -67,11 +65,11 @@ It is easy to see that $P$, $D$, and $V_0$ form a partition of $V$.
 
 Let $(P, D, V_0, M)$ be a matching found by the local search algorithm, and let
 $(P^*, D^*, V^*_0, M^*)$ be an arbitrary but fixed optimal matching.
-We refer to a driver $v$ with degree $d(v) = c(v)$ as a \emph{fully utilized}
-driver, and denote by $D_f$ the set of fully utilized drivers.
+We refer to a driver $v \in D$ with degree $\din(v) = c(v)$ as a \emph{fully utilized}
+driver, and denote by $D_f \subseteq D$ the set of fully utilized drivers.
 
 For the purpose of the analysis, assume, without loss of generality, that
-if $v \in D_f \cap D^*$, and $(u, v) \in M^*$, then $u \notin V_0$.
+if $v \in D_f \cap D^*$, and $(u, v) \in M^*$, then $(u, v) \in M$.
 If this is not the case, that is $u \in V_0$, then based on the pigeonhole principle,
 there must be a vertex $u' \in P \setminus P^*$, such that $(u', v) \in M \setminus M^*$.
 So we can remove $(u', v)$ from $M$ and add $(u, v)$ instead.
@@ -91,7 +89,7 @@ ${|D| \leq |P|}$.
 
 \begin{lemma}
 \label{lm:v_in_p}
-If $u \in V_0 \cap P^*$, and $(u, v) \in M^*$, then $v \in P \setminus P^*$.
+If $u \in V_0$ and $(u, v) \in M^*$, then $v \in P \setminus P^*$.
 \end{lemma}
 
 \begin{proof}
@@ -104,7 +102,7 @@ if $(u, v) \in M^*$ then $v \notin P^*$.
 
 \begin{lemma}
 \label{lm:u1nequ2thenv1neqv2}
-If $u_1, u_2 \in V_0 \cap P^*$, 
+If $u_1, u_2 \in V_0$, 
 $(u_1, v_1), (u_2, v_2) \in M^*$, 
 and $u_1 \neq u_2$,
 then $v_1 \neq v_2$.
@@ -155,7 +153,7 @@ The optimal matching, on the other hand, is $\{(1, 2), (3, 2)\}$.
 The path in the example can be duplicated to form an arbitrary large graph (forest).
 
 \begin{figure} 
-\input{fig-ls-worst}
+\input{txt/fig-ls-worst}
 \caption{
 \label{fig:localtight}
 Local Search - Worst Case Example

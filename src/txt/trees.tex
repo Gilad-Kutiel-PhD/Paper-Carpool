@@ -1,4 +1,3 @@
-\section{Trees}
 \label{sec:carpool:trees}
 
 \def\Md{\Pi_D}
@@ -26,7 +25,7 @@ $u$, when $\din(u) = \dout(u) = 0$.
 %
 For a vertex $u \in V$, let $C(u)$ be the set of children of $u$,
 Then the maximum matching for the tree, rooted at $r$,
-is given by $\max{(D(r), P(r)))}$, 
+is given by $\max{(\Md(r), \Mp(r)))}$, 
 and can be calculated using the following recursion:
 
 \begin{align*}
@@ -46,7 +45,7 @@ and for a leaf $u$:
 $$ \Md(u) = \Mp(u) = \M0(u) = 0 $$
 %
 That is, each vertex can be a driver ($\Md$) serving its children, 
-a passenger ($\Mp$) served by on of its children, 
+a passenger ($\Mp$) served by one of its children, 
 or a passenger ($\M0$) (possibly) served by its father.
   
 We now generalize the solution when a capacity function 
@@ -59,7 +58,7 @@ define $\delta(u, v) = w(u, v) + \M0(u) - \max (\Md(u), \Mp(u))$.
 For a given vertex $u$, and a capacity $c$ 
 consider all the children with positive $\delta$ value among the $c$
 children with the highest value and refer to this set as $C_\delta(u, c)$. 
-The maximum matching for a tree can, then, be calculated using the
+The maximum matching for a tree, then, can be calculated using the
 following recursion:
 
 \begin{align*}
