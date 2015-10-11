@@ -1,0 +1,40 @@
+Given a directed graph $G = (V, E)$,
+a weight function $w : E \rightarrow \mathbb{R^+}$, 
+and a spanning tree $T$ of the underlying graph, 
+we refer to the directed acyclic graph resulting from directing the edges 
+of $T$ according to their original direction
+\footnote{if there are antisymmetric edges in $G$, 
+choose an arbitrary direction to the underlying edge}
+as the \emph{spanning bipartite graph}
+of $G$.
+
+For a given spanning bipartite graph $G = (V = (L, R), E)$, 
+denote by $E_{LR}$ the edges directed from a vertex in $L$ to a vertex in $R$,
+and by $E_{RL}$ the edges directed from a vertex in $R$ to a vertex in $L$,
+For a set of edges $E$ let $w(E) = \sum_{e \in E}{w(e)}$, 
+then, it is easy to verify that the following properties hold:
+
+\begin{observation}
+The sets $E_{LR}$ and $E'_{RL}$ form a partition of $E$. 
+\end{observation}
+
+\begin{observation}
+\label{ob:geq_half}
+$ \max(w(E_{LR}), w(E_{RL}))  \geq \frac{w(E)}{2} $
+\end{observation}
+
+The idea of the spanning bipartite graph is illustrated in 
+Figure~\ref{fig:spanning-bipartite-graph}
+
+\begin{figure}
+\centering
+\input{txt/fig-spanning-bipartite-graph}
+\caption{
+\label{fig:spanning-bipartite-graph}
+\subref{sub:graph} is a directed graph, 
+\subref{sub:tree} is a spanning tree, and  
+\subref{sub:bipartite} is a spanning bipartite graph.
+the blue, dashed edges form $E_{LR}$, 
+and the red, dotted edge is $E_{RL}$  
+}
+\end{figure}
