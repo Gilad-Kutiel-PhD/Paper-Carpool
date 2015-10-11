@@ -66,7 +66,7 @@ We now show how to transform a super matching into a feasible matching.
 We can, without loss of generality, 
 consider a single connected component in the underline graph of a maximum super matching.
 Given a connected component $C = (V, E)$ we construct a feasible matching by
-computing a maximum spanning layered graph $L = (V, E'_{even}, E'_{odd})$ of $C$,
+computing a maximum spanning bipartite graph $L = (V, E'_{even}, E'_{odd})$ of $C$,
 and returning the set of edges in the odd layers or the even layers,
 whichever has a higher weight. 
 We describe the algorithm in Algorithm~\ref{alg:cm3}.
@@ -80,7 +80,7 @@ $E'' \leftarrow \emptyset$								\\
 $G' \leftarrow \text{superMatching($G$)}$				\\
 
 \For{every connected component $C_i \in G'$}{	
-	$(V^i, E'^i_{even}, E'^i_{odd}) \leftarrow \text{maximum layered spanning graph of } C_i$
+	$(V^i, E'^i_{even}, E'^i_{odd}) \leftarrow \text{maximum spanning bipartite graph of } C_i$
 	\\
 	$M \leftarrow E'' \cup \argmax_{E'' \in \{ E'^i_{even}, E'^i_{odd} \}}{w(E'')}$	
 }
