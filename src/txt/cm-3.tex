@@ -6,8 +6,48 @@ where $d_{in}(v) \leq c(v)$, and $d_{out}(v) \leq 1$ for every $v \in V$,
 then, in the second phase it turns this subgraph to a feasible matching
 by removing some of the edges.
 
-To begin, assume for a moment, 
-that every vertex in the input can acts both as a driver and as passenger.
+Given a directed graph $G = (V, E)$,
+a weight function $w : E \rightarrow \mathbb{R^+}$, 
+and a spanning tree $T$ of the underlying graph, 
+we refer to the directed bipartite
+\footnote{a graph whose underlying graph is a tree, must be a bipartite graph}
+graph resulting from directing the edges 
+of $T$ according to their original direction
+\footnote{if there are antisymmetric edges in $G$, 
+choose an arbitrary direction to the underlying edge}
+as the \emph{spanning bipartite graph} of $G$.
+An example of a spanning bipartite graph is illustrated in 
+Figure~\ref{fig:spanning-bipartite-graph}
+
+\begin{figure}
+\centering
+\input{txt/fig-spanning-bipartite-graph}
+\caption{
+\label{fig:spanning-bipartite-graph}
+An example of a spanning bipartite graph:
+\subref{sub:graph} a directed graph, 
+\subref{sub:tree} a possible spanning tree  
+\subref{sub:bipartite} a spanning bipartite graph:
+$E_{LR}$ is the set of blue, dashed edges, 
+and $E_{RL}$ is the red, dotted edge   
+}
+\end{figure}
+
+For a given spanning bipartite graph $G = (V = (L, R), E)$, 
+denote by $E_{LR}$ the edges directed from a vertex in $L$ to a vertex in $R$,
+and by $E_{RL}$ the edges directed from a vertex in $R$ to a vertex in $L$,
+For a set of edges $E$ let $w(E) = \sum_{e \in E}{w(e)}$, 
+then, clearly, the following property holds:
+
+\begin{observation}
+\label{ob:geq_half}
+$ \max(w(E_{LR}), w(E_{RL}))  \geq \frac{w(E)}{2} $
+\end{observation}
+
+
+We now describe our algorithm. 
+Assume for a moment, 
+that every vertex can acts both as a driver and as passenger.
 We refer to a matching, under this assumption, as a \emph{super matching}.
 We now show how an optimal super matching can be found efficiently.
 Given a directed graph $G = (V, E)$,

@@ -5,11 +5,11 @@
 \node(n3)[default node] at (4,0) {3};
 \node(n4)[default node] at (2,2) {4};
 
-\draw[->] (n1) -- (n2);
-\draw[->] (n2) -- (n3);
-\draw[->] (n3) to[out=-90, in=-90] (n1);
+\draw[->, very thick] (n1) -- (n2);
+\draw[->, very thick] (n2) -- (n3);
+\draw[->, very thick] (n3) to[out=-90, in=-90] (n1);
 
 \foreach \i in {1,...,3}
-\draw[->, dashed] (n\i) -- (n4);
+\draw[->, dashed, very thick] (n\i) -- (n4);
 
 \end{tikzpicture}
