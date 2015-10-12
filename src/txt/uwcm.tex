@@ -5,12 +5,12 @@ We show that the approximation ratio of this algorithm is $2$ and give an exampl
 to show that our analysis is tight.
 
 Given a directed graph $G = (V, E)$, 
-and a capacity function ${c : V \rightarrow N}$, 
+and a capacity function ${c : V \rightarrow \mathbb{N}}$, 
 In the \textsc{\UWCARPOOL{}} problem, 
 we seek for a matching that maximize the size of $M$.
 
 We now present a simple local search algorithm for the problem, 
-the algorithm maintains a feasible matching through its running.
+that maintains a feasible matching through its execution.
 In every iteration of the algorithm, the size of $M$ increases.
 The algorithm terminates, when no further improvement can be done. 
 
@@ -28,18 +28,26 @@ the local search algorithm is described in
 Algorithm~\ref{alg:local}.
 
 \begin{algorithm}
+\SetKw{True}{true}
+\SetKw{False}{false}
+
 \label{alg:local}
+
 \KwIn{$G = (V, E)$, $c : V \rightarrow \mathbb{N}$}
 \KwOut{$M$}
-$M \leftarrow \emptyset$	\\
-\Repeat{there is no improvement}{
+
+$M \leftarrow \emptyset$					\\
+
+\Repeat{done}{
 \label{line:outerloop}
 	\For{$v \in (V \setminus D^M_u)$}{
-		$D \leftarrow D^M_u \cup \{v\}$ \\
-		$P \leftarrow V \setminus D$ \\
-		$M' = \text{opt}_{fixed}(P, D)$ \\
+		$done$ \leftarrow{} \True			\\
+		$D \leftarrow D^M_u \cup \{v\}$ 	\\
+		$P \leftarrow V \setminus D$ 		\\
+		$M' = \text{opt}_{fixed}(P, D)$ 	\\
 		\If{$|M'| > |M|$}{
-			$M \leftarrow M'$
+			$M \leftarrow M'$				\\
+			$done$ \leftarrow{} \False		\\
 		}
 	}
 }
