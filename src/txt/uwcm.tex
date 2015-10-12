@@ -74,31 +74,36 @@ Let $(P, D, M)$ be a matching found by the local search algorithm,
 and let $P_1$, $D_{>0}$, $D_c$, $V_0$ be the corresponded sets.
 Let $(P^*, D^*, M^*)$ be an arbitrary but fixed optimal matching.
 and let $P^*_1$, $D^*_{>0}$, $D^*_c$, $V^*_0$ be the corresponded sets.
-
 We need to show that $|P^*_1| \leq 2|P_1|$.
 To do this we are going to show that 
 $|P^*_1 \cap D_{>0}| \leq |P_1|$ 
 and that
 $|P^*_1 \cap (V_0 \cup P_1)| \leq |P_1|$.
-Figure~\ref{fig:uwcm-illustration} depict our goal.
+
+
+For the purpose of the analysis, assume, without loss of generality, that
+if $(x, y) \in M^*$ and $x \in V_0$, then $y \notin D_c$.
+If this is not the case, that is $y \in C_c$, then based on the pigeonhole principle,
+there must be a vertex $x'$, such that $(x', y) \in M \setminus M^*$.
+So we can remove $(x', y)$ from $M$ and add $(x, y)$ instead.
+Clearly the resulting matching has the same size of the original one,
+further, the new matching could actually be found by the $opt_{fixed}$ procedure.
+Figure~\ref{fig:uwcm-illustration} depicts our analysis.
 
 \begin{figure}
 \centering
 \input{txt/fig-uwcm-illustration}
 \caption{
 \label{fig:uwcm-illustration}
+Local search analysis:
+1. we assume the edge $(x, y)$ is not in $M^*$
+2. the edge $(u,v)$ can not be in $M^* \setminus M$ (Lemma~\ref{lm:v_in_p})
+3. if $(a,b) \in M^*$ then $b \in D^*_{>0}$, thus $(a,b) \notin M^*$
+4. it is not possible that both $(u_1, w)$ and $(u_2, w)$ are in $M^* \setminus M$
+(Lemma~\ref{lm:u1nequ2thenv1neqv2})
+Thus, for every vertex $u \in V_0$ there is a unique vertex $v \in P_1 \setminus P^*_1$
 }
 \end{figure}
-
-
-For the purpose of the analysis, assume, without loss of generality, that
-if $v \in D_c \cap D^*$, and $(u, v) \in M^*$, then $u \notin V_0$.
-If this is not the case, that is $u \in V_0$, then based on the pigeonhole principle,
-there must be a vertex $u'$, such that $(u', v) \in M \setminus M^*$.
-So we can remove $(u', v)$ from $M$ and add $(u, v)$ instead.
-Clearly the resulting matching has the same size of the original one,
-further, the new matching could actually be found by the $opt_{fixed}$ procedure.
-
 
 \begin{lemma}
 \label{lm:dleqp}
@@ -112,12 +117,12 @@ ${|D| \leq |P|}$.
 
 \begin{lemma}
 \label{lm:v_in_p}
-If $u \in V_0$ and $(u, v) \in M^*$, then $v \in P_1 \setminus P^*_1$.
+If $(u, v) \in M^*$ and $u \in V_0$, then $v \in P_1 \setminus P^*_1$.
 \end{lemma}
 
 \begin{proof}
-Recall, that we assume that $v \notin D_f$.
-Clearly, if $v$ was in $V_0$ or in $D \setminus D_f$, 
+Recall, that we assume that $v \notin D_c$.
+Clearly, if $v$ was in $V_0$ or in $D \setminus D_c$, 
 then the solution can be improved by the local search algorithm.
 Thus it must be the case that $v \in P$, furthermore, 
 if $(u, v) \in M^*$ then $v \notin P^*$. 
@@ -125,8 +130,8 @@ if $(u, v) \in M^*$ then $v \notin P^*$.
 
 \begin{lemma}
 \label{lm:u1nequ2thenv1neqv2}
-If $u_1, u_2 \in V_0$, 
-$(u_1, v_1), (u_2, v_2) \in M^*$, 
+If $(u_1, v_1), (u_2, v_2) \in M^*$,
+$u_1, u_2 \in V_0$, 
 and $u_1 \neq u_2$,
 then $v_1 \neq v_2$.
 \end{lemma}

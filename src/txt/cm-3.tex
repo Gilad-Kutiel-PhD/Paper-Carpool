@@ -116,20 +116,20 @@ We describe the algorithm in Algorithm~\ref{alg:cm3}.
 \KwIn{$G = (V, E), c : V \rightarrow \mathbb{N}, w : E \rightarrow \mathbb{R^+}$}											 
 \KwOut{$(M \subseteq E)$}
 
-$E'' \leftarrow \emptyset$								\\
+$M \leftarrow \emptyset$								\\
 $G' \leftarrow \text{superMatching($G$)}$				\\
 
-\For{every connected component $C_i \in G'$}{	
-	$(V^i, E'^i_{even}, E'^i_{odd}) \leftarrow \text{maximum spanning bipartite graph of } C_i$
+\For{every connected component $C_i = (V^i, E^i) \in G'$}{	
+	$(V^i, E' = (E'_{LR}, E'_{RL})) \leftarrow \text{maximum spanning bipartite graph of } C_i$
 	\\
-	$M \leftarrow E'' \cup \argmax_{E'' \in \{ E'^i_{even}, E'^i_{odd} \}}{w(E'')}$	
+	$M \leftarrow M \cup \argmax_{F \in \{ E'_{LR}, E'_{RL} \}}{w(F)}$	
 }
 
-\Return $E''$
+\Return $M$
 \caption{Super Matching Algorithm}
 \end{algorithm}
 
-We now show that our Algorithm~\ref{alg:cm3} achieves a 3-approximation ratio.
+We now show that the Super Matching is 3-approximation algorithm.
 Once again, we limit, without loss of generality, 
 our analysis to a single connected component.
 Let $(V, E)$ be the underlying graph of the super matching, 
@@ -145,7 +145,7 @@ and $w(E)$ is the weight of an optimal super-matching
 \end{proof}
 
 Let
-$$ M = \argmax_{E'' \in \{ E'_{even}, E'^{odd} \}}{w(E'')} $$
+$$ M = \argmax_{F \in \{ E'_{LR}, E'_{RL} \}}{w(F)} $$
 be the matching computed by Algorithm~\ref{alg:cm3}, then:
 
 \begin{lemma}
