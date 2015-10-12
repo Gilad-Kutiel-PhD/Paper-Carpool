@@ -20,7 +20,7 @@ Given a directed graph $G = (V, E)$.
 Each vertex $v \in V$ corresponds to a user of the service and an arc
 $(u, v)$ exists if the user corresponded to vertex $u$ is willing to
 commute with the user corresponded to vertex $v$.
-A capacity function $ c: V \rightarrow \mathbb{N} $ is defined
+A capacity function $ c: V \rightarrow \N $ is defined
 according to the number of passengers each user can drive if she was
 selected as a driver.
 A weight function $w : E \rightarrow \R $ defines the amount of
@@ -30,28 +30,24 @@ that user $u$ gains when riding with user $v$ for every edge $(u, v) \in E$.
 A feasible \emph{carpool matching} (matching) is a triple 
 $(P, D, M)$, where $P$ and $D$ form a partition of $V$, and 
 $M \subseteq E \cap (P \times D)$,
-under the constraints (w.r.t $M$) that for every driver $d \in D$, 
+under the constraints that for every driver $d \in D$, 
 $\din(d) \leq c(d)$, 
 and for every passenger $p \in P$, $\dout(p) \leq 1$.
 In the \textsc{\CARPOOL{}} problem we seek for a matching $(P, D, M)$ that maximizes the
 total weight on the edges.
-
 Here we consider two more variants of the problem, namely, 
 the unweighted and the uncapacitated, undirected variants of the problem.
-All these variants are NP-hard, to see this, 
-consider the unweighted, uncapacitate, undirected variant of the problem, 
-the set of vertices with out-degree of zero, in an optimal solution, 
-form a minimum dominating set.  
   
-Hartman et al.~\cite{hartman2013optimal} proved that the \emph{\CARPOOL{}} problem is
-NP-hard, and that it remains NP-hard even for a binary weight function, and even when
+Hartman et al.~\cite{hartman2013optimal} proved that all the variants of the
+\emph{\CARPOOL{}} problem considered in this paper are NP-hard, 
+and that the problem remains NP-hard even for a binary weight function when
 the capacity function $c(v) \leq 2$ for every vertex in $V$.
 Later, they compared different heuristics algorithms on real data~\cite{hartman2014theory}.
 Other heuristics algorithms were developed as well~\cite{knapen2014exploiting}.
 When the (potential) set of drivers is known in advanced, however, the problem becomes
 tractable and can be solved using a reduction to a flow network.
 
-in Section~\ref{sub:fixed} we discuss how the problem can be solved,
+In Section~\ref{sub:fixed} we discuss how the problem can be solved,
 when $P$ and $D$ are fixed,
 and in Section~\ref{sub:uwcm} we give a 2-approximation algorithm for the
 unweighted variant of the problem,

@@ -2,12 +2,12 @@
 In the \textsc{\FIXEDCARPOOL{}} problem, $P$ and $D$ are fixed, 
 and the goal is to find $M$ that maximizes the total weight. 
 This variant of the problem can be solved efficiently,
-by reducing it to a maximum weight flow (flow in short) problem as
+by reducing it to a maximum weight flow (flow) problem as
 follow:
 Let $(G = (V, E), c, w)$ be a \CARPOOL{} instance,
 let $(P, D)$ be a partition of $E$,
 let  $N = (G' = (V', E'), s, t, c')$ be a flow network, 
-and let $w' : E \rightarrow \N^+$ be a weight function, where 
+and let $w' : E \rightarrow \N$ be a weight function, where 
 
 \begin{align*}
 V'			& = P \cup D \cup \{s, t\}										\\
@@ -61,13 +61,13 @@ For every matching $(P, D, M)$ on $G$, there exists a flow $f$ on $N$ with the s
 \begin{proof}
 Consider the flow function
 \begin{align*}
-f(s, p_i)		& = d_{out}(p_i)		 				\\
+f(s, p_i)		& = \dout(p_i)		 				\\
 f(p_i, d_j)		& = 
 				\begin{cases}
 				1 & \text{if } (p_i, d_j) \in M		\\
 				0 & \text{otherwise}
 				\end{cases}						\\
-f(d_j, t) 	& = d_{in}(d_j) 
+f(d_j, t) 	& = \din(d_j) 
 \end{align*}
 
 It is easy to verify, that $f$ is indeed a flow function.
@@ -78,7 +78,7 @@ the weight of $f$ equals to the weight of the matching.
 As we mentioned in the preliminary, 
 the maximum weight flow problem can be solved efficiently, 
 and so is the \FIXEDCARPOOL{} problem.
-It is worth mentioning, that it possible that in a maximum weight flow, 
+It is worth mentioning, that it is possible that in a maximum weight flow, 
 some of the edges will have no flow at all, 
 that is, it is possible that in a \FIXEDCARPOOL{}
 some of the passengers and drivers will be unmatched.  

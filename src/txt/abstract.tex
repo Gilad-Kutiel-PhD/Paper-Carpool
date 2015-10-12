@@ -1,10 +1,10 @@
 Given a directed graph $G = (V, E)$,
-a capacity function $ c: V \rightarrow \mathbb{N} $,
+a capacity function $ c: V \rightarrow \N $,
 and a weight function $w : E \rightarrow \R $,
 a feasible \emph{carpool matching} is a triple 
 $(P, D, M)$, where $P$ and $D$ form a partition of $V$, and 
 $M \subseteq E \cap (P \times D)$,
-under the constraints (w.r.t $M$) that for every vertex $d \in D$, 
+under the constraints that for every vertex $d \in D$, 
 $\din(d) \leq c(d)$, 
 and for every vertex $p \in P$, $\dout(p) \leq 1$.
 In the \textsc{\CARPOOL{}} problem we seek for a matching $(P, D, M)$ that maximizes the

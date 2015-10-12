@@ -7,7 +7,7 @@ then, in the second phase it turns this subgraph to a feasible matching
 by removing some of the edges.
 
 Given a directed graph $G = (V, E)$,
-a weight function $w : E \rightarrow \mathbb{R^+}$, 
+a weight function $w : E \rightarrow \R^+$, 
 and a spanning tree $T$ of the underlying graph, 
 we refer to the directed bipartite
 \footnote{a graph whose underlying graph is a tree, must be a bipartite graph}
@@ -51,8 +51,8 @@ that every vertex can acts both as a driver and as passenger.
 We refer to a matching, under this assumption, as a \emph{super matching}.
 We now show how an optimal super matching can be found efficiently.
 Given a directed graph $G = (V, E)$,
-a weight function $w : E \rightarrow \mathbb{R^+}$,
-and a capacity function $c : V \rightarrow \mathbb{N}$, 
+a weight function $w : E \rightarrow \R^+$,
+and a capacity function $c : V \rightarrow \N$, 
 when every vertex can acts both as a driver and as a passenger, 
 a \emph{super matching} is a subgraph of $G$, 
 where $d_{in}(v) \leq c(v)$, and $d_{out}(v) \leq 1$ for every $v \in V$. 
@@ -60,10 +60,10 @@ A maximum super matching can be found by the following reduction
 to a maximum weight flow problem: 
 Let $N = (G', s, t, c', w')$ be a flow network, where 
 \begin{align*}
-G'				& = (V_p \cup V_d \cup \{s, t\}, E_{sp} \cup E_{pd} \cup E_{dt})	\\
-V_p				& = \{v_p : v \in V\} \\
+G'				& = (U_p \cup V_d \cup \{s, t\}, E_{sp} \cup E_{pd} \cup E_{dt})	\\
+U_p				& = u_p : v \in V\} \\
 V_d				& = \{v_d : v \in V\} \\
-E_{sp}			& = \{ (s, u_p) : u_p \in V_p \} \\
+E_{sp}			& = \{ (s, u_p) : u_p \in U_p \} \\
 E_{pd}			& = \{ ((u_p, v_d)) : (u, v) \in E \} \\
 E_{dt}			& = \{ (v_d, t) : v_d \in V_d \} \\
 c'(u, v)		& =
@@ -72,9 +72,9 @@ c(u) & \text{if } (u, v) \in E_{dt} \\
 1 & \text{otherwise}	
 \end{cases}
 \\
-w'(u_d, v_p)	& = 
+w'(u_d, u_p)	& = 
 \begin{cases}
-w(u, v) & \text{if } (u_d, v_p) \in E_{pd} \\
+w(u, v) & \text{if } (u_d, u_p) \in E_{pd} \\
 0 & \text{otherwise}	
 \end{cases}
 \end{align*}
@@ -106,14 +106,14 @@ We now show how to transform a super matching into a feasible matching.
 We can, without loss of generality, 
 consider a single connected component in the underline graph of a maximum super matching.
 Given a connected component $C = (V, E)$ we construct a feasible matching by
-computing a maximum spanning bipartite graph $L = (V, E'_{even}, E'_{odd})$ of $C$,
+computing a maximum spanning bipartite graph $L = (V, E'_{LR}, E'_{RL})$ of $C$,
 and returning the set of edges in the odd layers or the even layers,
 whichever has a higher weight. 
 We describe the algorithm in Algorithm~\ref{alg:cm3}.
 
 \begin{algorithm}
 \label{alg:cm3}
-\KwIn{$G = (V, E), c : V \rightarrow \mathbb{N}, w : E \rightarrow \mathbb{R^+}$}											 
+\KwIn{$G = (V, E), c : V \rightarrow \N, w : E \rightarrow \R^+$}											 
 \KwOut{$(M \subseteq E)$}
 
 $M \leftarrow \emptyset$								\\
@@ -154,7 +154,7 @@ $w(M) \geq w(E) - w(E')$
 \end{lemma}
 
 \begin{proof}
-Recall that $E = E' \cup \{e\}$, and that $e$ is the lightest edge on some cycle in $(V, E)$ 
+Recall that $E = E' \cup \{e\}$, where $e$ is the lightest edge on some cycle in $(V, E)$ 
 \end{proof}
 
 \begin{theorem}

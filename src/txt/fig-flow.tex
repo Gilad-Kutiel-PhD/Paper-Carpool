@@ -23,18 +23,18 @@ every node/.style={default node},
 
 % s -> P
 \draw[->] (s) -- (pi)
-node[label above] {$w = 0$}
-node[label below] {$c = 1$};
+node[label above] {$w' = 0$}
+node[label below] {$c' = 1$};
 
 % P -> D
 \draw[->] (pi) -- (dj)
-node[label above, above=-5mm] {$w = w(p_i, d_j)$}
-node[label below] {$c = 1$};
+node[label above, above=-5mm] {$w' = w(p_i, d_j)$}
+node[label below] {$c' = 1$};
 
 % D -> t
 \draw[->] (dj) -- (t)
-node[label above] {$w = 0$}
-node[label below, below=-3mm] {$c = c(d_j)$};
+node[label above] {$w' = 0$}
+node[label below, below=-3mm] {$c' = c(d_j)$};
 
 % dots
 \newcommand{\edots}[2]{

@@ -5,7 +5,7 @@ We show that the approximation ratio of this algorithm is $2$ and give an exampl
 to show that our analysis is tight.
 
 Given a directed graph $G = (V, E)$, 
-and a capacity function ${c : V \rightarrow \mathbb{N}}$, 
+and a capacity function ${c : V \rightarrow \N}$, 
 In the \textsc{\UWCARPOOL{}} problem, 
 we seek for a matching that maximize the size of $M$.
 
@@ -33,15 +33,15 @@ Algorithm~\ref{alg:local}.
 
 \label{alg:local}
 
-\KwIn{$G = (V, E)$, $c : V \rightarrow \mathbb{N}$}
+\KwIn{$G = (V, E)$, $c : V \rightarrow \N$}
 \KwOut{$M$}
 
 $M \leftarrow \emptyset$					\\
 
 \Repeat{done}{
 \label{line:outerloop}
+	$done$ \leftarrow{} \True			\\
 	\For{$v \in (V \setminus D^M_u)$}{
-		$done$ \leftarrow{} \True			\\
 		$D \leftarrow D^M_u \cup \{v\}$ 	\\
 		$P \leftarrow V \setminus D$ 		\\
 		$M' = \text{opt}_{fixed}(P, D)$ 	\\
@@ -83,7 +83,7 @@ $|P^*_1 \cap (V_0 \cup P_1)| \leq |P_1|$.
 
 For the purpose of the analysis, assume, without loss of generality, that
 if $(x, y) \in M^*$ and $x \in V_0$, then $y \notin D_c$.
-If this is not the case, that is $y \in C_c$, then based on the pigeonhole principle,
+If this is not the case, that is $y \in D_c$, then based on the pigeonhole principle,
 there must be a vertex $x'$, such that $(x', y) \in M \setminus M^*$.
 So we can remove $(x', y)$ from $M$ and add $(x, y)$ instead.
 Clearly the resulting matching has the same size of the original one,
@@ -146,7 +146,7 @@ by replacing $(v, w)$ with $(u_1, v)$ and $(u_2, v)$ - a contradiction.
 
 \begin{lemma}
 \label{lm:unleqp}
-$|P^* \cap (V_0 \cup P)| \leq |P|$
+$|P^*_1 \cap (V_0 \cup P_1)| \leq |P_1|$
 \end{lemma}
 
 \begin{proof}
@@ -166,8 +166,8 @@ The local search algorithm achieves a 2-approximation ratio.
 \begin{proof}
 By Lemma~\ref{lm:dleqp} and Lemma~\ref{lm:unleqp} we get that 
 $$
-|P^*| = 
-|(P^* \cap D) \cup ((V_0 \cup P) \cap P^*)| \leq 2 \cdot |P|
+|P^*_1| = 
+|(P^*_1 \cap D_1) \cup ((V_0 \cup P_1) \cap P^*_1)| \leq 2 \cdot |P_1|
 $$.
 \end{proof}
 
