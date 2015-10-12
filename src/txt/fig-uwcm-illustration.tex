@@ -1,0 +1,38 @@
+\begin{tikzpicture}
+
+\node at(0,0) {$P_1$};
+\node at(7,3) {$D_{>0}$};
+\node at(7,-3) {$V_0$};
+
+
+\path[draw, pattern=dots, pattern color=red!30]
+(4,0) -- (7,0) to[out=90, in=0] (4,3) -- (4,0);
+
+\path[draw, pattern=checkerboard, pattern color=blue!20]
+(4,0) -- (7,0) 
+to[out=-90, in=0] (4,-3)
+to[out=180, in=-90] (1,0)
+to[out=90, in=180] (4,3)
+-- (4,0);
+
+\draw (5.5,3) circle (0.9) node {$D_c$};
+
+\node[pattern=dots, pattern color=red!20] at(5,1.5) {$P^*_1 \cap D_{>0}$};
+\node[pattern=checkerboard, pattern color=blue!15] at(2.9,-1) {$P^*_1 \cap (P_1 \cup V_0)$};
+
+\draw (4,0) -- (8,0);
+\draw (4,-4) -- (4,4);
+
+\draw[fill] (6,-1) circle (0.1) node(u) {} node[right] {$u$};
+\draw[fill] (6,0.5) circle (0.1) node(v) {} node[right] {$v$};
+
+\draw[fill] (4.5,-1) circle (0.1) node(u1) {} node[above] {$u_1$};
+\draw[fill] (5,-2) circle (0.1) node(u2) {} node[below] {$u_2$};
+\draw[fill] (2,-3) circle (0.1) node(w) {} node[above] {$w$};
+
+\draw[->, thick] (u) -- (v) node[midway, cross out, draw]{};
+
+\draw[->, thick] (u1) -- (w);
+\draw[->, thick] (u2) -- (w) node[midway, cross out, draw]{};
+
+\end{tikzpicture}

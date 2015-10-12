@@ -63,23 +63,38 @@ and this can happen at most $n$ times.
 Also, observe that the body of this loop can be computed in polynomial time, 
 and we can conclude that Algorithm~\ref{alg:local} runs in polynomial time.
     
-We now prove that the local search algorithm achieves an approximation ratio of
-$2$.
-Consider a matching as a tuple $(P, D, V_0, M)$, 
-where $d_{out}(p) = 1, \, \forall p \in P$,
-$d_{in}(d) > 0, \, \forall d \in D$,
-and $d_{in} = d_{out} = 0, \, \forall v \in V_0$.
-It is easy to see that $P$, $D$, and $V_0$ form a partition of $V$.
+We now prove that the local search algorithm achieves an approximation ratio of $2$.
+Consider a matching $(P, D, M)$,
+Let $P_1 = \{p \in P : \dout(p) = 1\}$,
+let $D_{>0} = \{d \in D : \din(d) > 0\}$,
+let $D_c = \{d \in D_{>0} : \din(d) = c(d)\}$,
+and let $V_0 = \{v \in P \cup D : \din(v) = \dout(v) = 0\}$. 
 
-Let $(P, D, V_0, M)$ be a matching found by the local search algorithm, and let
-$(P^*, D^*, V^*_0, M^*)$ be an arbitrary but fixed optimal matching.
-We refer to a driver $v \in D$ with degree $\din(v) = c(v)$ as a \emph{fully utilized}
-driver, and denote by $D_f \subseteq D$ the set of fully utilized drivers.
+Let $(P, D, M)$ be a matching found by the local search algorithm, 
+and let $P_1$, $D_{>0}$, $D_c$, $V_0$ be the corresponded sets.
+Let $(P^*, D^*, M^*)$ be an arbitrary but fixed optimal matching.
+and let $P^*_1$, $D^*_{>0}$, $D^*_c$, $V^*_0$ be the corresponded sets.
+
+We need to show that $|P^*_1| \leq 2|P_1|$.
+To do this we are going to show that 
+$|P^*_1 \cap D_{>0}| \leq |P_1|$ 
+and that
+$|P^*_1 \cap (V_0 \cup P_1)| \leq |P_1|$.
+Figure~\ref{fig:uwcm-illustration} depict our goal.
+
+\begin{figure}
+\centering
+\input{txt/fig-uwcm-illustration}
+\caption{
+\label{fig:uwcm-illustration}
+}
+\end{figure}
+
 
 For the purpose of the analysis, assume, without loss of generality, that
-if $v \in D_f \cap D^*$, and $(u, v) \in M^*$, then $(u, v) \in M$.
+if $v \in D_c \cap D^*$, and $(u, v) \in M^*$, then $u \notin V_0$.
 If this is not the case, that is $u \in V_0$, then based on the pigeonhole principle,
-there must be a vertex $u' \in P \setminus P^*$, such that $(u', v) \in M \setminus M^*$.
+there must be a vertex $u'$, such that $(u', v) \in M \setminus M^*$.
 So we can remove $(u', v)$ from $M$ and add $(u, v)$ instead.
 Clearly the resulting matching has the same size of the original one,
 further, the new matching could actually be found by the $opt_{fixed}$ procedure.
@@ -87,7 +102,7 @@ further, the new matching could actually be found by the $opt_{fixed}$ procedure
 
 \begin{lemma}
 \label{lm:dleqp}
-$|D \cap P^*| \leq |P|$
+$|P^*_1 \cap D_{>0}| \leq |P_1|$
 \end{lemma}
 
 \begin{proof}
@@ -97,7 +112,7 @@ ${|D| \leq |P|}$.
 
 \begin{lemma}
 \label{lm:v_in_p}
-If $u \in V_0$ and $(u, v) \in M^*$, then $v \in P \setminus P^*$.
+If $u \in V_0$ and $(u, v) \in M^*$, then $v \in P_1 \setminus P^*_1$.
 \end{lemma}
 
 \begin{proof}
@@ -117,7 +132,7 @@ then $v_1 \neq v_2$.
 \end{lemma}
 
 \begin{proof}
-From Lemma~\ref{lm:v_in_p} we know that $v_1, v_2 \in P$,
+From Lemma~\ref{lm:v_in_p} we know that $v_1, v_2 \in P_1$,
 Assume for contradiction that $v_1 = v_2 = v$,
 and let $w$ be the vertex such that $(v, w) \in M$,
 then the local search can improve the solution, 
@@ -126,13 +141,13 @@ by replacing $(v, w)$ with $(u_1, v)$ and $(u_2, v)$ - a contradiction.
 
 \begin{lemma}
 \label{lm:unleqp}
-$|(V_0 \cup P) \cap P^*| \leq |P|$
+$|P^* \cap (V_0 \cup P)| \leq |P|$
 \end{lemma}
 
 \begin{proof}
-It is enough to show that for every vertex $u \in V_0 \cap P^*$
-there is a distinct vertex $v \in P \setminus P^*$.
-To see that, for every vertex $u \in V_0 \cap P^*$, 
+It is enough to show that for every vertex $u \in P^*_1 \cap V_0$
+there is a distinct vertex $v \in P_1 \setminus P^*_1$.
+To see that, for every vertex $u \in P^*_1 \cap V_0$, 
 consider the vertex $v$, such that $(u, v) \in M^*$, 
 the proof follows, then, directly
 from Lemma~\ref{lm:v_in_p} and Lemma~\ref{lm:u1nequ2thenv1neqv2}.  
