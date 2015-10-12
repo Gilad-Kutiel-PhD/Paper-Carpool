@@ -21,7 +21,7 @@ c'(u, v)	& =
 				1 & \text{otherwise}
 				\end{cases}
 																			\\
-w'			& = 
+w'(e)			& = 
 				\begin{cases}
 				w(e) & \text{if } e \in E_{pd} 								\\
 				0 & \text{otherwise}	
@@ -59,15 +59,15 @@ For every matching $(P, D, M)$ on $G$, there exists a flow $f$ on $N$ with the s
 \end{lemma}
 
 \begin{proof}
-consider the flow function
+Consider the flow function
 \begin{align*}
-f(s, p)		& = d_{out}(u)		 				\\
-f(p, d)		& = 
+f(s, p_i)		& = d_{out}(p_i)		 				\\
+f(p_i, d_j)		& = 
 				\begin{cases}
-				1 & \text{if } (u, v) \in M		\\
+				1 & \text{if } (p_i, d_j) \in M		\\
 				0 & \text{otherwise}
 				\end{cases}						\\
-f(d, t) 	& = d_{in}(v) 
+f(d_j, t) 	& = d_{in}(d_j) 
 \end{align*}
 
 It is easy to verify, that $f$ is indeed a flow function.

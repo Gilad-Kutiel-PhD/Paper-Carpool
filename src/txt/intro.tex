@@ -17,8 +17,8 @@ that maximizes the global (total expected) satisfaction.
 
 The second phase can be modeled in terms of graph theory.
 Given a directed graph $G = (V, E)$.
-Each vertex $v \in V$ corresponds to a user of the service and a directed
-edge $(u, v)$ exists if the user corresponded to vertex $u$ is willing to
+Each vertex $v \in V$ corresponds to a user of the service and an arc
+$(u, v)$ exists if the user corresponded to vertex $u$ is willing to
 commute with the user corresponded to vertex $v$.
 A capacity function $ c: V \rightarrow \mathbb{N} $ is defined
 according to the number of passengers each user can drive if she was
@@ -27,7 +27,7 @@ A weight function $w : E \rightarrow \R $ defines the amount of
 satisfaction $w(u, v)$,
 that user $u$ gains when riding with user $v$ for every edge $(u, v) \in E$.
 
-A feasible \emph{carpool matching} (matching in short) is a triple 
+A feasible \emph{carpool matching} (matching) is a triple 
 $(P, D, M)$, where $P$ and $D$ form a partition of $V$, and 
 $M \subseteq E \cap (P \times D)$,
 under the constraints (w.r.t $M$) that for every driver $d \in D$, 
