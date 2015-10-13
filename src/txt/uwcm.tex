@@ -93,10 +93,10 @@ ${|D| \leq |P|}$.
 \end{proof}
 
 For the purpose of the analysis, assume, without loss of generality, that
-if $(x, y) \in M^*$ and $x \in V_0$, then $y \notin D_c$.
-If this is not the case, that is $y \in D_c$, then based on the pigeonhole principle,
-there must be a vertex $x'$, such that $(x', y) \in M \setminus M^*$.
-So we can remove $(x', y)$ from $M$ and add $(x, y)$ instead.
+if $(u, v) \in M^*$ and $u \in V_0$, then $v \notin D_c$.
+If this is not the case, that is $v \in D_c$, then based on the pigeonhole principle,
+there must be a vertex $u'$, such that $(u', v) \in M \setminus M^*$.
+So we can remove $(u', v)$ from $M$ and add $(u, v)$ instead.
 Clearly the resulting matching has the same size of the original one,
 further, the new matching could actually be found by the $opt_{fixed}$ procedure.
 Figure~\ref{fig:uwcm-illustration} depicts the analysis done in Lemma~\ref{lm:v_in_p},
