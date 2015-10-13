@@ -108,12 +108,12 @@ and Lemma~\ref{lm:u1nequ2thenv1neqv2}.
 \caption{
 \label{fig:uwcm-illustration}
 Local search analysis:
-1. we assume the edge $(x, y)$ is not in $M^*$
-2. the edge $(u,v)$ can not be in $M^* \setminus M$ (Lemma~\ref{lm:v_in_p})
-3. if $(a,b) \in M^*$ then $b \in D^*_{>0}$, thus $(a,b) \notin M^*$
-4. it is not possible that both $(u_1, w)$ and $(u_2, w)$ are in $M^* \setminus M$
-(Lemma~\ref{lm:u1nequ2thenv1neqv2})
-Thus, for every vertex $u \in V_0$ there is a unique vertex $v \in P_1 \setminus P^*_1$
+1) the edge $(a,b)$ implies that $b \in D^*$, thus, $(a,b) \notin M^*$
+2) the edges $(c,d)$, and $(e,f)$ do not exist, or otherwise, 
+they can be added to $M$ by the local search algorithm
+3) we assume that the edge $(g,h) \notin M^*$
+4) if the edge $(u_1, v)$ exists, then the edge $(u_2, v)$ does not exists, 
+or otherwise, the local search algorithm can increase the size of $M$
 }
 \end{figure}
 
