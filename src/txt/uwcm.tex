@@ -64,22 +64,33 @@ Also, observe that the body of this loop can be computed in polynomial time,
 and we can conclude that Algorithm~\ref{alg:local} runs in polynomial time.
     
 We now prove that the local search algorithm achieves an approximation ratio of $2$.
-Consider a matching $(P, D, M)$,
-Let $P_1 = \{p \in P : \dout(p) = 1\}$,
-let $D_{>0} = \{d \in D : \din(d) > 0\}$,
-let $D_c = \{d \in D_{>0} : \din(d) = c(d)\}$,
-and let $V_0 = \{v \in P \cup D : \din(v) = \dout(v) = 0\}$. 
+Consider a matching $(P, D, M)$, and define the following sets:
+\begin{itemize}
+\item $P_1 = \{p \in P : \dout(p) = 1\}$
+\item $D_{>0} = \{d \in D : \din(d) > 0\}$
+\item $D_c = \{d \in D_{>0} : \din(d) = c(d)\}$
+\item $V_0 = \{v \in P \cup D : \din(v) = \dout(v) = 0\}$ 
+\end{itemize}
 
 Let $(P, D, M)$ be a matching found by the local search algorithm, 
 and let $P_1$, $D_{>0}$, $D_c$, $V_0$ be the corresponded sets.
 Let $(P^*, D^*, M^*)$ be an arbitrary but fixed optimal matching.
-and let $P^*_1$, $D^*_{>0}$, $D^*_c$, $V^*_0$ be the corresponded sets.
+and let $P^*_1$ be the corresponded set.
 We need to show that $|P^*_1| \leq 2|P_1|$.
 To do this we are going to show that 
 $|P^*_1 \cap D_{>0}| \leq |P_1|$ 
 and that
 $|P^*_1 \cap (V_0 \cup P_1)| \leq |P_1|$.
 
+\begin{lemma}
+\label{lm:dleqp}
+$|P^*_1 \cap D_{>0}| \leq |P_1|$
+\end{lemma}
+
+\begin{proof}
+The lemma follows directly from the observation that 
+${|D| \leq |P|}$.
+\end{proof}
 
 For the purpose of the analysis, assume, without loss of generality, that
 if $(x, y) \in M^*$ and $x \in V_0$, then $y \notin D_c$.
@@ -88,7 +99,8 @@ there must be a vertex $x'$, such that $(x', y) \in M \setminus M^*$.
 So we can remove $(x', y)$ from $M$ and add $(x, y)$ instead.
 Clearly the resulting matching has the same size of the original one,
 further, the new matching could actually be found by the $opt_{fixed}$ procedure.
-Figure~\ref{fig:uwcm-illustration} depicts our analysis.
+Figure~\ref{fig:uwcm-illustration} depicts the analysis done in Lemma~\ref{lm:v_in_p},
+and Lemma~\ref{lm:u1nequ2thenv1neqv2}.
 
 \begin{figure}
 \centering
@@ -104,16 +116,6 @@ Local search analysis:
 Thus, for every vertex $u \in V_0$ there is a unique vertex $v \in P_1 \setminus P^*_1$
 }
 \end{figure}
-
-\begin{lemma}
-\label{lm:dleqp}
-$|P^*_1 \cap D_{>0}| \leq |P_1|$
-\end{lemma}
-
-\begin{proof}
-The lemma follows directly from the observation that 
-${|D| \leq |P|}$.
-\end{proof}
 
 \begin{lemma}
 \label{lm:v_in_p}
