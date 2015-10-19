@@ -99,11 +99,9 @@ where, the number of edges,
 in every connected component is at most the number of vertices in that component.
 
 We now show how to transform a super matching into a feasible matching.
-We can, without loss of generality, 
-consider a single connected component in the underline graph of a maximum super matching.
-Given a connected component $C = (V, E)$ we construct a feasible matching by
+For every connected component $C = (V, E)$ we construct a feasible matching by
 computing a maximum spanning bipartite graph $L = (V, E'_{LR}, E'_{RL})$ of $C$,
-and returning the set of edges in the odd layers or the even layers,
+and returning $E'_{LR}$ or $E'_{RL}$,
 whichever has a higher weight. 
 We describe the algorithm in Algorithm~\ref{alg:cm3}.
 
@@ -126,8 +124,8 @@ $G' \leftarrow \text{superMatching($G$)}$				\\
 \end{algorithm}
 
 We now show that the Super Matching is 3-approximation algorithm.
-Once again, we limit, without loss of generality, 
-our analysis to a single connected component.
+For the purpose of the analysis, we limit, without loss of generality, 
+our discussion to a single connected component.
 Let $(V, E)$ be the underlying graph of the super matching, 
 and let $M^*$ be an optimal matching, then:
 \begin{lemma}
@@ -150,7 +148,11 @@ $w(M) \geq w(E) - w(E')$
 \end{lemma}
 
 \begin{proof}
-Recall that $E = E' \cup \{e\}$, where $e$ is the lightest edge on some cycle in $(V, E)$ 
+Recall that $E = E' \cup \{e\}$, 
+where $e$ is the lightest edge on some cycle in $(V, E)$. 
+Thus, $w(e) = w(E) - w(E')$, 
+and there must be another edge $e' \in E \setminus E'$, 
+such that $w(e') \geq w(e)$
 \end{proof}
 
 \begin{theorem}
