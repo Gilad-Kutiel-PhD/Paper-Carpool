@@ -1,0 +1,68 @@
+\tikzset{
+edge/.style={
+->, 
+very thick,
+},
+%
+},
+
+\subfigure[]{
+\label{sub:input}
+\begin{tikzpicture}
+
+\graph[default graph]{
+{1/2, 2/3, 3/1, 5/0, 6/4, 8/2, 9/1},
+{4/3, 7/3, 10/4},
+
+
+1 ->[edge label=3] 4,
+2 ->[edge label=4] 4,
+3 ->[edge label=5] 4,
+
+5 ->[edge label=2] 7,
+6 ->[edge label=4] 7,
+
+8 ->[edge label=6] 10,
+9 ->[edge label=2] 10,
+
+
+{1, 4} ->[edge label=4] 5,
+{2, 6, 7} ->[edge label=2] 3,
+{8, 10} ->[edge label=1] 2,
+3 <->[edge label=3] 8,
+{1, 4} <->[edge label=1] 9,
+
+};
+
+\end{tikzpicture}
+}
+\hfill
+%
+\subfigure[]{
+\label{sub:output}
+\begin{tikzpicture}
+
+\graph[default graph]{
+{[nodes={blue}]1/2, 2/3, 3/1, 5/0, 6/4, 8/2, 9/1},
+{[nodes={dashed, red}]4/3, 7/3, 10/4},
+
+1 ->[edge label=3] 4,
+2 ->[edge label=4] 4,
+3 ->[edge label=5] 4,
+
+5 ->[edge label=2] 7,
+6 ->[edge label=4] 7,
+
+8 ->[edge label=6] 10,
+9 ->[edge label=2] 10,
+
+
+{1, 4} ->[draw=none] 5,
+{2, 6, 7} ->[draw=none] 3,
+{8, 10} ->[draw=none] 2,
+3 <->[draw=none] 8,
+{1, 4} <->[draw=none] 9,
+
+};
+\end{tikzpicture}
+}

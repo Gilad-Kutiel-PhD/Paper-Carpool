@@ -35,7 +35,23 @@ $\din(d) \leq c(d)$,
 and for every passenger $p \in P$, $\dout(p) \leq 1$.
 In the \textsc{\CARPOOL{}} problem we seek for a matching $(P, D, M)$ that maximizes the
 total weight on the edges.
-Here we consider two more variants of the problem, namely, 
+In other words, the \textsc{\CARPOOL{}} problem is about finding a set of 
+(directed toward the center) vertex disjoint stars 
+that maximizes the total weights on the edges.
+Figure~\ref{fig:carpool} is an example of the \textsc{\CARPOOL{}} problem.
+\begin{figure}
+\centering
+\input{txt/fig-carpool}
+\caption{
+\label{fig:carpool}
+A carpool matching example: 
+\subref{sub:input} 
+a directed graph with capacities on the vertices and weights on the edges 
+\subref{sub:output}
+a feasible matching with total weight of 26. 
+}
+\end{figure}  
+In this paper, we also consider two more variants of the problem, namely, 
 the unweighted and the uncapacitated, undirected variants of the problem.
   
 Hartman et al.~\cite{hartman2013optimal} proved that all variants of the

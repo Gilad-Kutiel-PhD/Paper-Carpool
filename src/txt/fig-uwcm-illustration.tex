@@ -36,37 +36,37 @@ minimum height=2.5cm,
 }
 
 % ARCS
-\newcommand{\arc}[2]{
+\newcommand{\arc}[4]{
 \draw[fill] (#1) circle (0.05) node(#1') {} node[below=1mm] {$#1$};
 \draw[fill] (#2) circle (0.05) node(#2') {} node[above=1mm] {$#2$};
-\draw[->] (#1') -- (#2') node[midway](#1#2) {};
+\draw[->] (#1') .. controls +(#3) and +(#4).. (#2') node[midway](#1#2) {};
 }
 
-\newcommand{\arcx}[2]{
-\arc{#1}{#2}
+\newcommand{\arcx}[4]{
+\arc{#1}{#2}{#3}{#4}
 \node[sloped, cross out, draw] at(#1#2){};
 }
 
 \node[above right=5mm](a) at(v.west){};
 \node[left=5mm](b) at(p.east){};
-\arcx{a}{b}
+\arcx{a}{b}{-5mm, 5mm}{5mm, 5mm}
 
 \node[left=5mm](c) at(v.east){};
 \node[right=11mm](d) at(v.east){};
-\arcx{c}{d}
+\arcx{c}{d}{5mm, -5mm}{-5mm, -5mm}
 
 \node[below right=3mm](e) at(v.north){};
 \node[below right=10mm](f) at(dc.east){};
-\arcx{e}{f}
+\arcx{e}{f}{5mm, 5mm}{5mm, -5mm}
 
 \node[below left=3mm](g) at(v.north){};
 \node[above=3mm](h) at(dc.south){};
-\arcx{g}{h}
+\arcx{g}{h}{-5mm, 5mm}{-5mm, -5mm}
 
 \node[above=6mm](u_1) at(v.south west){};
 \node[above=6mm](u_2) at(v.south){};
 \node[below=10mm](v) at(p.south){};
-\arc{u_1}{v}
-\arcx{u_2}{v}
+\arc{u_1}{v}{-5mm, 5mm}{5mm, 5mm}
+\arcx{u_2}{v}{-5mm, -5mm}{5mm, -5mm}
 
 \end{tikzpicture}
