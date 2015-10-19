@@ -38,14 +38,23 @@ total weight on the edges.
 Here we consider two more variants of the problem, namely, 
 the unweighted and the uncapacitated, undirected variants of the problem.
   
-Hartman et al.~\cite{hartman2013optimal} proved that all the variants of the
-\emph{\CARPOOL{}} problem considered in this paper are NP-hard, 
+Hartman et al.~\cite{hartman2013optimal} proved that all variants of the
+\emph{\CARPOOL{}} problem considered in this paper are NP-hard,
 and that the problem remains NP-hard even for a binary weight function when
 the capacity function $c(v) \leq 2$ for every vertex in $V$.
-Later, they compared different heuristics algorithms on real data~\cite{hartman2014theory}.
-Other heuristics algorithms were developed as well~\cite{knapen2014exploiting}.
+It is also worth mentioning, that in the undirected, uncapacitated, unweighted
+variant of the problem, the set of drivers, in an optimal solution,
+form a minimum dominating set.
 When the (potential) set of drivers is known in advanced, however, the problem becomes
 tractable and can be solved using a reduction to a flow network.
+
+Agatz et al. outlined the optimization challenges that arise 
+when developing technology to support ride-sharing and survey the
+related operations research models in the academic literature~\cite{agatz2012optimization}.  
+Hartman et al. designed several heuristics algorithms for the 
+\CARPOOL{} problem and compared 
+their performance on real data~\cite{hartman2014theory}.
+Other heuristics algorithms were developed as well~\cite{knapen2014exploiting}.
 
 In Section~\ref{sub:fixed} we discuss how the problem can be solved,
 when $P$ and $D$ are fixed,
