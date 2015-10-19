@@ -7,13 +7,13 @@ then, in the second phase it turns this subgraph to a feasible matching
 by removing some of the edges.
 
 Given a directed graph $G = (V, E)$,
-a weight function $w : E \rightarrow \R^+$, 
+a weight function $w : E \rightarrow \R$, 
 and a spanning tree $T$ of the underlying graph, 
-we refer to the directed bipartite
-\footnote{a graph whose underlying graph is a tree, must be a bipartite graph}
+we refer to the directed bipartite~\footnote{
+a graph whose underlying graph is a tree, must be a bipartite graph}
 graph resulting from directing the edges 
-of $T$ according to their original direction
-\footnote{if there are antisymmetric edges in $G$, 
+of $T$ according to their original direction~\footnote{
+if there are antisymmetric edges in $G$, 
 choose an arbitrary direction to the underlying edge}
 as the \emph{spanning bipartite graph} of $G$.
 An example of a spanning bipartite graph is illustrated in 
@@ -34,8 +34,8 @@ and $E_{RL}$ is the red, dotted edge
 \end{figure}
 
 For a given spanning bipartite graph $G = (V = (L, R), E)$, 
-denote by $E_{LR}$ the edges directed from a vertex in $L$ to a vertex in $R$,
-and by $E_{RL}$ the edges directed from a vertex in $R$ to a vertex in $L$,
+denote by $E_{LR}$ the edges directed from vertices in $L$ to vertices in $R$,
+and by $E_{RL}$ the edges directed from vertices in $R$ to vertices in $L$,
 For a set of edges $E$ let $w(E) = \sum_{e \in E}{w(e)}$, 
 then, clearly, the following property holds:
 
@@ -51,7 +51,7 @@ that every vertex can acts both as a driver and as passenger.
 We refer to a matching, under this assumption, as a \emph{super matching}.
 We now show how an optimal super matching can be found efficiently.
 Given a directed graph $G = (V, E)$,
-a weight function $w : E \rightarrow \R^+$,
+a weight function $w : E \rightarrow \R$,
 and a capacity function $c : V \rightarrow \N$, 
 when every vertex can acts both as a driver and as a passenger, 
 a \emph{super matching} is a subgraph of $G$, 
@@ -60,21 +60,17 @@ A maximum super matching can be found by the following reduction
 to a maximum weight flow problem: 
 Let $N = (G', s, t, c', w')$ be a flow network, where 
 \begin{align*}
-G'				& = (U_p \cup V_d \cup \{s, t\}, E_{sp} \cup E_{pd} \cup E_{dt})	\\
-U_p				& = u_p : v \in V\} \\
-V_d				& = \{v_d : v \in V\} \\
-E_{sp}			& = \{ (s, u_p) : u_p \in U_p \} \\
-E_{pd}			& = \{ ((u_p, v_d)) : (u, v) \in E \} \\
-E_{dt}			& = \{ (v_d, t) : v_d \in V_d \} \\
-c'(u, v)		& =
+G'				& = (P \cup D \cup \{s, t\}, E_{sp} \cup E_{pd} \cup E_{dt})	\\
+P				& = \{p_v : v \in V\}					\\
+D				& = \{d_v : v \in V\}					\\
+E_{sp}			& = \{ (s, p_v) : p_v \in P \}			\\
+E_{pd}			& = \{ ((p_u, d_v)) : (u, v) \in E \}	\\
+E_{dt}			& = \{ (d_v, t) : d_v \in D \}			\\
+c'(s, p_v)		& = c'(p_u, d_v) = 1					\\
+c'(d_v, t)		& = c(v)								\\
+w'(p_u, d_v)	& = 
 \begin{cases}
-c(u) & \text{if } (u, v) \in E_{dt} \\
-1 & \text{otherwise}	
-\end{cases}
-\\
-w'(u_d, u_p)	& = 
-\begin{cases}
-w(u, v) & \text{if } (u_d, u_p) \in E_{pd} \\
+w(u, v) & \text{if } (p_u, d_v) \in E_{pd} \\
 0 & \text{otherwise}	
 \end{cases}
 \end{align*}
@@ -113,7 +109,7 @@ We describe the algorithm in Algorithm~\ref{alg:cm3}.
 
 \begin{algorithm}
 \label{alg:cm3}
-\KwIn{$G = (V, E), c : V \rightarrow \N, w : E \rightarrow \R^+$}											 
+\KwIn{$G = (V, E), c : V \rightarrow \N, w : E \rightarrow \R$}											 
 \KwOut{$(M \subseteq E)$}
 
 $M \leftarrow \emptyset$								\\

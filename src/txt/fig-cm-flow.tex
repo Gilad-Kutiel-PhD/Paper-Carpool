@@ -4,20 +4,20 @@ every node/.style={default node},
 
 \node(s) at (0,0) {s};
 
-\node[draw=none]() 		at (3,3) {$U_p$};
-\node(p0) 				at (3,2) {$u^p_0$};
+\node[draw=none]() 		at (3,3) {$P$};
+\node(p0) 				at (3,2) {$p_0$};
 \node[draw=none](pdots1)at (3,1) {$\vdots$};
-\node(pi) 				at (3,0) {$u^p_i$};
+\node(pi) 				at (3,0) {$p_i$};
 \node[draw=none](pdots2)at (3,-1) {$\vdots$};
-\node(pl) 				at (3,-2) {$u^p_n$};
+\node(pl) 				at (3,-2) {$p_n$};
 
 
-\node[draw=none]() 		at (7,3) {$V_d$};
-\node(d0) 				at (7,2) {$v^d_0$};
+\node[draw=none]() 		at (7,3) {$D$};
+\node(d0) 				at (7,2) {$d_0$};
 \node[draw=none](pdots)	at (7,1) {$\vdots$};
-\node(dj) 				at (7,0) {$v^d_j$};
+\node(dj) 				at (7,0) {$d_j$};
 \node[draw=none](pdots)	at (7,-1) {$\vdots$};
-\node(dm) 				at (7,-2) {$v^d_n$};
+\node(dm) 				at (7,-2) {$d_n$};
 
 \node(t) at (10,0) {t};
 
@@ -28,13 +28,13 @@ node[label below] {$c' = 1$};
 
 % P -> D
 \draw[->] (pi) -- (dj)
-node[label above, above=-5mm] {$w' = w(v_i, v_j)$}
+node[label above, above=-5mm] {$w' = w(i, j)$}
 node[label below] {$c' = 1$};
 
 % D -> t
 \draw[->] (dj) -- (t)
 node[label above] {$w' = 0$}
-node[label below, below=-3mm] {$c' = c(v_j)$};
+node[label below, below=-3mm] {$c' = c(j)$};
 
 % dots
 \newcommand{\edots}[2]{

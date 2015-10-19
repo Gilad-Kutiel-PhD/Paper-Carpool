@@ -1,6 +1,8 @@
 \label{sub:ucudcm}
 In this section we consider a variant of the problem, 
 when there are no capacity constraints and the graph is undirected.
+We give a simple 2-approximation algorithm for this variant, 
+and give an example to shoe that our analysis is tight.
 
 Let $G = (V, E)$ be a graph, 
 and let $T = (V, E')$ be a maximum spanning tree of $G$.
@@ -28,7 +30,7 @@ We can now describe our algorithm in Algorithm~\ref{alg:apx}.
 \label{alg:apx}
 \caption{MaxTree}
 $(V, E'_{even}, E'_{odd}) \leftarrow$ maximum spanning tree of $G$		\\
-Return $\argmax_{E'' \in \{ E'_{even}, E'_{odd} \}}{w(E'')} $	\\
+Return $\argmax_{F \in \{ E'_{even}, E'_{odd} \}}{w(F)} $	\\
 \end{algorithm}
 
 We now prove that the approximation ratio of MaxTree is 2.
