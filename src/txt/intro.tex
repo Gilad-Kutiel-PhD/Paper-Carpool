@@ -32,9 +32,9 @@ $(P, D, M)$, where $P$ and $D$ form a partition of $V$, and
 $M \subseteq E \cap (P \times D)$,
 under the constraints that for every driver $d \in D$, 
 $\din(d) \leq c(d)$, 
-and for every passenger $p \in P$, $\dout(p) \leq 1$.
+and for every passenger $p \in P$, ${\dout(p) \leq 1}$.
 In the \textsc{\CARPOOL{}} problem we seek for a matching $(P, D, M)$ that maximizes the
-total weight on the edges.
+total weight of $M$.
 In other words, the \textsc{\CARPOOL{}} problem is about finding a set of 
 (directed toward the center) vertex disjoint stars 
 that maximizes the total weights on the edges.
@@ -51,8 +51,13 @@ a directed graph with capacities on the vertices and weights on the edges
 a feasible matching with total weight of 26. 
 }
 \end{figure}  
+
 In this paper, we also consider two more variants of the problem, namely, 
-the unweighted and the uncapacitated, undirected variants of the problem.
+the unweighted and the uncapacitated, undirected variants of the problem 
+\footnote{For simplicity, 
+we consider the special (directed) variant of the problem, 
+when for every directed edge, in the given graph, 
+the antisymmetric edge also exists, as the undirected variant}.
   
 Hartman et al.~\cite{hartman2013optimal} proved that all variants of the
 \emph{\CARPOOL{}} problem considered in this paper are NP-hard,
@@ -61,7 +66,7 @@ the capacity function $c(v) \leq 2$ for every vertex in $V$.
 It is also worth mentioning, that in the undirected, uncapacitated, unweighted
 variant of the problem, the set of drivers, in an optimal solution,
 form a minimum dominating set.
-When the (potential) set of drivers is known in advanced, however, the problem becomes
+When the set of drivers is known in advanced, however, the problem becomes
 tractable and can be solved using a reduction to a flow network.
 
 Agatz et al. outlined the optimization challenges that arise 
@@ -71,6 +76,10 @@ Hartman et al. designed several heuristics algorithms for the
 \CARPOOL{} problem and compared 
 their performance on real data~\cite{hartman2014theory}.
 Other heuristics algorithms were developed as well~\cite{knapen2014exploiting}.
+Arkin et al, considered other variants of capacitated star packing where
+a capacity vector is given as part of the input and 
+capacities are needed to be assigned to vertices.  
+
 
 In Section~\ref{sub:fixed} we discuss how the problem can be solved,
 when $P$ and $D$ are fixed,

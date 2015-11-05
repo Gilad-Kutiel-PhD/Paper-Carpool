@@ -1,4 +1,5 @@
-Given a directed graph $G = (V, E)$,
+The \textsc{\CARPOOL{}} problem is a star packing problem in directed graph.
+Formally, given a directed graph $G = (V, E)$,
 a capacity function $ c: V \rightarrow \N $,
 and a weight function $w : E \rightarrow \R $,
 a feasible \emph{carpool matching} is a triple 
@@ -8,7 +9,7 @@ under the constraints that for every vertex $d \in D$,
 $\din(d) \leq c(d)$, 
 and for every vertex $p \in P$, $\dout(p) \leq 1$.
 In the \textsc{\CARPOOL{}} problem we seek for a matching $(P, D, M)$ that maximizes the
-total weight on the edges.
+total weight of $M$.
 
 The problem arises when designing an online carpool service, 
 such as Zimride~\cite{zimride}, 
