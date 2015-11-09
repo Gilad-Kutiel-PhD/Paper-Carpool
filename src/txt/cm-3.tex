@@ -49,6 +49,9 @@ We now describe our algorithm.
 Assume for a moment, 
 that every vertex can acts both as a driver and as passenger.
 We refer to a matching, under this assumption, as a \emph{super matching}.
+Formally, a super matching is a set of edges $M \subseteq E$, 
+under the constraints that, $\din(v) \leq c(v)$ and $\dout(v) \leq 1$,
+for every $v \in V$. 
 We now show how an optimal super matching can be found efficiently.
 Given a directed graph $G = (V, E)$,
 a weight function $w : E \rightarrow \R$,
@@ -82,6 +85,7 @@ and the right side each vertex in $V$ being a driver.
 Figure~\ref{fig:cm-flow} illustrates this flow network.
 %
 \begin{figure}
+\centering
 \input{txt/fig-cm-flow}
 \caption{
 \label{fig:cm-flow}
