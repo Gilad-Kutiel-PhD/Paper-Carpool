@@ -5,8 +5,7 @@ In the first phase it computes a maximum super-matching of $G$,
 in the second phase it turns this super-matching to a feasible matching
 by removing some of the edges.
 
-We now describe our algorithm. 
-We now consider the underlying graph of an optimal super matching.
+Consider the underlying graph of an optimal super matching.
 Recall that in a super matching the out degree of every vertex is at most 1,
 that is, the underlying graph of a super matching is a pseudoforest.
 
@@ -52,7 +51,7 @@ Obviously, every matching is a valid super-matching,
 and $w(E)$ is the weight of an optimal super-matching 
 \end{proof}
 
-Let $T = (V, E')$ be a maximum spanning tree of $U$,
+Let $T = (V, E')$ be a maximum spanning bipartite graph of $U$,
 and let 
 $$M = \argmax_{F \in \{ E_{LR}, E_{RL} \}}{w(F)}$$
 be the matching computed by Algorithm~\ref{alg:cm3}, then:

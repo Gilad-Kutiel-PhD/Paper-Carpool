@@ -48,22 +48,23 @@ A carpool matching example:
 \subref{sub:input} 
 a directed graph with capacities on the vertices and weights on the edges 
 \subref{sub:output}
-a feasible matching with total weight of 26. 
+a feasible matching with total weight of 26.
+$P$ is the set of blue vertices, and $D$ is the set of red, dashed vertices. 
 }
 \end{figure}  
 
 In this paper, we also consider two more variants of the problem, namely, 
-the unweighted and the uncapacitated, undirected variants of the problem 
-\footnote{The undirected variant of the problem reduces to the directed variant,
-by replacing each edge $(u,v)$ by two directed edges,
-$(u \rightarrow v)$ and $(v \rightarrow u)$,
-each of the same weight as $(u,v)$.}.
+the unweighted and the uncapacitated variants of the problem 
   
 Hartman et al.~\cite{hartman2013optimal} proved that all variants of the
 \emph{\CARPOOL{}} problem considered in this paper are NP-hard,
 and that the problem remains NP-hard even for a binary weight function when
 the capacity function $c(v) \leq 2$ for every vertex in $V$.
-It is also worth mentioning, that in the undirected, uncapacitated, unweighted
+It is also worth mentioning, that in the undirected
+\footnote{The undirected variant of the problem reduces to the directed variant,
+by replacing each edge $(u,v)$ by two directed edges,
+$(u \rightarrow v)$ and $(v \rightarrow u)$,
+each of the same weight as $(u,v)$.}, uncapacitated, unweighted
 variant of the problem, the set of drivers, in an optimal solution,
 form a minimum dominating set.
 When the set of drivers is known in advanced, however, the problem becomes
@@ -78,15 +79,15 @@ their performance on real data~\cite{hartman2014theory}.
 Other heuristics algorithms were developed as well~\cite{knapen2014exploiting}.
 Arkin et al, considered other variants of capacitated star packing where
 a capacity vector is given as part of the input and 
-capacities are needed to be assigned to vertices.  
+capacities are needed to be assigned to vertices~\cite{arkin2004approximations}.  
 
 
 In Section~\ref{sub:fixed} we discuss how the problem can be solved,
-when $P$ and $D$ are fixed,
-and in Section~\ref{sub:uwcm} we give a 2-approximation algorithm for the
-unweighted variant of the problem,
-in Section~\ref{sub:ucudcm} we give a 2-approximation algorithm
-for the uncapacitated, undirected variant of the problem. 
+when $P$ and $D$ are fixed.
+In Section~\ref{sub:uwcm} we give a 2-approximation algorithm for the
+unweighted variant of the problem.
+In Section~\ref{sub:ucudcm} we give a 2-approximation algorithm
+for the uncapacitated variant of the problem. 
 Finally, in Section~\ref{sub:cm}, we present a 3-approximation
 algorithm for the general problem. 
 These are the first known approximation algorithms for any variant of the problem.
