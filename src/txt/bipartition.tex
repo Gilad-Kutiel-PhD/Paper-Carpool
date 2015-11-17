@@ -1,0 +1,34 @@
+\label{sub:bipartition}
+Given a directed bipartite graph $G = (L\cup R, E)$, 
+let $E_{LR} = E \cap (L \times R)$, 
+and let $E_{RL} = E \cap (R \times L)$.
+Clearly $E_{LR} \cup E_{RL} = E$, moreover, 
+if a weight function $w:E \rightarrow \R$ 
+assign weight to every edge in $G$ then the following observation holds:
+\begin{observation}
+\label{ob:bipartition}
+$\max(w(E_{LR}), w(E_{LR})) \geq \frac{w(E)}{2}$
+\end{observation}
+
+In particular, given a directed graph $G$, 
+and a maximum spanning tree $T$ of $G$, 
+applying the original directions of the edges to the edges in $T$ result 
+with a directed bipartite graph $\overrightarrow{T}$.
+We refer to $\overrightarrow{T}$ as the \emph{maximum spanning bipartite graph}
+of $G$. 
+Figure~\ref{fig:spanning-bipartite-graph} illustrate this process.   
+
+\begin{figure}
+\centering
+\input{txt/fig-spanning-bipartite-graph}
+\caption{
+\label{fig:spanning-bipartite-graph}
+An example of a maximum spanning bipartite graph:
+\subref{sub:graph} a directed graph, 
+\subref{sub:tree} a maximum spanning tree  
+\subref{sub:bipartite} a maximum spanning bipartite graph:
+$E_{LR}$ is the set of blue edges, 
+and $E_{RL}$ is the red, dashed edge   
+}
+\end{figure}
+ 

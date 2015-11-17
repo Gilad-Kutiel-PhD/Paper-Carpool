@@ -1,111 +1,21 @@
 \label{sub:cm}
 We now present a 3-app\-roximation algorithm for the \textsc{\CARPOOL{}} problem.
 This algorithm acts in two phases.
-In the first phase it computes a subgraph of $G$ 
-where $d_{in}(v) \leq c(v)$, and $d_{out}(v) \leq 1$ for every $v \in V$, 
-then, in the second phase it turns this subgraph to a feasible matching
+In the first phase it computes a maximum super-matching of $G$, 
+in the second phase it turns this super-matching to a feasible matching
 by removing some of the edges.
 
-Given a directed graph $G = (V, E)$,
-a weight function $w : E \rightarrow \R$, 
-and a spanning tree $T$ of the underlying graph, 
-we refer to the directed bipartite~\footnote{
-a graph whose underlying graph is a tree, must be a bipartite graph}
-graph resulting from directing the edges 
-of $T$ according to their original direction~\footnote{
-if there are antisymmetric edges in $G$, 
-choose an arbitrary direction to the underlying edge}
-as the \emph{spanning bipartite graph} of $G$.
-An example of a spanning bipartite graph is illustrated in 
-Figure~\ref{fig:spanning-bipartite-graph}
-
-\begin{figure}
-\centering
-\input{txt/fig-spanning-bipartite-graph}
-\caption{
-\label{fig:spanning-bipartite-graph}
-An example of a spanning bipartite graph:
-\subref{sub:graph} a directed graph, 
-\subref{sub:tree} a possible spanning tree  
-\subref{sub:bipartite} a spanning bipartite graph:
-$E_{LR}$ is the set of blue, dashed edges, 
-and $E_{RL}$ is the red, dotted edge   
-}
-\end{figure}
-
-For a given spanning bipartite graph $G = (V = (L, R), E)$, 
-denote by $E_{LR}$ the edges directed from vertices in $L$ to vertices in $R$,
-and by $E_{RL}$ the edges directed from vertices in $R$ to vertices in $L$,
-For a set of edges $E$ let $w(E) = \sum_{e \in E}{w(e)}$, 
-then, clearly, the following property holds:
-
-\begin{observation}
-\label{ob:geq_half}
-$ \max\{w(E_{LR}), w(E_{RL})\}  \geq \frac{w(E)}{2} $
-\end{observation}
-
-
 We now describe our algorithm. 
-Assume for a moment, 
-that every vertex can acts both as a driver and as passenger.
-We refer to a matching, under this assumption, as a \emph{super matching}.
-Formally, a super matching is a set of edges $M \subseteq E$, 
-under the constraints that, $\din(v) \leq c(v)$ and $\dout(v) \leq 1$,
-for every $v \in V$. 
-We now show how an optimal super matching can be found efficiently.
-Given a directed graph $G = (V, E)$,
-a weight function $w : E \rightarrow \R$,
-and a capacity function $c : V \rightarrow \N$, 
-when every vertex can acts both as a driver and as a passenger, 
-a \emph{super matching} is a subgraph of $G$, 
-where $d_{in}(v) \leq c(v)$, and $d_{out}(v) \leq 1$ for every $v \in V$. 
-A maximum super matching can be found by the following reduction 
-to a maximum weight flow problem: 
-Let $N = (G', s, t, c', w')$ be a flow network, where 
-\begin{align*}
-G'				& = (P \cup D \cup \{s, t\}, E_{sp} \cup E_{pd} \cup E_{dt})	\\
-P				& = \{p_v : v \in V\}					\\
-D				& = \{d_v : v \in V\}					\\
-E_{sp}			& = \{ (s, p_v) : p_v \in P \}			\\
-E_{pd}			& = \{ ((p_u, d_v)) : (u, v) \in E \}	\\
-E_{dt}			& = \{ (d_v, t) : d_v \in D \}			\\
-c'(s, p_v)		& = c'(p_u, d_v) = 1					\\
-c'(d_v, t)		& = c(v)								\\
-w'(p_u, d_v)	& = 
-\begin{cases}
-w(u, v) & \text{if } (p_u, d_v) \in E_{pd} \\
-0 & \text{otherwise}	
-\end{cases}
-\end{align*}
-
-That is, 
-we construct a bipartite graph where the left side represent each vertex 
-in $V$ being a passenger,
-and the right side each vertex in $V$ being a driver.
-Figure~\ref{fig:cm-flow} illustrates this flow network.
-%
-\begin{figure}
-\centering
-\input{txt/fig-cm-flow}
-\caption{
-\label{fig:cm-flow}
-Illustration of the flow network that is used to find a super-matching.
-}
-\end{figure}
-%
-One can verify that this is indeed a flow network and that there is a straight forward 
-translation between a flow and a super matching with the same weight.
-
 We now consider the underlying graph of an optimal super matching.
 Recall that in a super matching the out degree of every vertex is at most 1,
-that is, the underlying graph of a super matching is a set of connected components,
-where, the number of edges, 
-in every connected component is at most the number of vertices in that component.
+that is, the underlying graph of a super matching is a pseudoforest.
 
 We now show how to transform a super matching into a feasible matching.
 For every connected component $C = (V, E)$ we construct a feasible matching by
-computing a maximum spanning bipartite graph $L = (V, E'_{LR}, E'_{RL})$ of $C$,
-and returning $E'_{LR}$ or $E'_{RL}$,
+computing a maximum spanning tree and directing the edges of this tree according
+to their original directions, denote by $T = (V, E_{LR}, E_{RL})$, the resulting, 
+bipartite graph.
+We then return $E_{LR}$ or $E_{RL}$,
 whichever has a higher weight. 
 We describe the algorithm in Algorithm~\ref{alg:cm3}.
 
@@ -118,19 +28,19 @@ $M \leftarrow \emptyset$								\\
 $G' \leftarrow \text{superMatching($G$)}$				\\
 
 \For{every connected component $C_i = (V^i, E^i) \in G'$}{	
-	$(V^i, E' = (E'_{LR}, E'_{RL})) \leftarrow \text{maximum spanning bipartite graph of } C_i$
-	\\
-	$M \leftarrow M \cup \argmax_{F \in \{ E'_{LR}, E'_{RL} \}}{w(F)}$	
+	$T \leftarrow \text{maximum spanning tree of } C_i$				\\
+	$(V, E_{LR}, E_{RL}) \leftarrow \text{direct}(T)$				\\
+	$M \leftarrow M \cup \argmax_{F \in \{ E_{LR}, E_{RL} \}}{w(F)}$	
 }
 
 \Return $M$
-\caption{Super Matching Algorithm}
+\caption{SuperMatching}
 \end{algorithm}
 
-We now show that the Super Matching is 3-approximation algorithm.
+We now show that the SuperMatching algorithm is 3-approximation.
 For the purpose of the analysis, we limit, without loss of generality, 
 our discussion to a single connected component.
-Let $(V, E)$ be the underlying graph of the super matching, 
+Let $U = (V, E)$ be the underlying graph of the super matching, 
 and let $M^*$ be an optimal matching, then:
 \begin{lemma}
 \label{lm:super-geq-m^*}
@@ -142,8 +52,9 @@ Obviously, every matching is a valid super-matching,
 and $w(E)$ is the weight of an optimal super-matching 
 \end{proof}
 
-Let
-$$ M = \argmax_{F \in \{ E'_{LR}, E'_{RL} \}}{w(F)} $$
+Let $T = (V, E')$ be a maximum spanning tree of $U$,
+and let 
+$$M = \argmax_{F \in \{ E_{LR}, E_{RL} \}}{w(F)}$$
 be the matching computed by Algorithm~\ref{alg:cm3}, then:
 
 \begin{lemma}
@@ -164,7 +75,7 @@ Algorithm~\ref{alg:cm3} achieves a 3-approximation ratio.
 \end{theorem}
 
 \begin{proof}
-From Observation~\ref{ob:geq_half}, Lemma~\ref{lm:super-geq-m^*},
+From Observation~\ref{ob:bipartition}, Lemma~\ref{lm:super-geq-m^*},
 and Lemma~\ref{lm:more_than_e} we get that
 $$ 3w(M) = 2w(M) + w(M) \geq w(E') + w(E) - w(E') = w(E) \geq w(M^*)$$.
 \end{proof}

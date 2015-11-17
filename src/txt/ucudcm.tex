@@ -1,36 +1,25 @@
 \label{sub:ucudcm}
-In this section we consider a variant of the problem, 
-when there are no capacity constraints and the graph is undirected.
+In this section we consider the uncapacitated variant of the problem. 
 We give a simple 2-approximation algorithm for this variant, 
 and give an example to show that our analysis is tight.
 
-Let $G = (V, E)$ be a graph, 
-and let $T = (V, E')$ be a maximum spanning tree of $G$.
-Pick an arbitrary vertex, $r$, to be the root of $T$, 
-and denote by $L_i$ the $i$th layer of $T$, 
-where $L_i$, for $i \geq 0$, is the set of vertices with a minimum distance of $i$ from $r$.
-Denote by $l(v)$ the layer of vertex $v$ and let 
-$$ E'_{even} = \{ (u, v) : l(u) \equiv 0 \mod 2 \} $$
-and    
-$$ E'_{odd} = \{ (u, v) : l(u) \equiv 1 \mod 2 \} $$
-then, it is easy to verify that the following properties hold:
-
-\begin{observation}
-The sets $E'_{even}$ and $E'_{odd}$ form a partition of $E'$. 
-\end{observation}
-
-\begin{observation}
-\label{ob:tree_geq_half}
-$ \max\{w(E'_{even}), w(E'_{odd})\}  \geq \frac{w(E')}{2} $
-\end{observation}
+Let $G = (V, E)$ be a directed graph, 
+and let $T = (V, E')$ be a maximum spanning tree of the underlying graph of $G$.
+Let $\overrightarrow{T}$ be the directed graph, 
+obtained by directing the edges in $T$ according to their original direction
+($\text{direct}(T)$).
+As we remarked in the preliminaries, 
+$\overrightarrow{T}$ is a bipartite graph, 
+and we can write $\overrightarrow{T} = (V, E_{LR} \cup E_{RL})$. 
 
 We can now describe our algorithm in Algorithm~\ref{alg:apx}.
 
 \begin{algorithm}
 \label{alg:apx}
 \caption{MaxTree}
-$(V, E'_{even}, E'_{odd}) \leftarrow$ maximum spanning tree of $G$		\\
-Return $\argmax_{F \in \{ E'_{even}, E'_{odd} \}}{w(F)} $	\\
+$T = (V, E') \leftarrow$ maximum spanning tree of $G$	\\
+$(V, E_{LR}, E_{RL}) \leftarrow$ direct$(T)$			\\
+Return $\argmax_{F \in \{ E_{LR}, E_{RL} \}}{w(F)} $	\\
 \end{algorithm}
 
 We now prove that the approximation ratio of MaxTree is 2.
@@ -43,18 +32,19 @@ an optimal matching in $G$.
 \end{lemma}
 
 \begin{proof}
-Consider an optimal matching, and complete it to a spanning tree, obviously, the
+Consider the underlying graph of an optimal matching, 
+and complete it to a spanning tree, obviously, the
 weight of the resulted tree is no more than the weight of a maximum spanning
 tree.
 \end{proof}
 
 \begin{theorem}
-The \UCUDCARPOOL{} algorithm achi\-eves approximation ratio of 2.
+The MaxTree algorithm achieves approximation ratio of 2.
 \end{theorem}
 
 \begin{proof}
 The proof follows directly from 
-Lemma~\ref{lm:tree_upper_matching} and Observation~\ref{ob:tree_geq_half}.
+Lemma~\ref{lm:tree_upper_matching} and Observation~\ref{ob:bipartition}.
 \end{proof}
 
 To see that the analysis is tight, 
