@@ -30,14 +30,9 @@ Algorithm~\ref{alg:local}.
 \begin{algorithm}
 \SetKw{True}{true}
 \SetKw{False}{false}
-
-\label{alg:local}
-
 \KwIn{$G = (V, E)$, $c : V \rightarrow \N$}
 \KwOut{$M$}
-
 $M \leftarrow \emptyset$					\\
-
 \Repeat{done}{
 \label{line:outerloop}
 	$done$ \leftarrow{} \True			\\
@@ -51,8 +46,11 @@ $M \leftarrow \emptyset$					\\
 		}
 	}
 }
-\caption{Local Search}
 \Return{$M$}
+
+\caption{
+\label{alg:local}
+Local Search}
 \end{algorithm}
 
 First, observe that the outer loop on line~\ref{line:outerloop} of the local search algorithm

@@ -16,10 +16,9 @@ to their original directions, denote by $T = (V, E_{LR}, E_{RL})$, the resulting
 bipartite graph.
 We then return $E_{LR}$ or $E_{RL}$,
 whichever has a higher weight. 
-We describe the algorithm in Algorithm~\ref{alg:cm3}.
+We describe the algorithm in Algorithm~\ref{alg:cm3}, and illustrate it in Figure~\ref{fig:spanning-bipartite-graph}.   
 
 \begin{algorithm}
-\label{alg:cm3}
 \KwIn{$G = (V, E), c : V \rightarrow \N, w : E \rightarrow \R$}											 
 \KwOut{$(M \subseteq E)$}
 
@@ -33,8 +32,25 @@ $G' \leftarrow \text{superMatching($G$)}$				\\
 }
 
 \Return $M$
-\caption{SuperMatching}
+\caption{
+\label{alg:cm3}
+SuperMatching}
 \end{algorithm}
+
+\begin{figure}
+\centering
+\input{txt/fig-super-matching-alg}
+\caption[]{
+\label{fig:spanning-bipartite-graph}
+Illustration of the SuperMatching algorithm:
+\subref{sub:graph} a directed graph, 
+\subref{sub:super} a maximum super-matching  
+\subref{sub:spanning} a maximum spanning bipartite graph:
+$E_{LR}$ is the set of edges exiting red, dashed vertices, 
+and $E_{RL}$ is the set of edges exiting blue vertices
+\subref{sub:matching} a feasible carpool matching with total value of 6   
+}
+\end{figure}
 
 We now show that the SuperMatching algorithm is 3-approximation.
 For the purpose of the analysis, we limit, without loss of generality, 

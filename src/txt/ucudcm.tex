@@ -15,8 +15,9 @@ and we can write $\overrightarrow{T} = (V, E_{LR} \cup E_{RL})$.
 We can now describe our algorithm in Algorithm~\ref{alg:apx}.
 
 \begin{algorithm}
+\caption{
 \label{alg:apx}
-\caption{MaxTree}
+MaxTree}
 $T = (V, E') \leftarrow$ maximum spanning tree of $G$	\\
 $(V, E_{LR}, E_{RL}) \leftarrow$ direct$(T)$			\\
 Return $\argmax_{F \in \{ E_{LR}, E_{RL} \}}{w(F)} $	\\
