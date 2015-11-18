@@ -1,0 +1,66 @@
+\label{apx:k-local}
+In this section we consider a natural generalization of the LocalSearch 
+algorithm, presented in Section~\ref{sub:uwcm}.
+The k-local search algorithm maintains a feasible matching $M$ through its execution.
+In every step,
+the algorithm tries to increase the size of $M$, 
+by choosing $k$ vertices, permute their role,
+and then compute an optimal, fixed matching.
+The algorithm terminates when no further improvement can be done.
+We describe the k-local search algorithm in Algorithm~\ref{alg:k-local}, 
+using the following notations: 
+For a given set $V$, let $V^k = \{V' \subseteq V \mid |V'| = k\}$, 
+and for a given set $K$ let $2^K = \{(P, D) \mid \text{P and D form a partition of K}\}$. 
+
+
+\begin{algorithm}
+\SetKw{True}{true}
+\SetKw{False}{false}
+\KwIn{$G = (V, E)$, $c : V \rightarrow \N$}
+\KwOut{$M$}
+$M \leftarrow \emptyset$					\\
+\Repeat{done}{
+\label{line:outerloop}
+	$done$ \leftarrow{} \True			\\
+	\For{$K \in V^k$}{
+		\For{$(P, D) \in 2^K$}{
+			$D' \leftarrow D^M_u \setminus K \cup D$	 	\\
+			$M' = \text{opt}_{fixed}(V \setminus D', D')$	\\
+			\If{$|M'| > |M|$}{
+				$M \leftarrow M'$							\\
+				$done$ \leftarrow{} \False					\\
+			}
+		}
+	}
+}
+\Return{$M$}
+
+\caption{
+\label{alg:k-local}
+K-LocalSearch}
+\end{algorithm}
+
+Clearly, this is a generalization of the LocalSearch algorithm, thus, 
+by Theorem~\ref{th:ls-2}, it achieves approximation ratio of 2.
+To see that the k-local search algorithm does not achieves a better approximation ratio than 2, 
+consider the graph given in Figure~\ref{fig:k-local-tight},
+assuming a uniform weight function,  
+and no capacity constraints.
+
+\begin{figure}
+\centering
+\input{txt/fig-k-local-tight}
+\caption{
+\label{fig:k-local-tight}
+k-local search worst case example
+}
+\end{figure}
+
+Let the black edges, in the example, 
+denote a possible solution of the k-local search algorithm, 
+and the red, dashed, edges, denote the optimal solution.
+Note that the ratio between the optimal and the k-local search solutions is 
+$\frac{2(n-1)}{n}$, and it tends to $2$ when $n$ is large.
+Note, also, 
+that no improvement can be done by permuting the role of any $k$ vertices (for any fixed $k$).
+

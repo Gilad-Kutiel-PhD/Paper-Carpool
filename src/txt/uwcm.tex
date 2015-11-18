@@ -38,8 +38,7 @@ $M \leftarrow \emptyset$					\\
 	$done$ \leftarrow{} \True			\\
 	\For{$v \in (V \setminus D^M_u)$}{
 		$D \leftarrow D^M_u \cup \{v\}$ 	\\
-		$P \leftarrow V \setminus D$ 		\\
-		$M' = \text{opt}_{fixed}(P, D)$ 	\\
+		$M' = \text{opt}_{fixed}(V \setminus D, D)$ 	\\
 		\If{$|M'| > |M|$}{
 			$M \leftarrow M'$				\\
 			$done$ \leftarrow{} \False		\\
@@ -50,7 +49,7 @@ $M \leftarrow \emptyset$					\\
 
 \caption{
 \label{alg:local}
-Local Search}
+LocalSearch}
 \end{algorithm}
 
 First, observe that the outer loop on line~\ref{line:outerloop} of the local search algorithm
@@ -160,6 +159,7 @@ from Lemma~\ref{lm:v_in_p} and Lemma~\ref{lm:u1nequ2thenv1neqv2}.
 
 
 \begin{theorem}
+\label{th:ls-2}
 The local search algorithm achieves a 2-approximation ratio.
 \end{theorem}
 
@@ -187,3 +187,6 @@ The path in the example can be duplicated to form an arbitrary large graph (fore
 Local Search - Worst Case Example
 }
 \end{figure}
+
+In Appendix~\ref{apx:k-local} we consider a k-local search algorithm, 
+and show that it does not improve over the simple local search algorithm.
