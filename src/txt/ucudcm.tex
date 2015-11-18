@@ -4,25 +4,23 @@ We give a simple 2-approximation algorithm for this variant,
 and give an example to show that our analysis is tight.
 
 Let $G = (V, E)$ be a directed graph, 
-and let $T = (V, E')$ be a maximum spanning tree of the underlying graph of $G$.
-Let $\overrightarrow{T}$ be the directed graph, 
-obtained by directing the edges in $T$ according to their original direction
-($\text{direct}(T)$).
-As we remarked in the preliminaries, 
-$\overrightarrow{T}$ is a bipartite graph, 
-and we can write $\overrightarrow{T} = (V, E_{LR} \cup E_{RL})$. 
-
-We can now describe our algorithm in Algorithm~\ref{alg:apx}.
+the MaxTree algorithm (Algorithm~\ref{alg:apx})
+computes a maximum spanning bipartite graph of $G$, 
+$\T = (V, E_{LR} \cup E_{RL})$, 
+and returns $E_{LR}$ or $E_{RL}$, 
+whichever weights more.
 
 \begin{algorithm}
 \caption{
 \label{alg:apx}
 MaxTree}
-$T = (V, E') \leftarrow$ maximum spanning tree of $G$	\\
-$(V, E_{LR}, E_{RL}) \leftarrow$ direct$(T)$			\\
-Return $\argmax_{F \in \{ E_{LR}, E_{RL} \}}{w(F)} $	\\
+$(V, E_{LR}, E_{RL}) \leftarrow$ maximum spanning bipartite graph of $G$	\\
+Return $\argmax_{F \in \{ E_{LR}, E_{RL} \}}{w(F)} $						\\
 \end{algorithm}
 
+Observed that the MaxTree algorithm returns a feasible matching,
+this is because, in the solution, 
+there is no vertex that has both incoming and outgoing edges.  
 We now prove that the approximation ratio of MaxTree is 2.
 We start with a simple lemma.
 
