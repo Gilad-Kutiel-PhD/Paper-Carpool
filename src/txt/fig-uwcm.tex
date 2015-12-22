@@ -1,16 +1,16 @@
 \begin{tikzpicture}[very thick, ->]
-
+% \draw [help lines] (0,0) grid (3,2);
 \graph[default graph]{
-	{[nodes={red}]				3,7};
-	{[nodes={orange, dashed}]	1,2,4,5,6};
+	{[nodes={red}]				3[x=1],7};
+	{[nodes={orange, dashed}]	1,2[x=0],4,5[]};
 	{[nodes={gray, dotted}]		8,9,10};
+	
 	{1, 2} -> 3;
-	{4, 5, 6} -> 7;
+	{4, 5} -> 7;
 
 	{[edges={blue, dashed}]
-	{8,9} -> 3;
-	{4,10} -> 6;
-	{2,5,7} -> 1;	
+	{8,9} -> 7;
+	{2,3,10} -> 5;
 	}
 };
 
