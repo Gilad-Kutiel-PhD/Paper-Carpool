@@ -71,7 +71,7 @@ Consider the set of edges $M$ in a matching, and define the following sets:
 \end{itemize}
 
 We refer to the vertices in these sets as, \emph{passenger}, 
-\emph{driver}, \emph{saturated driver}, \emph{free vertex} respectively.
+\emph{driver}, \emph{saturated driver}, and \emph{free vertex} respectively.
 Let $M$ be a matching found by the local search algorithm, 
 and let $M^*$ be an arbitrary but fixed optimal matching.
 Observe that every edge in $M^*$ has at least one end point in $M$, formally: 
@@ -106,7 +106,35 @@ If this is not the case, once again, Algorithm~\ref{alg:local} can improve $M$
 by adding the edge $(u,v)$.
 \end{proof}
 
-We use a charging scheme:
+To show that Algorithm~\ref{alg:local} is 2-approximation, 
+consider the following charging scheme:
+Load every edge $(u,v) \in M$ with 2 coins, 
+place one coin on $u$ and one coin on $v$.
+Observe that every vertex $u \in P^M$ is loaded with one coin, 
+and every vertex $v \in D^M$ is loaded with $\din(v)$ coins.   
+Now, pay one coin for every $(u,v) \in M^*$, charge $u$ if $u \in P^M \cup D^M$, 
+otherwise ($v \in P^M \cup D^M$) charge $v$.
+Clearly, every edge in $M^*$ is paid.
+We claim that no vertex is overcharged.
+
+\begin{lemma}
+No vertex $u \in P^M$ is overcharged.
+\end{lemma}
+
+\begin{proof}
+If $u \in P^{M^*}$, then $\dout[M^*](u) = 1$, and $u$ is charged once.
+\end{proof}
+
+\begin{theorem}
+Algorithm~\ref{alg:local} is 2-approximation
+\end{theorem}
+\begin{proof}
+We use a charging scheme to prove the approximation ratio of Algorithm~\ref{alg:local}:
+We show that every edge $(u,v) \in M$ is charged at most twice.
+
+\end{proof}
+
+
 \begin{figure}
 \centering
 \input{txt/fig-uwcm}
