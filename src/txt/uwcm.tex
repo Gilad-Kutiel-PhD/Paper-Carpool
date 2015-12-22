@@ -38,7 +38,8 @@ $M \leftarrow \emptyset$					\\
 	$done$ \leftarrow{} \True			\\
 	\For{$v \in (V \setminus D^M_u)$}{
 		$D \leftarrow D^M_u \cup \{v\}$ 	\\
-		$M' = \text{opt}_{fixed}(V \setminus D, D)$ 	\\
+		$P \leftarrow V \setminus D$ 		\\
+		$M' = \text{opt}_{fixed}(P, D)$ 	\\
 		\If{$|M'| > |M|$}{
 			$M \leftarrow M'$				\\
 			$done$ \leftarrow{} \False		\\
@@ -49,7 +50,7 @@ $M \leftarrow \emptyset$					\\
 
 \caption{
 \label{alg:local}
-LocalSearch}
+Local Search}
 \end{algorithm}
 
 First, observe that the outer loop on line~\ref{line:outerloop} of the local search algorithm
@@ -61,115 +62,56 @@ Also, observe that the body of this loop can be computed in polynomial time,
 and we can conclude that Algorithm~\ref{alg:local} runs in polynomial time.
     
 We now prove that the local search algorithm achieves an approximation ratio of $2$.
-Consider a matching $(P, D, M)$, and define the following sets:
+Consider the set of edges $M$ in a matching, and define the following sets:
 \begin{itemize}
-\item $P_1 = \{p \in P : \dout(p) = 1\}$
-\item $D_{>0} = \{d \in D : \din(d) > 0\}$
-\item $D_c = \{d \in D_{>0} : \din(d) = c(d)\}$
-\item $V_0 = \{v \in P \cup D : \din(v) = \dout(v) = 0\}$ 
+\item $P^M = \{p \in P : \dout(p) = 1\}$
+\item $D^M = \{d \in D : \din(d) > 0\}$
+\item $D^M_c = \{d \in D_{>0} : \din(d) = c(d)\}$
+\item $F^M = \{v \in P \cup D : \din(v) = \dout(v) = 0\}$ 
 \end{itemize}
 
-Let $(P, D, M)$ be a matching found by the local search algorithm, 
-and let $P_1$, $D_{>0}$, $D_c$, $V_0$ be the corresponded sets.
-Let $(P^*, D^*, M^*)$ be an arbitrary but fixed optimal matching.
-and let $P^*_1$ be the corresponded set.
-We need to show that $|P^*_1| \leq 2|P_1|$.
-To do this we are going to show that 
-$|P^*_1 \cap D_{>0}| \leq |P_1|$ 
-and that
-$|P^*_1 \cap (V_0 \cup P_1)| \leq |P_1|$.
-
+We refer to the vertices in these sets as, \emph{passenger}, 
+\emph{driver}, \emph{saturated driver}, \emph{free vertex} respectively.
+Let $M$ be a matching found by the local search algorithm, 
+and let $M^*$ be an arbitrary but fixed optimal matching.
+Observe that every edge in $M^*$ has at least one end point in $M$, formally: 
 \begin{lemma}
-\label{lm:dleqp}
-$|P^*_1 \cap D_{>0}| \leq |P_1|$
+If $(u,v) \in M^*$, then $\{u,v\} \cap (P^M \cup D^M) \neq \emptyset$
 \end{lemma}
 
 \begin{proof}
-The lemma follows directly from the observation that 
-${|D_{>0}| \leq |P_1|}$.
+If this is not the case, Algorithm~\ref{alg:local} can improve $M$
+by adding the edge $(u,v)$.  
 \end{proof}
 
-For the rest of the analysis, assume, without loss of generality, that
-if $(u, v) \in M^*$ and $u \in V_0$, then $v \notin D_c$.
-If this is not the case, that is $v \in D_c$, then based on the pigeonhole principle,
-there must be a vertex $u'$, such that $(u', v) \in M \setminus M^*$.
-So we can remove $(u', v)$ from $M$ and add $(u, v)$ instead.
-Clearly the resulting matching has the same size of the original one,
-further, the new matching could actually be found by the $opt_{fixed}$ procedure.
-Figure~\ref{fig:uwcm-illustration} depicts the analysis done in Lemma~\ref{lm:v_in_p},
-and Lemma~\ref{lm:u1nequ2thenv1neqv2}.
+Now, with respect to $M$, the optimal solution can not match two free vertices to the same
+passenger, formally:
+\begin{lemma}
+If $(v,w) \in M$, $u_1, u_2 \in F^M$, and $(u_1, v), (u_2, v) \in M^*$, then $u_1 = u_2$.
+\end{lemma}
 
-\begin{figure}[ht]
+\begin{proof}
+If this is not the case, Algorithm~\ref{alg:local} can improve $M$ 
+by removing the edge $(v,w)$ and adding the edges $(u_1, v), (u_2, v)$.
+\end{proof}
+
+Finally, with respect to $M$, the optimal solution can not match a free vertex to a driver
+that is not saturated, formally: 
+\begin{lemma}
+If $(u,v) \in M^*$, $u \in F^M$, and $v \in D^M$, then $v \in D^M_c$.
+\end{lemma}
+
+\begin{proof}
+If this is not the case, once again, Algorithm~\ref{alg:local} can improve $M$
+by adding the edge $(u,v)$.
+\end{proof}
+
+We use a charging scheme:
+\begin{figure}
 \centering
-\input{txt/fig-uwcm-illustration}
-\caption{
-\label{fig:uwcm-illustration}
-Local search analysis:
-1) the edge $(a,b)$ implies that $b \in D^*$, thus, $(a,b) \notin M^*$
-2) the edges $(c,d)$, and $(e,f)$ do not exist, or otherwise, 
-they can be added to $M$ by the local search algorithm
-3) we assume that the edge $(g,h) \notin M^*$
-4) if the edge $(u_1, v)$ exists, then the edge $(u_2, v)$ does not exists, 
-or otherwise, the local search algorithm can increase the size of $M$
-}
+\input{txt/fig-uwcm}
 \end{figure}
 
-\begin{lemma}
-\label{lm:v_in_p}
-If $(u, v) \in M^*$ and $u \in V_0$, then $v \in P_1 \setminus P^*_1$.
-\end{lemma}
-
-\begin{proof}
-Recall, that we assume that $v \notin D_c$.
-Clearly, if $v$ was in $V_0$ or in $D \setminus D_c$, 
-then the solution can be improved by the local search algorithm.
-Thus it must be the case that $v \in P$, furthermore, 
-if $(u, v) \in M^*$ then $v \notin P^*$. 
-\end{proof}
-
-\begin{lemma}
-\label{lm:u1nequ2thenv1neqv2}
-If $(u_1, v_1), (u_2, v_2) \in M^*$,
-$u_1, u_2 \in V_0$, 
-and $u_1 \neq u_2$,
-then $v_1 \neq v_2$.
-\end{lemma}
-
-\begin{proof}
-From Lemma~\ref{lm:v_in_p} we know that $v_1, v_2 \in P_1$,
-Assume for contradiction that $v_1 = v_2 = v$,
-and let $w$ be the vertex such that $(v, w) \in M$,
-then the local search can improve the solution, 
-by replacing $(v, w)$ with $(u_1, v)$ and $(u_2, v)$ - a contradiction.
-\end{proof}
-
-\begin{lemma}
-\label{lm:unleqp}
-$|P^*_1 \cap (V_0 \cup P_1)| \leq |P_1|$
-\end{lemma}
-
-\begin{proof}
-It is enough to show that for every vertex $u \in P^*_1 \cap V_0$
-there is a distinct vertex $v \in P_1 \setminus P^*_1$.
-To see that, for every vertex $u \in P^*_1 \cap V_0$, 
-consider the vertex $v$, such that $(u, v) \in M^*$, 
-the proof follows, then, directly
-from Lemma~\ref{lm:v_in_p} and Lemma~\ref{lm:u1nequ2thenv1neqv2}.  
-\end{proof}
-
-
-\begin{theorem}
-\label{th:ls-2}
-The local search algorithm achieves a 2-approximation ratio.
-\end{theorem}
-
-\begin{proof}
-By Lemma~\ref{lm:dleqp} and Lemma~\ref{lm:unleqp} we get that 
-$$
-|P^*_1| = 
-|(P^*_1 \cap D_1) \cup ((V_0 \cup P_1) \cap P^*_1)| \leq 2 \cdot |P_1|
-$$.
-\end{proof}
 
 To conclude this section, we show that our analysis is tight.
 Consider the example given in Figure~\ref{fig:localtight}.
@@ -187,6 +129,3 @@ The path in the example can be duplicated to form an arbitrary large graph (fore
 Local Search - Worst Case Example
 }
 \end{figure}
-
-In Appendix~\ref{apx:k-local} we consider a k-local search algorithm, 
-and show that it does not improve over the simple local search algorithm.
