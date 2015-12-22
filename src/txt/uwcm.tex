@@ -109,7 +109,7 @@ by adding the edge $(u,v)$.
 \end{proof}
 
 To show that Algorithm~\ref{alg:local} is 2-approximation, 
-consider the following charging scheme:
+consider the charging scheme that is ilustrated in Figure~\ref{fig:charging}:
 Load every edge $(u,v) \in M$ with 2 coins, 
 place one coin on $u$ and one coin on $v$.
 Observe that every vertex $u \in P^M$ is loaded with one coin, 
@@ -153,6 +153,10 @@ by using at most $2|M|$ coins.
 
 
 \begin{figure}
+\caption{
+\label{fig:charging}
+Charging Scheme
+}
 \centering
 \input{txt/fig-uwcm}
 \end{figure}
