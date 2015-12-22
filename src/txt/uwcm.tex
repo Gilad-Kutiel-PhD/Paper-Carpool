@@ -87,6 +87,7 @@ by adding the edge $(u,v)$.
 Now, with respect to $M$, the optimal solution can not match two free vertices to the same
 passenger, formally:
 \begin{lemma}
+\label{lemma:one-free}
 If $(v,w) \in M$, $u_1, u_2 \in F^M$, and $(u_1, v), (u_2, v) \in M^*$, then $u_1 = u_2$.
 \end{lemma}
 
@@ -98,6 +99,7 @@ by removing the edge $(v,w)$ and adding the edges $(u_1, v), (u_2, v)$.
 Finally, with respect to $M$, the optimal solution can not match a free vertex to a driver
 that is not saturated, formally: 
 \begin{lemma}
+\label{lemma:saturated}
 If $(u,v) \in M^*$, $u \in F^M$, and $v \in D^M$, then $v \in D^M_c$.
 \end{lemma}
 
@@ -118,20 +120,35 @@ Clearly, every edge in $M^*$ is paid.
 We claim that no vertex is overcharged.
 
 \begin{lemma}
-No vertex $u \in P^M$ is overcharged.
+\label{lemma:p-not-charged}
+If $u \in P^M$, then $u$ is not overcharged.
 \end{lemma}
 
 \begin{proof}
-If $u \in P^{M^*}$, then $\dout[M^*](u) = 1$, and $u$ is charged once.
+If $u \in P^{M^*}$, then it is only charged once, otherwise, 
+if $u \in D^{M^*}$, then it is only charged for edges $(w, u)$ where $w \in F^M$,
+and by lemma~\ref{lemma:one-free}, there is at most one such edge. 
+\end{proof}
+
+\begin{lemma}
+\label{lemma:d-not-charged}
+If $u \in D^M$, then $u$ is not overcharged.
+\end{lemma}
+
+\begin{proof}
+If $u \in P^{M^*}$, then it is only charged once, 
+if $u \in D^{M^*}$, then it is only charged for edges $(w, u)$ where $w \in F^M$,
+if such edges exists, then by lemma~\ref{lemma:saturated}, $u$ is saturated, 
+and can not be overcharged.
 \end{proof}
 
 \begin{theorem}
 Algorithm~\ref{alg:local} is 2-approximation
 \end{theorem}
-\begin{proof}
-We use a charging scheme to prove the approximation ratio of Algorithm~\ref{alg:local}:
-We show that every edge $(u,v) \in M$ is charged at most twice.
 
+\begin{proof}
+We used a charging scheme where we managed to pay 1 coin for each edge in $M^*$
+by using at most $2|M|$ coins.
 \end{proof}
 
 
