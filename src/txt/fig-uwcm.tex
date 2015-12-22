@@ -1,10 +1,17 @@
 \begin{tikzpicture}[very thick, ->]
-\tikzset{
-	d/.style={red}
-}
 
 \graph[default graph]{
-	1 -- 2;
+	{[nodes={red}]				3,7};
+	{[nodes={orange, dashed}]	1,2,4,5,6};
+	{[nodes={gray, dotted}]		8,9,10};
+	{1, 2} -> 3;
+	{4, 5, 6} -> 7;
+
+	{[edges={blue, dashed}]
+	{8,9} -> 3;
+	{4,10} -> 6;
+	{2,5,7} -> 1;	
+	}
 };
 
 \end{tikzpicture}
