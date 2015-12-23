@@ -1,7 +1,22 @@
-\documentclass[]{article}
-\input{libs}
-\input{tikz}
-\input{def}
+\RequirePackage{amsmath}
+\documentclass[]{llncs}
+\pagestyle{plain}
 
+\let\proof\relax
+\let\endproof\relax
+
+\input{libs}
+\input{def}
+\input{cmds}
+\input{tikz}
+
+\input{title}
 \begin{document}
+\maketitle
+
+\input{doc}
+
+\bibliographystyle{plain}
+\bibliography{paper}
+
 \end{document}
