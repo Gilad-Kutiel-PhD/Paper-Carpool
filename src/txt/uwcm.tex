@@ -109,7 +109,7 @@ by adding the edge $(u,v)$.
 \end{proof}
 
 To show that Algorithm~\ref{alg:local} is 2-approximation, 
-consider the charging scheme that is ilustrated in Figure~\ref{fig:charging}:
+consider the charging scheme that is illustrated in Figure~\ref{fig:charging}:
 Load every edge $(u,v) \in M$ with 2 coins, 
 place one coin on $u$ and one coin on $v$.
 Observe that every vertex $u \in P^M$ is loaded with one coin, 
@@ -118,6 +118,19 @@ Now, pay one coin for every $(u,v) \in M^*$, charge $u$ if $u \in P^M \cup D^M$,
 otherwise ($v \in P^M \cup D^M$) charge $v$.
 Clearly, every edge in $M^*$ is paid.
 We claim that no vertex is overcharged.
+
+\begin{figure}
+\centering
+\input{txt/fig-uwcm}
+\caption[]{
+\label{fig:charging}
+Charging Scheme:															\\
+1. vertices $1,2,4,5$ are charged with 1\$ each and vertices $3,7$ with 2\$	\\
+2. vertex 1 pays for the edge $(1, 4)$										\\
+3. vertex 5 pays for the edge $(10, 5)$										\\
+4. vertex 7 must be saturated
+}
+\end{figure}
 
 \begin{lemma}
 \label{lemma:p-not-charged}
@@ -150,20 +163,6 @@ Algorithm~\ref{alg:local} is 2-approximation
 We used a charging scheme where we managed to pay 1 coin for each edge in $M^*$
 by using at most $2|M|$ coins.
 \end{proof}
-
-
-\begin{figure}
-\centering
-\input{txt/fig-uwcm}
-\caption{
-\label{fig:charging}
-Charging Scheme: 															\\
-1. vertices $1,2,4,5$ are charged with 1\$ each and vertices $3,7$ with 2\$	\\
-2. vertex 1 pays for the edge $(1, 4)$										\\
-3. vertex 5 pays for the edge $(10, 5)$										\\
-4. vertex 7 must be saturated
-}
-\end{figure}
 
 
 To conclude this section, we show that our analysis is tight.
