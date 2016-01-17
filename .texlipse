@@ -1,7 +1,7 @@
 #TeXlipse project settings
-#Wed Sep 23 21:32:13 IDT 2015
+#Sun Jan 17 19:38:30 IST 2016
 markTmpDer=true
-builderNum=8
+builderNum=2
 outputDir=out/
 makeIndSty=
 bibrefDir=
