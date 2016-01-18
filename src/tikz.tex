@@ -1,18 +1,31 @@
 \usepackage{tikz}
+\usetikzlibrary{shapes,graphs,arrows,calc,positioning,patterns}
 
-\usetikzlibrary{
-shapes,
-graphdrawing,
-graphs,
-arrows,
-calc,
-positioning,
-patterns,
-decorations.pathmorphing,
-}
+% NODE
+\tikzset{default node/.style={
+	draw, 
+	circle,
+	inner sep=0mm,
+	minimum size=5mm,
+	very thick,
+	font=\small,
+	black!70,
+}}
 
-\usegdlibrary{force}
+% LABELS
+\tikzset{label/.style={
+	draw=none,
+	sloped,
+}}
 
-\input{tikz/node}
-\input{tikz/label}
-\input{tikz/graph}
+\tikzset{label above/.style={
+	label,
+	midway,
+	above=-1mm,
+}}
+
+\tikzset{label below/.style={
+	label,
+	midway,
+	below=-1mm,
+}}
