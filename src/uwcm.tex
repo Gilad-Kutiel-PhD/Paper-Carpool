@@ -43,16 +43,16 @@ Algorithm~\ref{alg:local}.
 $M \leftarrow \emptyset$					\\
 \Repeat{done}{
 \label{line:outerloop}
-	$done$ \leftarrow{} \True				\\
-	\For{$v \in (V \setminus D^M)$}{
-		$D \leftarrow D^M \cup \{v\}$ 		\\
-		$P \leftarrow V \setminus D$ 		\\
-		$M' = \text{opt}_{fixed}(P, D)$ 	\\
+ 	$done \leftarrow{}$ \True				\\
+ 	\For{$v \in (V \setminus D^M)$}{
+ 		$D \leftarrow D^M \cup \{v\}$ 		\\
+ 		$P \leftarrow V \setminus D$ 		\\
+ 		$M' = \text{opt}_{fixed}(P, D)$ 	\\
 		\If{$|M'| > |M|$}{
 			$M \leftarrow M'$				\\
-			$done$ \leftarrow{} \False		\\
+			$done \leftarrow{}$ \False		\\
 		}
-	}
+ 	}
 }
 \Return{$M$}
 
