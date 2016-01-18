@@ -11,7 +11,8 @@ Recall that in a super matching the out degree of every vertex is at most 1,
 that is, the underlying graph of a super matching is a pseudoforest.
 For every connected component $C = (V, E)$ 
 in the super-matching we construct a feasible matching by
-computing a maximum spanning bipartite graph, $T = (V, E_{LR}, E_{RL})$, of $C$, 
+computing a maximum spanning bipartite graph, $T = (V, E_{LR}, E_{RL})$, 
+of $C$. 
 We then return $E_{LR}$ or $E_{RL}$, whichever weight more. 
 We describe the algorithm in Algorithm~\ref{alg:cm3}, 
 and illustrate it in Figure~\ref{fig:spanning-bipartite-graph}.   
@@ -36,7 +37,7 @@ SuperMatching}
 
 \begin{figure}
 \centering
-\input{txt/fig-super-matching-alg}
+\input{fig-super-matching-alg}
 \caption[]{
 \label{fig:spanning-bipartite-graph}
 Illustration of the SuperMatching algorithm:
@@ -94,7 +95,7 @@ $$ 3w(M) = 2w(M) + w(M) \geq w(E') + w(E) - w(E') = w(E) \geq w(M^*)$$.
 
 \begin{figure}
 \centering
-\input{txt/fig-3cm-tight}
+\input{fig-3cm-tight}
 \caption{
 \label{fig:3cm-tight-fig}
 Super Matching Algorithm, worst case example
