@@ -45,9 +45,9 @@ Figure~\ref{fig:carpool} is an example of the \textsc{\CARPOOL{}} problem.
 \caption[]{
 \label{fig:carpool}
 A carpool matching example: 
-\subref{sub:input} 
+\subref{subfloat::input} 
 a directed graph with capacities on the vertices and weights on the edges 
-\subref{sub:output}
+\subref{subfloat::output}
 a feasible matching with total weight of 26.
 $P$ is the set of blue vertices, and $D$ is the set of red, dashed vertices. 
 }
@@ -82,12 +82,13 @@ a capacity vector is given as part of the input and
 capacities are needed to be assigned to vertices~\cite{arkin2004approximations}.  
 
 
-In Section~\ref{sub:fixed} we discuss how the problem can be solved,
+In Section~\ref{sec:fixed} we discuss how the problem can be solved efficiently,
 when $P$ and $D$ are fixed.
-In Section~\ref{sub:uwcm} we give a 2-approximation algorithm for the
+In Section~\ref{sec:uwcm} we give a 2-approximation algorithm for the
 unweighted variant of the problem.
-In Section~\ref{sub:ucudcm} we give a 2-approximation algorithm
+In Section~\ref{sec:ucudcm} we give a 2-approximation algorithm
 for the uncapacitated variant of the problem. 
-Finally, in Section~\ref{sub:cm}, we present a 3-approximation
+In Section~\ref{sec:cm} we present a 3-approximation
 algorithm for the general problem. 
+Finlay, in Section~\ref{sec:hardness}, we show that the problem is APX-hard.
 These are the first known approximation algorithms for any variant of the problem.

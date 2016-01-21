@@ -1,7 +1,13 @@
-\label{sub:fixed}
+\label{sec:fixed}
 In the \textsc{\FIXEDCARPOOL{}} problem, $P$ and $D$ are fixed, 
 and the goal is to find $M$ that maximizes the total weight. 
-This variant of the problem can be solved efficiently,
+This variant of the problem can be solved efficiently\footnote{
+A solution to this variant of the problem was already proposed in~\cite{hartman2014theory}.
+For the sake of completeness, however, we describe a detailed solution for this variant. 
+More importantly, 
+the described solution helps us develop the intuition and understand the basic idea behind the
+approximation algorithm described in Section~\ref{sec:cm}.   
+},
 by reducing it to a maximum weight flow (flow) problem as
 follow:
 Let $(G = (V, E), c, w)$ be a \CARPOOL{} instance,
