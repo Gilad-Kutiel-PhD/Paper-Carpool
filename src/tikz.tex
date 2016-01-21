@@ -1,4 +1,11 @@
 \usepackage{tikz}
+\usetikzlibrary{shapes,graphs,arrows,calc,positioning,patterns,decorations.pathmorphing}
+
+% SCALE
+\tikzset{tikz scale/.style={
+	scale=#1,
+	every node/.style={scale=#1}
+}}
 
 % NODE
 \tikzset{default node/.style={
