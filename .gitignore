@@ -13,6 +13,8 @@
 *.out
 *.nav
 *.snm
+*.flt
 *~
 *#
 .metadata
+
