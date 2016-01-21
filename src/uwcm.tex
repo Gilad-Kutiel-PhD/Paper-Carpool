@@ -21,15 +21,15 @@ Let $M = \text{opt}_{fixed}(P, D)$ be an optimal solution of the
 
 For a given matching $M$, define the following sets:
 \begin{itemize}
-\item $P^M = \{p \in P : \dout(p) = 1\}$
-\item $D^M = \{d \in D : \din(d) > 0\}$
-\item $D^M_c = \{d \in D_{>0} : \din(d) = c(d)\}$
-\item $F^M = \{v \in P \cup D : \din(v) = \dout(v) = 0\}$ 
+\item $P^M = \{v : \dout(v) = 1\}$
+\item $D^M = \{v : \din(v) > 0\}$
+\item $D^M_c = \{v : \din(v) = c(v)\}$
+\item $F^M = \{v : \din(v) = \dout(v) = 0\}$ 
 \end{itemize}
 We refer to the vertices in these sets as, \emph{passenger}, 
 \emph{driver}, \emph{saturated driver}, and \emph{free vertex} respectively.
 The local search algorithm, in every iteration, 
-tries to improve a the current matching, 
+tries to improve the current matching, 
 by switching a passenger or a free vertex into a driver 
 and compute an optimal fixed matching.
 the local search algorithm is described in
@@ -158,7 +158,7 @@ Algorithm~\ref{alg:local} is 2-approximation
 \end{theorem}
 
 \begin{proof}
-We used a charging scheme where we managed to pay 1 coin for each edge in $M^*$
+We use a charging scheme where we manage to pay 1 coin for each edge in $M^*$
 by using at most $2|M|$ coins.
 \end{proof}
 
