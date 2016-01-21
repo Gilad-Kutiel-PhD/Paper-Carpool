@@ -1,5 +1,9 @@
 #TeXlipse project settings
+<<<<<<< HEAD
 #Sun Jan 17 19:38:30 IST 2016
+=======
+#Mon Jan 18 11:12:26 IST 2016
+>>>>>>> b40e39133d474dbd5a3210f7f93522f667e1551b
 markTmpDer=true
 builderNum=2
 outputDir=out/
