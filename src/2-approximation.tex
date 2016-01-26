@@ -9,17 +9,17 @@ is the sum of the weights of the edges in $M$ that incident $v$.
 That is: 
 %
 \begin{definition}[$val$]
-$$val_M(v) = \sum_{(u, v) \in M} w(u, v) + \sum_{(v, u) \in M} w(v, u)$$
+$val_M(v) = \sum_{(u, v) \in M} w(u, v) + \sum_{(v, u) \in M} w(v, u)$
 \end{definition}
 %
 If $V$ is a set of vertices, then $val_M(V) \triangleq \sum_{v \in V} val_M(v)$.
-
+%
 Denote by $\delta(e)$ the difference between the weight of the edge and the value
 of its source vertex,
 that is:
 %
 \begin{definition}[$\delta$]
-$$\delta_M(u, v) = w(u, v) - val_M(u)$$
+$\delta_M(u, v) = w(u, v) - val_M(u)$
 \end{definition}
 %
 If $S$ is a set of edges, then $\delta(S) \triangleq \sum_{e \in S}\delta(v)$.
@@ -39,20 +39,22 @@ $|S_v| \leq c(v)$
 $\delta_M(S_v) > val_M(v)$
 \end{itemize}  
 \end{definition}
-
+%
+If, for vertex $v$, an improvement exists, we say that vertex $v$ can be \emph{improved}.
+%
 Given an edge $(u,v)$, 
 let $inc(u,v)$ be the set of edges that incident $(u, v)$,
 formally:
-
+%
 \begin{definition}[inc]
 $inc(u,v) = (V \times \{u, v\} \cup \{u, v\} \times V) \cap E$
 \end{definition}
 %
 If $S$ is a set of edges, then $inc(S) \triangleq \bigcup_{e \in S} inc(e)$.
-
+%
 The \emph{passengers} of $v$ (w.r.t some set of edges) are all the vertices that have
 outgoing edge to $v$, formally: 
-
+%
 \begin{definition}[passengers]
 $\text{pass}_M(v) = \{u : (u, v) \in M\}$
 \end{definition}
@@ -125,7 +127,7 @@ the total value of all the vertices equals twice the value of the matching,
 formally: 
 \begin{lemma}
 \label{lm:val-twice}
-$$\sum_{v \in V} val_M(v) = 2 \sum_{e \in M} w(e)$$
+$\sum_{v \in V} val_M(v) = 2 \sum_{e \in M} w(e)$
 \end{lemma}
 
 \begin{proof}
@@ -172,11 +174,12 @@ Algorithm~\ref{alg:grd} is 2-approximation.
 \begin{proof}
 Let $M$ be the matching produced by algorithm~\ref{alg:grd}, 
 and let $M^*$ be an optimal matching.
-Load every vertex with $val_M(v)$ coins, 
+Load every vertex with $val_M(v)$ money, 
 by lemma~\ref{lm:val-twice} this is exactly twice the value of $M$.
 Consider a driver $v$ in $M^*$, and let $S = V \times \{v\} \cap M^*$.
 By lemma~\ref{lm:no improve} we know that $w(S) \leq val_M(v) + val_M(\text{pass}_S(v))$,
-thus we can pay for $S$, using the coins on $v$ and $\text{pass}_S(v)$.
+thus we can pay for $S$, using the money on $v$ and $\text{pass}_S(v)$.
+Clearly, these vertices will not be charged again.
 \end{proof}
 
 To conclude this section we show that our analysis is tight, 
