@@ -1,0 +1,103 @@
+Let $M$ be a feasible carpool matching,
+the \emph{value} of a vertex $v$, denoted $val(v)$, 
+is the sum of the weights of the edges in $M$ that incident $v$. 
+That is: 
+%
+\begin{definition}[$val_M(v)$]
+$$val_M(v) = \sum_{(u, v) \in M} w(u, v) + \sum_{(v, u) \in M} w(v, u)$$
+\end{definition}
+%
+Let $\delta(e)$ be the difference between the weight of the edge and the value
+of its source vertex.
+That is:
+%
+\begin{definition}[$\delta(u, v)$]
+$$\delta(u, v) = w(u, v) - val(u)$$
+\end{definition}
+%
+An \emph{improvement} w.r.t vertex $v$ 
+is a set of edges entering $v$ of size not greater than the capacity of $v$, 
+for which the sum of the $\delta$s is greater than the value of $v$,
+formally: 
+
+\begin{definition}[improvement]
+$S_v \subseteq \{(u, v) : (u, v) \in E\}$ is an \emph{improvement} if the following hold:
+\begin{itemize}
+\item
+$|S_v| \leq c(v)$
+\item
+$\sum_{e \in S_v}\delta(v) > val(v)$
+\end{itemize}  
+\end{definition}
+
+\begin{figure}
+\centering
+\input{fig-val-delta}
+\caption{
+In this example, $M$ is the set of the blue, dashed edges, then:
+\begin{itemize}
+\item
+$val(2) = 7$
+\item
+$val(3) = 2$
+\item
+$val(6) = 0$
+\item
+$\delta(2, 3) = 1$
+\item
+$\delta(6, 3) = 2$
+\item
+the set $\{(2,3), (6,3)\}$ is an \emph{improvement} w.r.t vertex 3
+\end{itemize}
+}
+\end{figure}
+
+Given an edge $(u,v)$, 
+let $inc(u,v)$ be the set of edges that incident $(u, v)$,
+that is $inc(u,v) = V \times \{u, v\} \cup \{u, v\} \times V$.
+We extend this definition to sets, i.e. $inc(S) = \bigcup_{e \in S} inc(e)$.
+
+\begin{algorithm}
+\caption{
+\label{alg:grd}
+GRD
+}
+$M \leftarrow \emptyset$									\\
+\Repeat{done}{
+	done $\leftarrow$ true									\\
+	\For{$v \in V$}{
+		\If{$\exists~\text{improvment}~S_v$}{
+			$M \leftarrow M \setminus inc(S_v) \cup S_v$	\\
+			done $\leftarrow$ \False						\\
+		}
+	}
+}
+\end{algorithm}
+
+\begin{lemma}
+$$
+\sum_{v \in V} val_M(v) = 2 \sum_{e \in M} w(e)
+$$
+\end{lemma}
+
+\begin{proof}
+\begin{equation}
+\begin{split}
+\sum_{v \in V} val_M(v)	& = 
+\sum_{v \in V} \left( \sum_{(u, v) \in M} w(u, v) + \sum_{(v, u) \in M} w(v, u) \right)	\\
+						& = \sum_{v \in V}\sum_{(u, v) \in M} w(u, v) + 
+							\sum_{v \in V}\sum_{(v, u) \in M} w(v, u)					\\
+						& = 2 \sum_{e \in M} w(e)
+\end{split}
+\end{equation}
+\end{proof}
+
+\begin{theorem}
+Algorithm~\ref{alg:grd} is 2-approximation.
+\end{theorem}
+
+\begin{proof}
+Let $M$ be the matching produced by algorithm~\ref{alg:grd}, 
+and let $M^*$ be an optimal matching.
+Load every vertex with $val_M(v)$
+\end{proof}

@@ -1,5 +1,13 @@
 \usepackage{tikz}
-\usetikzlibrary{shapes,graphs,arrows,calc,positioning,patterns,decorations.pathmorphing}
+\usetikzlibrary{
+shapes,
+graphs,
+arrows.meta,
+calc,
+positioning,
+patterns,
+decorations.pathmorphing,
+}
 
 % SCALE
 \tikzset{tikz scale/.style={
@@ -18,20 +26,25 @@
 	black!70,
 }}
 
+% EDGE
+\tikzset{default edge/.style={
+	-{Latex[length=2mm, width=2mm]},
+	very thick,
+}}
+
 % LABELS
 \tikzset{label/.style={
 	draw=none,
 	sloped,
+	midway,
 }}
 
 \tikzset{label above/.style={
 	label,
-	midway,
 	above=-1mm,
 }}
 
 \tikzset{label below/.style={
 	label,
-	midway,
 	below=-1mm,
 }}
