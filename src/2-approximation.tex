@@ -24,7 +24,7 @@ $\delta_M(u, v) = w(u, v) - val_M(u)$
 %
 If $S$ is a set of edges, then $\delta(S) \triangleq \sum_{e \in S}\delta(v)$.
 
-An \emph{improvement} w.r.t vertex $v$ 
+An \emph{improvement} to vertex $v$ 
 is a set of edges entering $v$ of size not greater than the capacity of $v$, 
 for which the sum of the $\delta$s is greater than the value of $v$,
 formally: 
@@ -91,8 +91,9 @@ $\text{pass}_M(2) = \{1, 4\}$
 We are now ready to describe our algorithm.
 The algorithm starts with an empty matching,
 in every iteration it seeks for a vertex that can be improved,
-it then improve the matching by removing existing edges and adding
-the edges that improve the vertex.
+it then improve the matching by adding
+the edges that improve the vertex, 
+just after removing the edges that incident them.
 The algorithm halts when no vertex can be improved.
 Figure~\ref{fig:improvement} depicts an improvement step,
 and the full algorithm is listed in Algorithm~\ref{alg:grd}. 
