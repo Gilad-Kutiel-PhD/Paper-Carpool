@@ -183,12 +183,17 @@ Clearly, these vertices will not be charged again.
 \end{proof}
 
 To conclude this section we show that our analysis is tight, 
-as depicts in Figure~\ref{fig:grd worst}
+as depicts in Figure~\ref{fig:grd worst}.
 \begin{figure}
-\caption{
-\label{fig:grd worst}
-GRD algorithm, worst case example.
-}
 \centering
 \input{fig-2-tight}
+\caption{
+\label{fig:grd worst}
+GRD algorithm, worst case example: \\
+Consider a path with $2n + 1$ edges, 
+and alternating edge weights (2 and 1),
+if the GRD algorithm selects all the 1 weighted edges,
+then no further improvement can be done and the value of the matching is $n + 1$,
+while the optimal matching has value of $2n$. 
+}
 \end{figure}
