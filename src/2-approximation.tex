@@ -94,7 +94,20 @@ in every iteration it seeks for a vertex that can be improved,
 it then improve the matching by removing existing edges and adding
 the edges that improve the vertex.
 The algorithm halts when no vertex can be improved.
-We describe the algorithm in Algorithm~\ref{alg:grd}. 
+Figure~\ref{fig:improvement} depicts an improvement step,
+and the full algorithm is listed in Algorithm~\ref{alg:grd}. 
+
+\begin{figure}
+\centering
+\input{fig-improvement}
+\caption{
+\label{fig:improvement}
+\subref{sub:can improved}
+A matching that can be improved
+\subref{sub:improved}
+The matching after improving vertex 3 
+}
+\end{figure}
 
 \begin{algorithm}
 \caption{
@@ -119,8 +132,7 @@ and only ones with positive value.
 Vertex $v$ can be improved, then, if the $\delta$s of the first $c(v)$ (or less) edges
 sum up to more than $val_M(v)$.
 
-TODO argue that the number of iteration is bounded.    
-
+\todo[inline]{argue that the number of iteration is bounded}
 
 We now argue that, with respect to any matching, 
 the total value of all the vertices equals twice the value of the matching, 
@@ -184,6 +196,7 @@ Clearly, these vertices will not be charged again.
 
 To conclude this section we show that our analysis is tight, 
 as depicts in Figure~\ref{fig:grd worst}.
+\todo[inline]{what happen if we apply the rule on both directions ?}
 \begin{figure}
 \centering
 \input{fig-2-tight}
