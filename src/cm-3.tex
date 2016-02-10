@@ -41,46 +41,46 @@ SuperMatching}
 \caption[]{
 \label{fig:spanning-bipartite-graph}
 Illustration of the SuperMatching algorithm:
-\subref{subfloat:graph} a directed graph, 
-\subref{subfloat:super} a maximum super-matching  
+\subref{subfloat:graph} a directed graph. 
+\subref{subfloat:super} a maximum super-matching.  
 \subref{subfloat:spanning} a maximum spanning bipartite graph:
 $E_{LR}$ is the set of edges exiting red, dashed vertices, 
-and $E_{RL}$ is the set of edges exiting blue vertices
-\subref{subfloat:matching} a feasible carpool matching with total value of 6   
+and $E_{RL}$ is the set of edges exiting blue vertices.
+\subref{subfloat:matching} a feasible carpool matching with total value of 6.   
 }
 \end{figure}
 
 We now show that the SuperMatching algorithm is 3-approximation.
 For the purpose of the analysis, we limit, without loss of generality, 
 our discussion to a single connected component.
-Let $U = (V, E)$ be the underlying graph of the super matching, 
+Let $M_{sup}$ be an optimal super matching, 
 and let $M^*$ be an optimal matching, then:
 \begin{lemma}
 \label{lm:super-geq-m^*}
-$w(E) \geq w(M^*)$
+$w(M_{sup}) \geq w(M^*)$
 \end{lemma}
 
 \begin{proof}
-Obviously, every matching is a valid super-matching, 
-and $w(E)$ is the weight of an optimal super-matching 
+The proof follows directly from Observation~\ref{ob:matching is super}. 
 \end{proof}
-
-Let $T = (V, E')$ be a maximum spanning bipartite graph of $U$,
+%
+Let $U = (V, M_{sup})$ be the underlying graph induced by $M_{sup}$, 
+and let $\T = (V, T = E_{LR} \cup E_{RL})$ be a maximum spanning bipartite graph of $U$,
 and let 
 $$M = \argmax_{F \in \{ E_{LR}, E_{RL} \}}{w(F)}$$
 be the matching computed by Algorithm~\ref{alg:cm3}, then:
 
 \begin{lemma}
 \label{lm:more_than_e}
-$w(M) \geq w(E) - w(E')$
+$w(M) \geq w(M_{sup}) - w(T)$
 \end{lemma}
 
 \begin{proof}
-Recall that $E = E' \cup \{e\}$, 
-where $e$ is the lightest edge on some cycle in $(V, E)$. 
-Thus, $w(e) = w(E) - w(E')$, 
-and there must be another edge $e' \in E \setminus E'$, 
-such that $w(e') \geq w(e)$
+Recall that $M_{sup} = T \cup \{e\}$, 
+where $e$ is the lightest edge on some cycle in $(V, M_{sup})$. 
+Thus, $w(e) = w(M_{sup}) - w(T)$, 
+and there must be another edge $e' \in M_{sup} \setminus \{e\}$, 
+such that $w(e') \geq w(e)$.
 \end{proof}
 
 \begin{theorem}
@@ -90,7 +90,7 @@ Algorithm~\ref{alg:cm3} achieves a 3-approximation ratio.
 \begin{proof}
 From Observation~\ref{ob:bipartition}, Lemma~\ref{lm:super-geq-m^*},
 and Lemma~\ref{lm:more_than_e} we get that
-$$3w(M) = 2w(M) + w(M) \geq w(E') + w(E) - w(E') = w(E) \geq w(M^*)$$.
+$$3w(M) = w(M) + 2w(M) \geq w(M_{sup}) - w(T) + w(T) = w(M_{sup}) \geq w(M^*)$$.
 \end{proof}
 
 \begin{figure}

@@ -25,11 +25,11 @@ according to the number of passengers each user can drive if she was
 selected as a driver.
 A weight function $w : E \rightarrow \R $ defines the amount of
 satisfaction $w(u, v)$,
-that user $u$ gains when riding with user $v$ for every edge $(u, v) \in E$.
+that user $u$ gains when riding with user $v$.
 
 A feasible \emph{carpool matching} (matching) is a triple 
-$(P, D, M)$, where $P$ and $D$ form a partition of $V$, and 
-$M \subseteq E \cap (P \times D)$,
+$(P, D, M)$, where $P$ and $D$ form a partition of $V$, 
+and $M$ is a subset of $E \cap (P \times D)$,
 under the constraints that for every driver $d \in D$, 
 $\din(d) \leq c(d)$, 
 and for every passenger $p \in P$, ${\dout(p) \leq 1}$.
@@ -46,7 +46,7 @@ Figure~\ref{fig:carpool} is an example of the \textsc{\CARPOOL{}} problem.
 \label{fig:carpool}
 A carpool matching example: 
 \subref{subfloat:input} 
-a directed graph with capacities on the vertices and weights on the edges 
+a directed graph with capacities on the vertices and weights on the edges. 
 \subref{subfloat:output}
 a feasible matching with total weight of 26.
 $P$ is the set of blue vertices, and $D$ is the set of red, dashed vertices. 
@@ -83,12 +83,12 @@ capacities are needed to be assigned to vertices~\cite{arkin2004approximations}.
 
 
 In Section~\ref{sec:fixed} we discuss how the problem can be solved efficiently,
-when $P$ and $D$ are fixed.
-In Section~\ref{sec:uwcm} we give a 2-approximation algorithm for the
+when $P$ and $D$ are given.
+In Section~\ref{sec:uwcm} we describe a 2-approximation algorithm for the
 unweighted variant of the problem.
-In Section~\ref{sec:ucudcm} we give a 2-approximation algorithm
+In Section~\ref{sec:ucudcm} we describe a 2-approximation algorithm
 for the uncapacitated variant of the problem. 
 In Section~\ref{sec:cm} we present a 3-approximation
 algorithm for the general problem. 
-Finlay, in Section~\ref{sec:hardness}, we show that the problem is APX-hard.
 These are the first known approximation algorithms for any variant of the problem.
+Finlay, in Section~\ref{sec:hardness}, we show that the problem is APX-hard.
