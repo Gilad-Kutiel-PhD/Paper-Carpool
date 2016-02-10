@@ -1,10 +1,10 @@
-The \textsc{\CARPOOL{}} problem is a star packing problem in directed graph.
+The \textsc{\CARPOOL{}} problem is a star packing problem in directed graphs.
 Formally, given a directed graph $G = (V, E)$,
 a capacity function $ c: V \rightarrow \N $,
 and a weight function $w : E \rightarrow \R $,
 a feasible \emph{carpool matching} is a triple 
-$(P, D, M)$, where $P$ and $D$ form a partition of $V$, and 
-$M \subseteq E \cap (P \times D)$,
+$(P, D, M)$, where $P$ and $D$ form a partition of $V$, 
+and $M$ is a subset of $E \cap (P \times D)$,
 under the constraints that for every vertex $d \in D$, 
 $\din(d) \leq c(d)$, 
 and for every vertex $p \in P$, $\dout(p) \leq 1$.
