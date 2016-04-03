@@ -1,18 +1,8 @@
 \label{sec:bipartition}
-Given a directed bipartite graph $G = (L\cup R, E)$, 
-let $E_{LR} = E \cap (L \times R)$, 
-and let $E_{RL} = E \cap (R \times L)$.
-Clearly $E_{LR} \cup E_{RL} = E$, moreover, 
-if a weight function $w:E \rightarrow \R$ 
-assigns weight to every edge in $G$ then the following observation holds:
+A directed graph, $T$, whose underlying graph is a tree is (trivially) 2-colorable.
+Let $(V = L \cup R, E = E_{LR} \cup E_{RL})$ be a 2-coloring of $T$, 
+and let $w:E \rightarrow \R$ be a weight function, then clearly the following holds: 
 \begin{observation}
 \label{ob:bipartition}
 $\max(w(E_{LR}), w(E_{LR})) \geq \frac{w(E)}{2}$
 \end{observation}
-
-In particular, given a directed graph $G$, 
-and a maximum spanning tree $T$ of $G$, 
-directing the edges in $T$ according to their original direction result 
-with a directed bipartite graph $\T$.
-We refer to $\T$ as the \emph{maximum spanning bipartite graph}
-of $G$.

@@ -72,9 +72,9 @@ We now prove that the local search algorithm achieves an approximation ratio of 
 Let $M$ be a matching found by the local search algorithm, 
 and let $M^*$ be an arbitrary but fixed optimal matching.
 Observe that every edge in $M^*$ has at least one end point in $M$, formally: 
-\begin{lemma}
+\begin{observation}
 If $(u,v) \in M^*$, then $\{u,v\} \cap (P^M \cup D^M) \neq \emptyset$
-\end{lemma}
+\end{observation}
 
 \begin{proof}
 If this is not the case, Algorithm~\ref{alg:local} can improve $M$
@@ -83,10 +83,10 @@ by adding the edge $(u,v)$.
 
 Now, with respect to $M$, the optimal solution can not match two free vertices to the same
 passenger, formally:
-\begin{lemma}
-\label{lemma:one-free}
+\begin{observation}
+\label{observation:one-free}
 If $(p,d) \in M$, $f_1, f_2 \in F^M$, and $(f_1, p), (f_2, p) \in M^*$, then $f_1 = f_2$.
-\end{lemma}
+\end{observation}
 
 \begin{proof}
 If this is not the case, Algorithm~\ref{alg:local} can improve $M$ 
@@ -95,10 +95,10 @@ by removing the edge $(p,d)$ and adding the edges $(f_1, p), (f_2, p)$.
 
 Finally, with respect to $M$, the optimal solution can not match a free vertex to a driver
 that is not saturated, formally: 
-\begin{lemma}
-\label{lemma:saturated}
+\begin{observation}
+\label{observation:saturated}
 If $(f,d) \in M^*$, $f \in F^M$, and $d \in D^M$, then $d \in D^M_c$.
-\end{lemma}
+\end{observation}
 
 \begin{proof}
 If this is not the case, once again, Algorithm~\ref{alg:local} can improve $M$
@@ -129,26 +129,26 @@ Charging Scheme:																	\\
 }
 \end{figure}
 
-\begin{lemma}
-\label{lemma:p-not-charged}
+\begin{observation}
+\label{observation:p-not-charged}
 If $u \in P^M$, then $u$ is not overcharged.
-\end{lemma}
+\end{observation}
 
 \begin{proof}
 If $u \in P^{M^*}$, then it is only charged once, otherwise, 
 if $u \in D^{M^*}$, then it is only charged for edges $(w, u)$ where $w \in F^M$,
-and by lemma~\ref{lemma:one-free}, there is at most one such edge. 
+and by observation~\ref{observation:one-free}, there is at most one such edge. 
 \end{proof}
 
-\begin{lemma}
-\label{lemma:d-not-charged}
+\begin{observation}
+\label{observation:d-not-charged}
 If $u \in D^M$, then $u$ is not overcharged.
-\end{lemma}
+\end{observation}
 
 \begin{proof}
 If $u \in P^{M^*}$, then it is only charged once, 
 if $u \in D^{M^*}$, then it is only charged for edges $(w, u)$ where $w \in F^M$,
-if such edges exists, then by lemma~\ref{lemma:saturated}, $u$ is saturated, 
+if such edges exists, then by observation~\ref{observation:saturated}, $u$ is saturated, 
 and can not be overcharged.
 \end{proof}
 

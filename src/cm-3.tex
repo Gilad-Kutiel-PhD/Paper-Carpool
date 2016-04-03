@@ -25,8 +25,9 @@ $M \leftarrow \emptyset$								\\
 $G' \leftarrow \text{superMatching($G$)}$				\\
 
 \For{every connected component $C_i = (V_i, E_i) \in G'$}{	
-	$(V, E_{LR}, E_{RL}) \leftarrow$ maximum spanning bipartite graph of $C_i$	\\
-	$M \leftarrow M \cup \argmax_{F \in \{ E_{LR}, E_{RL} \}}{w(F)}$	
+	$T \gets$ maximum spanning tree of $C_i$							\\
+	$(V, E_{LR}, E_{RL}) \gets$ 2-coloring of $T$						\\
+	$M \gets M \cup \argmax_{F \in \{ E_{LR}, E_{RL} \}}{w(F)}$	
 }
 
 \Return $M$
@@ -55,10 +56,10 @@ For the purpose of the analysis, we limit, without loss of generality,
 our discussion to a single connected component.
 Let $M_{sup}$ be an optimal super matching, 
 and let $M^*$ be an optimal matching, then:
-\begin{lemma}
+\begin{observation}
 \label{lm:super-geq-m^*}
 $w(M_{sup}) \geq w(M^*)$
-\end{lemma}
+\end{observation}
 
 \begin{proof}
 The proof follows directly from Observation~\ref{ob:matching is super}. 
@@ -70,10 +71,10 @@ and let
 $$M = \argmax_{F \in \{ E_{LR}, E_{RL} \}}{w(F)}$$
 be the matching computed by Algorithm~\ref{alg:cm3}, then:
 
-\begin{lemma}
+\begin{observation}
 \label{lm:more_than_e}
 $w(M) \geq w(M_{sup}) - w(T)$
-\end{lemma}
+\end{observation}
 
 \begin{proof}
 Recall that $M_{sup} = T \cup \{e\}$, 
@@ -88,9 +89,9 @@ Algorithm~\ref{alg:cm3} achieves a 3-approximation ratio.
 \end{theorem}
 
 \begin{proof}
-From Observation~\ref{ob:bipartition}, Lemma~\ref{lm:super-geq-m^*},
-and Lemma~\ref{lm:more_than_e} we get that
-$$3w(M) = w(M) + 2w(M) \geq w(M_{sup}) - w(T) + w(T) = w(M_{sup}) \geq w(M^*)$$.
+From Observation~\ref{ob:bipartition}, observation~\ref{lm:super-geq-m^*},
+and observation~\ref{lm:more_than_e} we get that
+$$3w(M) = w(M) + 2w(M) \geq w(M_{sup}) - w(T) + w(T) = w(M_{sup}) \geq w(M^*)$$
 \end{proof}
 
 \begin{figure}

@@ -54,17 +54,17 @@ $P$ is the set of blue vertices, and $D$ is the set of red, dashed vertices.
 \end{figure}  
 
 In this paper, we also consider two more variants of the problem, namely, 
-the unweighted and the uncapacitated variants of the problem. 
+the unweighted and the uncapacitated, undirected\footnote{
+The undirected variant of the problem reduces to the directed variant,
+by replacing each edge $(u,v)$ by two directed edges,
+$(u \rightarrow v)$ and $(v \rightarrow u)$,
+each of the same weight as $(u,v)$.} variants of the problem. 
   
 Hartman et al.~\cite{hartman2013optimal} proved that all variants of the
 \emph{\CARPOOL{}} problem considered in this paper are NP-hard,
 and that the problem remains NP-hard even for a binary weight function when
 the capacity function $c(v) \leq 2$ for every vertex in $V$.
-It is also worth mentioning, that in the undirected\footnote{
-The undirected variant of the problem reduces to the directed variant,
-by replacing each edge $(u,v)$ by two directed edges,
-$(u \rightarrow v)$ and $(v \rightarrow u)$,
-each of the same weight as $(u,v)$.}, uncapacitated, unweighted
+It is also worth mentioning, that in the undirected, uncapacitated, unweighted
 variant of the problem, the set of drivers, in an optimal solution,
 form a minimum dominating set.
 When the set of drivers is known in advanced, however, the problem becomes

@@ -1,34 +1,32 @@
 \label{sec:ucudcm}
-In this section we consider the uncapacitated variant of the problem. 
+In this section we consider the uncapacitated, undirected variant of the problem. 
 We give a simple 2-approximation algorithm for this variant, 
 and give an example to show that our analysis is tight.
 
-Let $G = (V, E)$ be a directed graph, 
-the MaxTree algorithm (Algorithm~\ref{alg:apx})
-computes a maximum spanning bipartite graph of $G$, 
-$\T = (V, E_{LR} \cup E_{RL})$, 
-and returns $E_{LR}$ or $E_{RL}$, 
-whichever weights more.
+A feasible carpool matching in an undirected graph, $G$, can be found as follow:
 
 \begin{algorithm}
-\caption{
-\label{alg:apx}
-MaxTree}
-$(V, E_{LR}, E_{RL}) \leftarrow$ maximum spanning bipartite graph of $G$	\\
-Return $\argmax_{F \in \{ E_{LR}, E_{RL} \}}{w(F)} $						\\
+\caption{MaxTree}
+Compute a maximum spanning tree, $T$, of $G$.											\\
+Pick an arbitrary vertex in $T$ to be its root, and direct the edges toward the root.	\\
+\label{item:direct}
+Let $(V = L \cup R, E = E_{LR} \cup E_{RL})$ a 2-coloring of $T$						\\
+\Return $\argmax_{F \in \{E_{LR}, E_{RL}\}} w(F)$
 \end{algorithm}
 
-Observed that the MaxTree algorithm returns a feasible matching,
-this is because, in the solution, 
-there is no vertex that has both incoming and outgoing edges.  
-We now prove that the approximation ratio of MaxTree is 2.
-We start with a simple lemma.
+Observe that step~\ref{item:direct} of the above algorithm ensures that 
+the out degree of every vertex is at most 1.
+Observe also that in the returned solution
+there is no vertex that has both incoming and outgoing edges,
+that is the returned solution is a feasible carpool matching.  
+We now prove that the approximation ratio of the above algorithm is 2.
+We start with a simple observation.
 
-\begin{lemma}
+\begin{observation}
 \label{lm:tree_upper_matching}
 The weight of a maximum spanning tree of $G$ is an upper bound on the weight of
 an optimal matching in $G$.
-\end{lemma}
+\end{observation}
 
 \begin{proof}
 Consider the underlying graph of an optimal matching, 
@@ -43,7 +41,7 @@ The MaxTree algorithm achieves approximation ratio of 2.
 
 \begin{proof}
 The proof follows directly from 
-Lemma~\ref{lm:tree_upper_matching} and Observation~\ref{ob:bipartition}.
+observation~\ref{lm:tree_upper_matching} and Observation~\ref{ob:bipartition}.
 \end{proof}
 
 To see that the analysis is tight, 
