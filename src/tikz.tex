@@ -1,18 +1,21 @@
 \usepackage{tikz}
 \usetikzlibrary{
-shapes,
-graphs,
-arrows.meta,
-calc,
-positioning,
-patterns,
-decorations.pathmorphing,
+	arrows,
+	arrows.meta,
+	calc,
+	graphs,
+	patterns,
+	positioning,
+	shapes,
+	decorations.pathmorphing,
 }
 
-% SCALE
-\tikzset{tikz scale/.style={
-	scale=#1,
-	every node/.style={scale=#1}
+%DEFAULT STYLE
+\tikzset{default style/.style={
+	>=Stealth, 
+	on grid, 
+	auto, 
+	thick,
 }}
 
 % NODE
@@ -26,25 +29,20 @@ decorations.pathmorphing,
 	black!70,
 }}
 
-% EDGE
-\tikzset{default edge/.style={
-	-{Latex[length=2mm, width=2mm]},
-	very thick,
-}}
-
 % LABELS
 \tikzset{label/.style={
 	draw=none,
 	sloped,
-	midway,
 }}
 
 \tikzset{label above/.style={
 	label,
+	midway,
 	above=-1mm,
 }}
 
 \tikzset{label below/.style={
 	label,
+	midway,
 	below=-1mm,
 }}
