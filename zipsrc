@@ -1,0 +1,2 @@
+rm src.zip
+zip -r src.zip src
