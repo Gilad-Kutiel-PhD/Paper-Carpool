@@ -5,4 +5,4 @@ flat:
 	python3 -m flap src/main.tex tmp/
 
 clean:
-	git clean -fxn
+	git clean -fx
