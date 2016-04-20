@@ -2,7 +2,7 @@ zip:
 	rm src.zip;zip -r src.zip src
 
 flat:
-	python3 -m flap src/main.tex tmp/
+	mkdir -p tmp;cd src; ../latexpand main.tex > ../tmp/main.tex; cp main.bib ../tmp/
 
 clean:
-	git clean -fx
+	git clean -dfx
