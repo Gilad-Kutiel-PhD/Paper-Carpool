@@ -1,10 +1,10 @@
 The \textsc{\CARPOOL{}} problem is a star packing problem in directed graphs.
-Formally, given a directed graph $G = (V, E)$,
+Formally, given a directed graph $G = (V, A)$,
 a capacity function $ c: V \rightarrow \N $,
-and a weight function $w : E \rightarrow \R $,
+and a weight function $w : A \rightarrow \R $,
 a feasible \emph{carpool matching} is a triple 
-$(P, D, M)$, where $P$ and $D$ form a partition of $V$, 
-and $M$ is a subset of $E \cap (P \times D)$,
+$(P, D, M)$, where $P$ (passengers) and $D$ (drivers) form a partition of $V$, 
+and $M$ is a subset of $A \cap (P \times D)$,
 under the constraints that for every vertex $d \in D$, 
 $\din(d) \leq c(d)$, 
 and for every vertex $p \in P$, $\dout(p) \leq 1$.
@@ -17,8 +17,5 @@ that tries to connect between passengers and drivers based on (arbitrary) simila
 The problem is known to be NP-hard, 
 even for uniform weights and without capacity constraints.
 
-We show that the \textsc{\CARPOOL{}} problem is APX-hard. 
-We present a $3$-approximation algorithm for the problem,
-and $2$-approximation algorithms for the 
-unweighted and for the uncapacitated, undirected variants of the problem.
-These are the first approximation algorithms for any variant of the problem.
+We present a $3$-approximation algorithm for the problem
+and $2$-approximation algorithm for the unweighted variant of the problem.

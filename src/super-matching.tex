@@ -1,9 +1,9 @@
-A super-matching is a relaxed variant of the \CARPOOL{} problem, 
-where every node can acts both as a driver and as a passenger. 
-Formally, given a directed graph $G = (V, E)$, 
+A super-matching is a relaxed variant of the \CARPOOL{} problem 
+where every node can act both as a driver and as a passenger. 
+Formally, given a directed graph $G = (V, A)$, 
 a capacity function $ c: V \rightarrow \N $,
-and a weight function $w : E \rightarrow \R$,
-a \emph{super-matching} is $M \subseteq E$, 
+and a weight function $w : A \rightarrow \R$,
+a \emph{super-matching} is a set $M \subseteq A$, 
 under the constraint that $\forall v \in V$,
 $\din(v) \leq c(v)$, and $\dout(v) \leq 1$. 
 %
@@ -17,17 +17,17 @@ A maximum super matching can be found efficiently by the following reduction
 to a maximum weight flow problem: 
 Let $N = (G', s, t, c', w')$ be a flow network, where 
 \begin{align*}
-G'				& = (P \cup D \cup \{s, t\}, E_{sp} \cup E_{pd} \cup E_{dt})	\\
+G'				& = (P \cup D \cup \{s, t\}, A_{sp} \cup A_{pd} \cup A_{dt})	\\
 P				& = \{p_v : v \in V\}					\\
 D				& = \{d_v : v \in V\}					\\
-E_{sp}			& = \{ (s, p_v) : p_v \in P \}			\\
-E_{pd}			& = \{ ((p_u, d_v)) : (u, v) \in E \}	\\
-E_{dt}			& = \{ (d_v, t) : d_v \in D \}			\\
+A_{sp}			& = \{ (s, p_v) : p_v \in P \}			\\
+A_{pd}			& = \{ ((p_u, d_v)) : (u, v) \in A \}	\\
+A_{dt}			& = \{ (d_v, t) : d_v \in D \}			\\
 c'(s, p_v)		& = c'(p_u, d_v) = 1					\\
 c'(d_v, t)		& = c(v)								\\
 w'(p_u, d_v)	& = 
 \begin{cases}
-w(u, v) & \text{if } (p_u, d_v) \in E_{pd} \\
+w(u, v) & \text{if } (p_u, d_v) \in A_{pd} \\
 0 & \text{otherwise}	
 \end{cases}
 \end{align*}
@@ -47,5 +47,5 @@ Illustration of the flow network that is used to find a super-matching.
 }
 \end{figure}
 %
-One can verify that this is indeed a flow network and that there is a straight forward 
-translation between a flow and a super matching with the same weight.
+One can verify that this is indeed a (integral) flow network and that there is a
+straight forward translation between a flow and a super matching with the same weight.

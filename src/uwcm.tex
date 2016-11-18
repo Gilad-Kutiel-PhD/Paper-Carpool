@@ -4,7 +4,7 @@ variant of the problem.
 We show that the approximation ratio of this algorithm is $2$ and give an example
 to show that our analysis is tight.
 
-Given a directed graph $G = (V, E)$, 
+Given a directed graph $G = (V, A)$, 
 and a capacity function ${c : V \rightarrow \N}$, 
 In the \textsc{\UWCARPOOL{}} problem, 
 we seek for a matching that maximizes the size of $M$.
@@ -12,7 +12,7 @@ we seek for a matching that maximizes the size of $M$.
 We now present a simple local search algorithm for the problem. 
 The algorithm maintains a feasible matching through its execution.
 In every iteration of the algorithm, the size of $M$ increases.
-The algorithm terminates, when no further improvement can be done. 
+The algorithm terminates, when no further improvement can be made. 
 
 Recall that the \FIXEDCARPOOL{} can be solved efficiently.
 Let $M = \text{opt}_{fixed}(P, D)$ be an optimal solution of the
@@ -31,13 +31,13 @@ The local search algorithm, in every iteration,
 tries to improve the current matching, 
 by switching a passenger or a free vertex into a driver 
 and compute an optimal fixed matching.
-the local search algorithm is described in
+The local search algorithm is described in
 Algorithm~\ref{alg:local}.
 
 \begin{algorithm}
 \SetKw{True}{true}
 \SetKw{False}{false}
-\KwIn{$G = (V, E)$, $c : V \rightarrow \N$}
+\KwIn{$G = (V, A)$, $c : V \rightarrow \N$}
 \KwOut{$M$}
 $M \leftarrow \emptyset$					\\
 \Repeat{done}{
@@ -71,14 +71,14 @@ and we can conclude that Algorithm~\ref{alg:local} runs in polynomial time.
 We now prove that the local search algorithm achieves an approximation ratio of $2$.
 Let $M$ be a matching found by the local search algorithm, 
 and let $M^*$ be an arbitrary but fixed optimal matching.
-Observe that every edge in $M^*$ has at least one end point in $M$, formally: 
+Observe that every arc in $M^*$ has at least one end point in $M$, formally: 
 \begin{observation}
 If $(u,v) \in M^*$, then $\{u,v\} \cap (P^M \cup D^M) \neq \emptyset$
 \end{observation}
 
 \begin{proof}
 If this is not the case, Algorithm~\ref{alg:local} can improve $M$
-by adding the edge $(u,v)$.  
+by adding the arc $(u,v)$.  
 \end{proof}
 
 Now, with respect to $M$, the optimal solution can not match two free vertices to the same
@@ -90,7 +90,7 @@ If $(p,d) \in M$, $f_1, f_2 \in F^M$, and $(f_1, p), (f_2, p) \in M^*$, then $f_
 
 \begin{proof}
 If this is not the case, Algorithm~\ref{alg:local} can improve $M$ 
-by removing the edge $(p,d)$ and adding the edges $(f_1, p), (f_2, p)$.
+by removing the arc $(p,d)$ and adding the arcs $(f_1, p), (f_2, p)$.
 \end{proof}
 
 Finally, with respect to $M$, the optimal solution can not match a free vertex to a driver
@@ -102,18 +102,18 @@ If $(f,d) \in M^*$, $f \in F^M$, and $d \in D^M$, then $d \in D^M_c$.
 
 \begin{proof}
 If this is not the case, once again, Algorithm~\ref{alg:local} can improve $M$
-by adding the edge $(f,d)$.
+by adding the arc $(f,d)$.
 \end{proof}
 
 To show that Algorithm~\ref{alg:local} is 2-approximation, 
 consider the charging scheme that is illustrated in Figure~\ref{fig:charging}:
-Load every edge $(p,d) \in M$ with 2 coins, 
+Load every arc $(p,d) \in M$ with 2 coins, 
 place one coin on $p$ and one coin on $d$.
 Observe that every vertex $p \in P^M$ is loaded with one coin, 
 and every vertex $d \in D^M$ is loaded with $\din(d)$ coins.   
 Now, pay one coin for every $(u,v) \in M^*$, charge $u$ if $u \in P^M \cup D^M$, 
 otherwise ($v \in P^M \cup D^M$) charge $v$.
-Clearly, every edge in $M^*$ is paid.
+Clearly, every arc in $M^*$ is paid.
 We claim that no vertex is overcharged.
 
 \begin{figure}
@@ -123,9 +123,9 @@ We claim that no vertex is overcharged.
 \label{fig:charging}
 Charging Scheme:																	\\
 1. vertices $1,2,4,5$ are loaded with 1\$ each and vertices $3,7$ with 2\$ each.	\\
-2. vertex 1 pays for the edge $(1,4)$.												\\
-3. vertex 5 pays for the edge $(10,5)$.												\\
-4. vertex 7 is saturated. It pays for edges $(8,7)$ and (9,7). 
+2. vertex 1 pays for the arc $(1,4)$.												\\
+3. vertex 5 pays for the arc $(10,5)$.												\\
+4. vertex 7 is saturated. It pays for arcs $(8,7)$ and (9,7). 
 }
 \end{figure}
 
@@ -136,8 +136,8 @@ If $u \in P^M$, then $u$ is not overcharged.
 
 \begin{proof}
 If $u \in P^{M^*}$, then it is only charged once, otherwise, 
-if $u \in D^{M^*}$, then it is only charged for edges $(w, u)$ where $w \in F^M$,
-and by observation~\ref{observation:one-free}, there is at most one such edge. 
+if $u \in D^{M^*}$, then it is only charged for arcs $(w, u)$ where $w \in F^M$,
+and by Observation~\ref{observation:one-free}, there is at most one such arc. 
 \end{proof}
 
 \begin{observation}
@@ -147,8 +147,8 @@ If $u \in D^M$, then $u$ is not overcharged.
 
 \begin{proof}
 If $u \in P^{M^*}$, then it is only charged once, 
-if $u \in D^{M^*}$, then it is only charged for edges $(w, u)$ where $w \in F^M$,
-if such edges exists, then by observation~\ref{observation:saturated}, $u$ is saturated, 
+if $u \in D^{M^*}$, then it is only charged for arcs $(w, u)$ where $w \in F^M$,
+if such arcs exists, then by observation~\ref{observation:saturated}, $u$ is saturated, 
 and can not be overcharged.
 \end{proof}
 
@@ -157,7 +157,7 @@ Algorithm~\ref{alg:local} is 2-approximation
 \end{theorem}
 
 \begin{proof}
-We use a charging scheme where we manage to pay 1 coin for each edge in $M^*$
+We use a charging scheme where we manage to pay 1 coin for each arc in $M^*$
 by using at most $2|M|$ coins.
 \end{proof}
 
@@ -165,8 +165,8 @@ by using at most $2|M|$ coins.
 To conclude this section, we show that our analysis is tight.
 Consider the example given in Figure~\ref{fig:localtight}.
 Assume, in this example, that there are no capacity constraints,
-if the local search algorithm start by choosing vertex $3$ to be a driver, 
-then the returned matching is the single edge $(2,3)$.
+if the local search algorithm starts by choosing vertex $3$ to be a driver, 
+then the returned matching is the single arc $(2,3)$.
 At this point, no further improvement can be done.
 The optimal matching, on the other hand, is $\{(1, 2), (3, 2)\}$. 
 The path in the example can be duplicated to form an arbitrary large graph (forest).

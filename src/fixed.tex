@@ -10,58 +10,52 @@ approximation algorithm described in Section~\ref{sec:cm}.
 },
 by reducing it to a maximum weight flow (flow) problem as
 follow:
-Let $(G = (V, E), c, w)$ be a \CARPOOL{} instance,
+Let $(G = (V, A), c, w)$ be a \CARPOOL{} instance,
 let $(P, D)$ be a partition of $V$,
-let  $N = (G' = (V', E'), s, t, c')$ be a flow network, 
-and let $w' : E \rightarrow \N$ be a weight function, where 
+let  $N = (G' = (V', A'), s, t, c')$ be a flow network, 
+and let $w' : A \rightarrow \N$ be a weight function, where 
 
 \begin{align*}
 V'			& = P \cup D \cup \{s, t\}										\\
-E'			& = E_{sp} \cup E_{pd} \cup E_{dt}								\\
-E_{sp}		& =	\{(s, p) : p \in P \}										\\
-E_{pd}		& =	E \cap (P \times D)											\\
-E_{dt}		& =	\{(d, t) : d \in D \}										\\
+A'			& = A_{sp} \cup A_{pd} \cup A_{dt}								\\
+A_{sp}		& =	\{(s, p) : p \in P \}										\\
+A_{pd}		& =	A \cap (P \times D)											\\
+A_{dt}		& =	\{(d, t) : d \in D \}										\\
 c'(u, v)	& = 
 				\begin{cases}
-				c(u) & \text{if } (u, v) \in E_{dt} 						\\
+				c(u) & \text{if } (u, v) \in A_{dt} 						\\
 				1 & \text{otherwise}
 				\end{cases}
 																			\\
 w'(e)			& = 
 				\begin{cases}
-				w(e) & \text{if } e \in E_{pd} 								\\
+				w(e) & \text{if } e \in A_{pd} 								\\
 				0 & \text{otherwise}	
 				\end{cases}
 \end{align*}
-The flow network is described in Figure~\ref{fig:flow}
+The flow network is described in Figure~\ref{fig:flow}.
 \begin{figure}
 \centering
 \input{fig-flow}
 \caption{
 \label{fig:flow}
-Illustration of a flow network corresponded to a \FIXEDCARPOOL{} instance.}
+Illustration of a flow network corresponding to a \FIXEDCARPOOL{} instance.}
 \end{figure}
 
 \begin{observation}
-There exists a maximum weight integral flow in $N$.
+For every integral flow $f$ in $N$, there is a carpool matching $M$ on $G$ with
+the same weight.
 \end{observation}
 
 \begin{proof}
-The observation follows directly from the fact that $c'$ is integral capacity function.
-\end{proof}
-
-\begin{observation}
-For every integral flow $f$ in $N$, there is a matching $M$ on $G$ with the same weight. 
-\end{observation}
-
-\begin{proof}
-Consider the matching $(P, D, M^f)$, where 
-$$ M^f = \{(p, d) \in E_{pd} : f(p, d) = 1\} $$
+Consider the carpool matching $(P, D, M^f)$, where 
+$$ M^f = \{(p, d) \in A_{pd} : f(p, d) = 1\} $$
 one can verify that this is indeed a matching with the same weight as $f$.
 \end{proof}
 
 \begin{observation}
-For every matching $(P, D, M)$ on $G$, there exists a flow $f$ on $N$ with the same weight. 
+For every carpool matching $(P, D, M)$ on $G$, there exists a flow $f$ on $N$
+with the same weight.
 \end{observation}
 
 \begin{proof}
@@ -81,10 +75,10 @@ Also, observe, that by construction,
 the weight of $f$ equals to the weight of the matching.
 \end{proof}
 
-As we mentioned in the preliminaries, 
+As we mentioned, 
 the maximum weight flow problem can be solved efficiently, 
 and so is the \FIXEDCARPOOL{} problem.
 It is worth mentioning, that it is possible that in a maximum weight flow, 
-some of the edges will have no flow at all, 
+some of the arcs will have no flow at all, 
 that is, it is possible that in a \FIXEDCARPOOL{}
 some of the passengers and drivers will be unmatched.  

@@ -5,7 +5,7 @@
 
 Let $M$ be a feasible carpool matching,
 the \emph{value} of a vertex $v$, denoted $val(v)$, 
-is the sum of the weights of the edges in $M$ that incident $v$. 
+is the sum of the weights of the arcs in $M$ that incident $v$. 
 That is: 
 %
 \begin{definition}[$val$]
@@ -14,7 +14,7 @@ $val_M(v) = \sum_{(u, v) \in M} w(u, v) + \sum_{(v, u) \in M} w(v, u)$
 %
 If $V$ is a set of vertices, then $val_M(V) \triangleq \sum_{v \in V} val_M(v)$.
 %
-Denote by $\delta(e)$ the difference between the weight of the edge and the value
+Denote by $\delta(e)$ the difference between the weight of the arc and the value
 of its source vertex,
 that is:
 %
@@ -22,15 +22,15 @@ that is:
 $\delta_M(u, v) = w(u, v) - val_M(u)$
 \end{definition}
 %
-If $S$ is a set of edges, then $\delta(S) \triangleq \sum_{e \in S}\delta(v)$.
+If $S$ is a set of arcs, then $\delta(S) \triangleq \sum_{e \in S}\delta(v)$.
 
 An \emph{improvement} to vertex $v$ 
-is a set of edges entering $v$ of size not greater than the capacity of $v$, 
+is a set of arcs entering $v$ of size not greater than the capacity of $v$, 
 for which the sum of the $\delta$s is greater than the value of $v$,
 formally: 
 
 \begin{definition}[improvement]
-$S_v \subseteq V \times \{v\} \cap E$ is an \emph{improvement} (w.r.t $M$)
+$S_v \subseteq V \times \{v\} \cap A$ is an \emph{improvement} (w.r.t $M$)
 if the following conditions hold:
 \begin{itemize}
 \item
@@ -42,18 +42,18 @@ $\delta_M(S_v) > val_M(v)$
 %
 If, for vertex $v$, an improvement exists, we say that vertex $v$ can be \emph{improved}.
 %
-Given an edge $(u,v)$, 
-let $inc(u,v)$ be the set of edges that incident $(u, v)$,
+Given an arc $(u,v)$, 
+let $inc(u,v)$ be the set of arcs that incident $(u, v)$,
 formally:
 %
 \begin{definition}[inc]
-$inc(u,v) = (V \times \{u, v\} \cup \{u, v\} \times V) \cap E$
+$inc(u,v) = (V \times \{u, v\} \cup \{u, v\} \times V) \cap A$
 \end{definition}
 %
-If $S$ is a set of edges, then $inc(S) \triangleq \bigcup_{e \in S} inc(e)$.
+If $S$ is a set of arcs, then $inc(S) \triangleq \bigcup_{e \in S} inc(e)$.
 %
-The \emph{passengers} of $v$ (w.r.t some set of edges) are all the vertices that have
-outgoing edge to $v$, formally: 
+The \emph{passengers} of $v$ (w.r.t some set of arcs) are all the vertices that have
+outgoing arc to $v$, formally: 
 %
 \begin{definition}[passengers]
 $\text{pass}_M(v) = \{u : (u, v) \in M\}$
@@ -66,7 +66,7 @@ Figure~\ref{fig:defs} depicts all the above definitions.
 \input{fig-val-delta}
 \caption{
 \label{fig:defs}
-In this example, $M$ is the set of the blue, dashed edges, then:
+In this example, $M$ is the set of the blue, dashed arcs, then:
 \begin{itemize}
 \item
 $val_M(2) = 7$
@@ -92,8 +92,8 @@ We are now ready to describe our algorithm.
 The algorithm starts with an empty matching,
 in every iteration it seeks for a vertex that can be improved,
 it then improve the matching by adding
-the edges that improve the vertex, 
-just after removing the edges that incident them.
+the arcs that improve the vertex, 
+just after removing the arcs that incident them.
 The algorithm halts when no vertex can be improved.
 Figure~\ref{fig:improvement} depicts an improvement step,
 and the full algorithm is listed in Algorithm~\ref{alg:grd}. 
@@ -128,9 +128,9 @@ $M \leftarrow \emptyset$									\\
 \end{algorithm}
 
 We argue that determining if a vertex $v$ can be improved can be done efficiently,
-by considering the incoming edges to $v$ in a decreasing order of their $\delta$s,
+by considering the incoming arcs to $v$ in a decreasing order of their $\delta$s,
 and only ones with positive value.
-Vertex $v$ can be improved, then, if the $\delta$s of the first $c(v)$ (or less) edges
+Vertex $v$ can be improved, then, if the $\delta$s of the first $c(v)$ (or less) arcs
 sum up to more than $val_M(v)$.
 
 \todo[inline]{argue that the number of iteration is bounded}
@@ -156,7 +156,7 @@ $\sum_{v \in V} val_M(v) = 2 \sum_{e \in M} w(e)$
 \end{proof}
 
 Let $M$ be a matching, and let $v$ be a vertex with no improvement,
-let $S \subseteq V \times \{v\} \cap E$ of size not greater than $c(v)$,
+let $S \subseteq V \times \{v\} \cap A$ of size not greater than $c(v)$,
 then the following lemma holds:
 
 \begin{lemma}
@@ -178,7 +178,7 @@ To bound the approximation ratio of the GRD algorithm,
 we use a charging scheme argument.
 Given the matching produced by the algorithm, 
 we load every vertex with amount of money equal to its value,
-we then show that this is enough to pay for every edge in an optimal matching.   
+we then show that this is enough to pay for every arc in an optimal matching.   
 
 \begin{theorem}
 Algorithm~\ref{alg:grd} is 2-approximation.
@@ -204,9 +204,9 @@ as depicts in Figure~\ref{fig:grd worst}.
 \caption{
 \label{fig:grd worst}
 GRD algorithm, worst case example: \\
-Consider a path with $2n + 1$ edges, 
-and alternating edge weights (2 and 1),
-if the GRD algorithm selects all the 1 weighted edges,
+Consider a path with $2n + 1$ arcs, 
+and alternating arc weights (2 and 1),
+if the GRD algorithm selects all the 1 weighted arcs,
 then no further improvement can be done and the value of the matching is $n + 1$,
 while the optimal matching has value of $2n$. 
 }
