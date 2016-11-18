@@ -17,4 +17,19 @@
 *.vtc
 *#
 /out/
+<<<<<<< HEAD
 /tmp/
+=======
+/tmp/
+/out/
+/out/
+/out/
+/out/
+/out/
+/out/
+/out/
+/out/
+/out/
+/out/
+>>>>>>> master
+/out/
