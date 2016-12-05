@@ -1,21 +1,13 @@
-\documentclass[draft]{article}
+\RequirePackage{amsmath}
+\documentclass[]{llncs}
+\pagestyle{plain}
 
-\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage{amsmath,amssymb,mathtools}
 \usepackage[linesnumbered, ruled]{algorithm2e}
 \usepackage[caption=false]{subfig}
 \usepackage{hyperref}
-\hypersetup{final}
+\usepackage[T1]{fontenc}
 \usepackage[inline]{enumitem}
-
-
-% DEBUG
-\usepackage{fullpage}
-\usepackage{todonotes}
-\usepackage{lineno}
-\linenumbers
-
-% EXTRA
-\usepackage{authblk}
 \DeclareMathOperator*{\argmin}{arg\,min}
 \DeclareMathOperator*{\argmax}{arg\,max}
 
@@ -23,8 +15,6 @@
 \def\N{\mathbb{N}}
 
 \newtheorem{observation}{Observation}
-\newtheorem{lemma}{Lemma}
-\newtheorem{theorem}{Theorem}
 
 \newcommand{\din}[1][M]{deg^M_{in}}
 \newcommand{\dout}[1][M]{deg^M_{out}}
@@ -88,10 +78,37 @@
 
 \title{Approximation Algorithms for the Maximum Carpool Matching Problem}
 
-\date{}
-\author[1]{Gilad Kutiel			\thanks{\texttt{gkutiel@cs.technion.ac.il}}}
+\author{
+Reuven Bar-Yehuda\inst{1}
+\and
+Gilad Kutiel\inst{1}
+\and
+Dror Rawitz\inst{2}
+}
 
-\affil[1]{Department of Computer Science, Technion, Haifa, Israel}
+\institute{
+Department of Computer Science, Technion, Haifa, Israel
+\\
+\email{\{reuven, gkutiel\}@cs.technion.ac.il}
+\and
+Faculty of Engineering, Bar Ilan University, Ramt-Gan, Israel
+\\
+\email{dror.rawitz@biu.ac.il}
+}
+
+
+\date{}
+\author{
+Gilad Kutiel\inst{1}
+}
+
+\institute{
+Department of Computer Science, Technion, Haifa, Israel
+\\
+\email{gkutiel@cs.technion.ac.il}
+}
+
+
 
 \begin{document}
 \maketitle

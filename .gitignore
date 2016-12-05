@@ -15,3 +15,5 @@
 *.tdo
 *.toc
 *.vtc
+/out/
+/tmp/
