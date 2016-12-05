@@ -4,8 +4,8 @@ BEGIN{
   FS="\\input{|}"
 }{
   if(match($0,"(%*)(.*)\\input{(.*)}",a)){
-    if(a[1]==""){
-          system("./merge.awk "a[3]".tex");
+	if(a[1]==""){
+		system("./merge.awk src/"a[3]".tex");
     }
   }
   else{
