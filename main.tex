@@ -458,7 +458,7 @@ the same weight.
 Consider the carpool matching $(P, D, M^f)$, where 
 $$ M^f = \{(p, d) \in A_{pd} : f(p, d) = 1\} $$
 one can verify that this is indeed a matching with the same weight as $f$.
-\end{proof}
+\qed\end{proof}
 
 \begin{observation}
 For every carpool matching $(P, D, M)$ on $G$, there exists a flow $f$ on $N$
@@ -480,7 +480,7 @@ f(d_j, t) 	& = \din(d_j)
 It is easy to verify, that $f$ is indeed a flow function.
 Also, observe, that by construction,
 the weight of $f$ equals to the weight of the matching.
-\end{proof}
+\qed\end{proof}
 
 As we mentioned, 
 the maximum weight flow problem can be solved efficiently, 
@@ -572,7 +572,7 @@ If $(u,v) \in M^*$, then $\{u,v\} \cap (P^M \cup D^M) \neq \emptyset$
 \begin{proof}
 If this is not the case, Algorithm~\ref{alg:local} can improve $M$
 by adding the arc $(u,v)$.  
-\end{proof}
+\qed\end{proof}
 
 Now, with respect to $M$, the optimal solution can not match two free vertices to the same
 passenger, formally:
@@ -584,7 +584,7 @@ If $(p,d) \in M$, $f_1, f_2 \in F^M$, and $(f_1, p), (f_2, p) \in M^*$, then $f_
 \begin{proof}
 If this is not the case, Algorithm~\ref{alg:local} can improve $M$ 
 by removing the arc $(p,d)$ and adding the arcs $(f_1, p), (f_2, p)$.
-\end{proof}
+\qed\end{proof}
 
 Finally, with respect to $M$, the optimal solution can not match a free vertex to a driver
 that is not saturated, formally: 
@@ -596,7 +596,7 @@ If $(f,d) \in M^*$, $f \in F^M$, and $d \in D^M$, then $d \in D^M_c$.
 \begin{proof}
 If this is not the case, once again, Algorithm~\ref{alg:local} can improve $M$
 by adding the arc $(f,d)$.
-\end{proof}
+\qed\end{proof}
 
 To show that Algorithm~\ref{alg:local} is 2-approximation, 
 consider the charging scheme that is illustrated in Figure~\ref{fig:charging}:
@@ -690,7 +690,7 @@ If $u \in P^M$, then $u$ is not overcharged.
 If $u \in P^{M^*}$, then it is only charged once, otherwise, 
 if $u \in D^{M^*}$, then it is only charged for arcs $(w, u)$ where $w \in F^M$,
 and by Observation~\ref{observation:one-free}, there is at most one such arc. 
-\end{proof}
+\qed\end{proof}
 
 \begin{observation}
 \label{observation:d-not-charged}
@@ -702,7 +702,7 @@ If $u \in P^{M^*}$, then it is only charged once,
 if $u \in D^{M^*}$, then it is only charged for arcs $(w, u)$ where $w \in F^M$,
 if such arcs exists, then by observation~\ref{observation:saturated}, $u$ is saturated, 
 and can not be overcharged.
-\end{proof}
+\qed\end{proof}
 
 \begin{theorem}
 Algorithm~\ref{alg:local} is 2-approximation
@@ -711,7 +711,7 @@ Algorithm~\ref{alg:local} is 2-approximation
 \begin{proof}
 We use a charging scheme where we manage to pay 1 coin for each arc in $M^*$
 by using at most $2|M|$ coins.
-\end{proof}
+\qed\end{proof}
 
 
 To conclude this section, we show that our analysis is tight.
@@ -986,7 +986,7 @@ and that $\max(w(M_a), w(M_1), w(M_2)) \geq
 \frac{w(A')}{3}$.
 The observation that the weight of a maximum super-matching is an upper bound on
 the weight of a maximum carpool matching finishes the proof. 
-\end{proof}
+\qed\end{proof}
 
 To see that our analysis is tight, consider the example in
 Figure~\ref{fig:3cm-tight-fig}. 

@@ -24,7 +24,7 @@ $|C^*| = |V| - |D^*|$
 
 \begin{proof}
 The proof follows immediately from the definitions of the two problems. 
-\end{proof}
+\qed\end{proof}
 
 \begin{lemma}
 \label{lm:optc_leq_boptd}
@@ -33,7 +33,7 @@ $|C^*| \leq b \cdot |D^*|$
 
 \begin{proof}
 The proof follows directly from the observation that $|D^*| \geq \frac{|V|}{b}$.
-\end{proof}
+\qed\end{proof}
 
 Let $C(G)$ be any feasible carpool matching on $G$, then the following lemma holds:
 
@@ -48,7 +48,7 @@ $$
 |V| - |D^*| - |C| 	= 
 (|V| - |C|) - |D^*|
 $$
-\end{proof}
+\qed\end{proof}
 
 Let $D(G)$ be any feasible dominating set in $G$, 
 we argue that $f(G) = G$, and $g(C(G)) = V \setminus C(G)$ 
@@ -64,7 +64,7 @@ and by lemma~\ref{lm:erreq} we get that
 							& = |g(C(G))| - |D^*(G)|
 \end{split}
 \end{equation}
-\end{proof}
+\qed\end{proof}
 
 \begin{theorem}
 The \textsc{\CARPOOL{}} problem is APX-hard.
@@ -73,4 +73,4 @@ The \textsc{\CARPOOL{}} problem is APX-hard.
 \begin{proof}
 The proof follows directly from the above linear reduction and the fact that 
 \textsc{Dominating Set-B} is APX-hard. 
-\end{proof}
+\qed\end{proof}

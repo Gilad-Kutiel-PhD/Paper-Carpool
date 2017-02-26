@@ -50,6 +50,7 @@ $M \leftarrow \emptyset$					\\
 		\If{$|M'| > |M|$}{
 			$M \leftarrow M'$				\\
 			$done \leftarrow{}$ \False		\\
+			\Break							\\
 		}
  	}
 }
@@ -71,7 +72,8 @@ and we can conclude that Algorithm~\ref{alg:local} runs in polynomial time.
 We now prove that the local search algorithm achieves an approximation ratio of $2$.
 Let $M$ be a matching found by the local search algorithm, 
 and let $M^*$ be an arbitrary but fixed optimal matching.
-Observe that every arc in $M^*$ has at least one end point in $M$, formally: 
+Observe that the optimal solution cannot match two free vertices to each other,
+formally:
 \begin{observation}
 If $(u,v) \in M^*$, then $\{u,v\} \cap (P^M \cup D^M) \neq \emptyset$
 \end{observation}
@@ -138,6 +140,7 @@ If $u \in P^M$, then $u$ is not overcharged.
 If $u \in P^{M^*}$, then it is only charged once, otherwise, 
 if $u \in D^{M^*}$, then it is only charged for arcs $(w, u)$ where $w \in F^M$,
 and by Observation~\ref{observation:one-free}, there is at most one such arc. 
+\qed
 \end{proof}
 
 \begin{observation}
@@ -150,6 +153,7 @@ If $u \in P^{M^*}$, then it is only charged once,
 if $u \in D^{M^*}$, then it is only charged for arcs $(w, u)$ where $w \in F^M$,
 if such arcs exists, then by observation~\ref{observation:saturated}, $u$ is saturated, 
 and can not be overcharged.
+\qed
 \end{proof}
 
 \begin{theorem}
@@ -158,7 +162,8 @@ Algorithm~\ref{alg:local} is 2-approximation
 
 \begin{proof}
 We use a charging scheme where we manage to pay 1 coin for each arc in $M^*$
-by using at most $2|M|$ coins.
+by using at most $2|M|$ coins. 
+\qed
 \end{proof}
 
 

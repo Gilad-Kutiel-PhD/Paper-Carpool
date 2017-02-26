@@ -153,7 +153,7 @@ $\sum_{v \in V} val_M(v) = 2 \sum_{e \in M} w(e)$
 						& = 2 \sum_{e \in M} w(e)
 \end{split}
 \end{equation}
-\end{proof}
+\qed\end{proof}
 
 Let $M$ be a matching, and let $v$ be a vertex with no improvement,
 let $S \subseteq V \times \{v\} \cap A$ of size not greater than $c(v)$,
@@ -172,7 +172,7 @@ w(S) - val_M(\text{pass}_S(v))=
 \delta_M(S) 
 \leq val_M(v)
 $$
-\end{proof}
+\qed\end{proof}
 
 To bound the approximation ratio of the GRD algorithm, 
 we use a charging scheme argument.
@@ -193,7 +193,7 @@ Consider a driver $v$ in $M^*$, and let $S = V \times \{v\} \cap M^*$.
 By lemma~\ref{lm:no improve} we know that $w(S) \leq val_M(v) + val_M(\text{pass}_S(v))$,
 thus we can pay for $S$, using the money on $v$ and $\text{pass}_S(v)$.
 Clearly, these vertices will not be charged again.
-\end{proof}
+\qed\end{proof}
 
 To conclude this section we show that our analysis is tight, 
 as depicts in Figure~\ref{fig:grd worst}.
